@@ -1,0 +1,67 @@
+﻿<!--
+    The URL should be localhost:xxxxx/Test
+    This means we are working with the Test Controller
+    The URL can also be appended to localhost:xxxxx/Test/Main
+    It will show the same page since Main is the default page for Test.
+-->
+<!--
+    ViewData is a key-value way of assigning variables.
+    In the @{} you'll notice that we call ViewData["Title] = "This page will help...."
+    What this does is assign the the string "This page will help...." to ViewData["Title]
+    We can then call down below as shown within the h2 and h3 tags.
+-->
+@{
+    ViewData["Message1"] = "This page will help us get an understanding of the ASP.net MVC framework";
+    ViewData["Message2"] = "Here's a 1.5 hour long C# video that goes over the syntax in a no BS manner.";
+}
+
+<!-- font import-->
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+</head>
+
+<!--CSS-->
+<style>
+    h2 {
+        font-family: 'cabin', sans-serif;
+        font-size: 32px;
+        color: white;
+    }
+
+    h3 {
+        font-family: 'cabin', sans-serif;
+        font-size: 32px;
+        color: white;
+    }
+
+    body {
+        background-image: url("http://cdn.wallpapersafari.com/33/41/YkubDf.jpg");
+        background-attachment: fixed;
+    }
+
+    img {
+        border: 1px solid #021a40;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
+
+
+
+<div class="container-fluid">
+    <h2>@ViewData["Message1"].</h2>
+        <h3>@ViewData["Message2"]</h3>
+
+    <div class="row">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/lisiwUZJXqQ" frameborder="1" allowfullscreen></iframe>
+    </div>
+    <div class="row">
+        <ul>
+           <li><a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc" style="font-size: 32px;">General MVC</a></li> 
+            <li><a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing" style="font-size: 32px;">Routing</a></li> 
+            <li><a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc" style="font-size: 32px;">ASP.net MVC tutorials</a></li> 
+        </ul>
+    </div>
+</div>
+
