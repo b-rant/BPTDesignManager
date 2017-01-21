@@ -1,0 +1,90 @@
+@model RoT_v6.Models.Purchase
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArrivedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Block)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Block)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CostPer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CostPer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstArrDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstArrDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdealDelDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdealDelDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.purchID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

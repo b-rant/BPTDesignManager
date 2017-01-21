@@ -1,0 +1,95 @@
+@model IEnumerable<RoT_v6.Models.Job>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompleteDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DesiredDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jobNum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompleteDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesiredDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobNum)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.JobID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.JobID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.JobID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
