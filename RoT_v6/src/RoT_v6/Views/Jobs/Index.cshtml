@@ -1,15 +1,13 @@
 @model IEnumerable<RoT_v6.Models.Job>
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
+<h2>All Jobs</h2>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table id="allJobs" class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -22,24 +20,6 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DesiredDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InvCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InvHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
@@ -49,47 +29,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompleteDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DesiredDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvCost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.jobNum)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.JobID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.JobID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.JobID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompleteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobNum)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.JobID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.JobID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.JobID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $("#allJobs").DataTable({
+            "columnDefs": [
+                { "className": "dt-center", "targets": "_all" }
+            ]
+        });
+    });
+</script>

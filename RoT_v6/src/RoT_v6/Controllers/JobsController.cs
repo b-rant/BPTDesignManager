@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RoT_v6.Data;
 using RoT_v6.Models;
+using RoT_v6.ViewModels;
+
+
 
 namespace RoT_v6.Controllers
 {
@@ -34,6 +37,9 @@ namespace RoT_v6.Controllers
             }
 
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+            var Purchase = _context.Purchase.Select(m => m.purchID == id).ToList();
+            var WorkTasks =  _context.WorkTasks.Select(m => m.JobID == id).ToList();
+
             if (job == null)
             {
                 return NotFound();
