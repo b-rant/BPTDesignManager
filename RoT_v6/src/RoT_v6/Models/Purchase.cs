@@ -15,7 +15,7 @@ namespace RoT_v6.Models
     {
         [Key]
         public int purchID { get; set; }
-        public string JobID { get; set; }
+        public int JobID { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
         public bool Block { get; set; }
