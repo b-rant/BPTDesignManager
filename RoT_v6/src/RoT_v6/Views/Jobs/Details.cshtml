@@ -1,4 +1,4 @@
-@model RoT_v6.Models.Job
+@model RoT_v6.ViewModels.JobsDetails_JobPurchasesWorkTask
 
 @{
     ViewData["Title"] = "Details";
@@ -11,74 +11,170 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Client)
+            @Html.DisplayNameFor(model => model.Job.Client)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Client)
+            @Html.DisplayFor(model => model.Job.Client)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CompleteDate)
+            @Html.DisplayNameFor(model => model.Job.CompleteDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CompleteDate)
+            @Html.DisplayFor(model => model.Job.CompleteDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Job.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Job.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DesiredDate)
+            @Html.DisplayNameFor(model => model.Job.DesiredDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DesiredDate)
+            @Html.DisplayFor(model => model.Job.DesiredDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EstCost)
+            @Html.DisplayNameFor(model => model.Job.EstCost)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.EstCost)
+            @Html.DisplayFor(model => model.Job.EstCost)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.EstHours)
+            @Html.DisplayNameFor(model => model.Job.EstHours)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.EstHours)
+            @Html.DisplayFor(model => model.Job.EstHours)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.InvCost)
+            @Html.DisplayNameFor(model => model.Job.InvCost)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.InvCost)
+            @Html.DisplayFor(model => model.Job.InvCost)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.InvHours)
+            @Html.DisplayNameFor(model => model.Job.InvHours)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.InvHours)
+            @Html.DisplayFor(model => model.Job.InvHours)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Job.StartDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Job.StartDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Job.Status)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Job.Status)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.jobNum)
+            @Html.DisplayNameFor(model => model.Job.jobNum)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.jobNum)
+            @Html.DisplayFor(model => model.Job.jobNum)
         </dd>
     </dl>
 </div>
+
+<table class="table" id="WorkTasks">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].JobID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].TotalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.WorkTasks)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Block)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompleteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.partNum)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TaskID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.JobID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Job.JobID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#WorkTasks").DataTable({
+            "columnDefs": [
+                { "className": "dt-center", "targets": "_all" }
+            ]
+        });
+    });
+</script>
+

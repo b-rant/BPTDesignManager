@@ -37,15 +37,20 @@ namespace RoT_v6.Controllers
             }
 
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
-            var Purchase = _context.Purchase.Select(m => m.purchID == id).ToList();
-            var WorkTasks =  _context.WorkTasks.Select(m => m.JobID == id).ToList();
-
+            var Purchases = await _context.Purchase.ToListAsync();
+            var WorkTasks = await _context.WorkTasks.ToListAsync();
+            JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
+            {
+                Job = job,
+                Purchases = Purchases,
+                WorkTasks = WorkTasks
+            };
             if (job == null)
             {
                 return NotFound();
             }
 
-            return View(job);
+            return View(JobPurchasesWorkTasks);
         }
 
         // GET: Jobs/Create
