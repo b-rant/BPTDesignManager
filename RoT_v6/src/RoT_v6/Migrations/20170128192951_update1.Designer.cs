@@ -8,9 +8,10 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(RoTContext))]
-    partial class RoTContextModelSnapshot : ModelSnapshot
+    [Migration("20170128192951_update1")]
+    partial class update1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
