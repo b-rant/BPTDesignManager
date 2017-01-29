@@ -10,7 +10,6 @@ using RoT_v6.Models;
 using RoT_v6.ViewModels;
 
 
-
 namespace RoT_v6.Controllers
 {
     public class JobsController : Controller
@@ -66,6 +65,8 @@ namespace RoT_v6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("JobID,Client,CompleteDate,Description,DesiredDate,EstCost,EstHours,InvCost,InvHours,StartDate,Status,jobNum")] Job job)
         {
+            DateTime dateOnly = DateTime.Today;
+            job.StartDate = dateOnly.ToString("d");
             if (ModelState.IsValid)
             {
                 _context.Add(job);

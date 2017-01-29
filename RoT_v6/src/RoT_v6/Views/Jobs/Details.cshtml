@@ -8,130 +8,200 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.Client)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.Client)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.CompleteDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.CompleteDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.DesiredDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.DesiredDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.EstCost)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.EstCost)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.EstHours)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.EstHours)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.InvCost)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.InvCost)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.InvHours)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.InvHours)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.StartDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.StartDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.Status)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Job.jobNum)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Job.jobNum)
+            </dd>
+            </dl>
+        </div>
     </div>
-    <div class="row">
-        <p>
-            <a asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
-        </p>
-        <table class="table nowrap" id="WorkTasks">
-            <thead>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <p>
+        <a asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
+    </p>
+    <table class="table nowrap" id="WorkTasks">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.WorkTasks)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
-                    </th>
-                    <th></th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Block)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompleteDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.partNum)
+                    </td>
+                    <td>
+                        <a asp-controller="WorkTasks" asp-action="Edit" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a> |
+                        <a asp-controller="WorkTasks" asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
+                        <a asp-controller="WorkTasks" asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.WorkTasks)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Block)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompleteDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Employee)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.partNum)
-                        </td>
-                        <td>
-                            <a asp-controller="WorkTasks" asp-action="Edit" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a> |
-                            <a asp-controller="WorkTasks" asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
-                            <a asp-controller="WorkTasks" asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 
-    </div>
-    <div class="row">
-        <p>
-            <a asp-action="Purchases/Create">Create New</a>
-        </p>
-        <table class="table nowrap" id="Purchases">
-            <thead>
+</div>
+<div class="row">
+    <p>
+        <a asp-action="Purchases/Create">Create New</a>
+    </p>
+    <table class="table nowrap" id="Purchases">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].ArrivedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].EstArrDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].RequestDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Purchases)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].Block)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].ArrivedDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].EstArrDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].Quantity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Purchases[0].RequestDate)
-                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Block)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstArrDate)
+                    </td>>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.purchID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.purchID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.purchID">Delete</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Purchases)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Block)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ArrivedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EstArrDate)
-                        </td>>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RequestDate)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.purchID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.purchID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.purchID">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 
-    </div>
+</div>
 </div>
 
 <div>

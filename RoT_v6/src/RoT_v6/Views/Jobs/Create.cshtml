@@ -15,11 +15,18 @@
                 <span asp-validation-for="Client" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="CompleteDate" class="form-control" />
                 <span asp-validation-for="CompleteDate" class="text-danger" />
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="jobNum" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="jobNum" class="form-control" />
+                <span asp-validation-for="jobNum" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -50,7 +57,7 @@
                 <span asp-validation-for="EstHours" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="InvCost" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="InvCost" class="form-control" />
@@ -63,30 +70,23 @@
                 <input asp-for="InvHours" class="form-control" />
                 <span asp-validation-for="InvHours" class="text-danger" />
             </div>
-        </div>
-        <div class="form-group">
+        </div>*@
+        @*<div class="form-group">
             <label asp-for="StartDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger" />
             </div>
-        </div>
+        </div>*@
         <div class="form-group">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="Status" class="form-control">
-                    <option>Ready</option>
+                    <option>Active</option>
                     <option>NotReady</option>
                     <option>Completed</option>
                 </select>
                 <span asp-validation-for="Status" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="jobNum" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="jobNum" class="form-control" />
-                <span asp-validation-for="jobNum" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
