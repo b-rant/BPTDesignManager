@@ -37,8 +37,8 @@ namespace RoT_v6.Controllers
             }
 
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
-            var Purchases = await _context.Purchase.ToListAsync();
-            var WorkTasks = await _context.WorkTasks.ToListAsync();
+            var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+            var WorkTasks = await _context.WorkTasks.Where(m => m.JobID == id).ToListAsync();
             JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
             {
                 Job = job,
