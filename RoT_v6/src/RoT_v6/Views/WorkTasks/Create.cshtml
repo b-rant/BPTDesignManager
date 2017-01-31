@@ -102,7 +102,7 @@
 </form>
 
 <div>
-    <a class="btn btn-primary"  asp-action="Index">Back to List</a>
+    <a class="btn btn-primary"  asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
 </div>
 
 @section Scripts {

@@ -25,12 +25,6 @@ namespace RoT_v6.Controllers
             return View(await _context.WorkTasks.ToListAsync());
         }
 
-        //public async Task<IActionResult> Details_Job(int id)
-        //{
-        //    var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
-        //    return RedirectToAction("Details", "Jobs", new { id = JobID }); ;
-        //}
-
         // GET: WorkTasks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,7 +45,9 @@ namespace RoT_v6.Controllers
         // GET: WorkTasks/Create
         public IActionResult Create(int JobID)
         {
-            return View();
+            WorkTask worktask = new WorkTask();
+            worktask.JobID = JobID;
+            return View(worktask);
         }
 
         // POST: WorkTasks/Create
