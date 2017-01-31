@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using RoT_v6.Models;
 using RoT_v6.Models.AccountViewModels;
 using RoT_v6.Services;
+using RoT_v6.Data;
 
 namespace RoT_v6.Controllers
 {
@@ -22,19 +23,22 @@ namespace RoT_v6.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _context = context;
         }
 
         //
@@ -91,8 +95,10 @@ namespace RoT_v6.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
+            RegisterViewModel R = new RegisterViewModel();
+            R.getRoles(_context);
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(R);
         }
 
         //

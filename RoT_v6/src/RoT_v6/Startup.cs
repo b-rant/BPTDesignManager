@@ -87,9 +87,9 @@ namespace RoT_v6
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            await CreateRoles(serviceProvider);
+           // await CreateRoles(serviceProvider);
         }
-        private async Task CreateRoles(IServiceProvider serviceProvider)
+      /*  private async Task CreateRoles(IServiceProvider serviceProvider)
         {
             var roleMan = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userMan = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -103,6 +103,8 @@ namespace RoT_v6
                     result = await roleMan.CreateAsync(new IdentityRole(rolesName));
                 }
             }
-        }
+            var user = await userMan.FindByIdAsync("f577865d-4c37-4aaa-bd19-e828e18a54a8");
+            await userMan.AddToRoleAsync(user, "Admin");
+        }*/
     }
 }
