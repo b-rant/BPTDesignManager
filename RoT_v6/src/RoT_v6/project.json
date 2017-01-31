@@ -1,7 +1,10 @@
-﻿{
+{
   "userSecretsId": "aspnet-RoT_v6-2896cd5e-d22f-4a3e-a646-680c5d42e6cb",
 
   "dependencies": {
+    "bootstrap": "3.3.7",
+    "Bootstrap.v3.Datetimepicker": "4.17.45",
+    "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -39,7 +42,8 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Moment.js": "2.17.1"
   },
 
   "tools": {

@@ -43,9 +43,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/Create
-        public IActionResult Create()
+        public IActionResult Create(int JobID)
         {
-            return View();
+            Purchase purchase = new Purchase();
+            purchase.JobID = JobID;
+            return View(purchase);
         }
 
         // POST: Purchases/Create
