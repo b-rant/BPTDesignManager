@@ -9,77 +9,60 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.Client)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.Client)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.CompleteDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.CompleteDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.Description)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.Description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.DesiredDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.DesiredDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.EstCost)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.EstCost)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.EstHours)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.EstHours)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.InvCost)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.InvCost)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.InvHours)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.InvHours)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.StartDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.StartDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.Status)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.Status)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Job.jobNum)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Job.jobNum)
-            </dd>
+            <dl class="dl-horizontal" style="border: 2px solid #2B303A;">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.jobNum)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.jobNum)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.Client)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.Client)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.Status)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.Status)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.StartDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.StartDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.DesiredDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.DesiredDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.CompleteDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.CompleteDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Job.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Job.Description)
+                </dd>
             </dl>
         </div>
+        <div class="col-md-4" style="border: 2px solid #2B303A;">
+            <h4>Hours Current vs. Budgeted</h4>
+            <div class="progress" id="hours_Progress">
+            </div>
+            <h4>Cost Current vs. Budgeted</h4>
+            <div class="progress" id="cost_Progress">
+            </div>
+        </div>
     </div>
-    <div class="col-md-4"></div>
 </div>
 <div class="row">
     <p>
@@ -93,7 +76,7 @@
                     @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
@@ -105,7 +88,7 @@
                     @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
                 </th>
                 <th></th>
             </tr>
@@ -118,7 +101,7 @@
                         @Html.DisplayFor(modelItem => item.Block)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CompleteDate)
+                        @Html.DisplayFor(modelItem => item.partNum)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
@@ -130,7 +113,7 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.partNum)
+                        @Html.DisplayFor(modelItem => item.CompleteDate)
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Edit" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a>
@@ -148,7 +131,7 @@
 <div class="row">
     <p>
         <h2>Bill of Materials</h2>
-        <a class="btn btn-primary" asp-action="Purchases/Create">Create New</a>
+        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
     </p>
     <table class="table table-striped table-bordered" id="Purchases">
         <thead>
@@ -229,5 +212,13 @@
                 { "className": "dt-center", "targets": "_all" }
             ]
         });
+        var estHours = @Model.Job.EstHours;
+        var invHours = @Model.Job.InvHours;
+        var estCost = @Model.Job.EstCost;
+        var invCost = @Model.Job.InvCost;
+        var hourProg = parseInt((invHours / estHours) * 100);
+        var costProg = parseInt((invCost / estCost) * 100);
+        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + '/' + estHours + '</div>');
+        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + '/' + estCost + '</div>');
     });
 </script>

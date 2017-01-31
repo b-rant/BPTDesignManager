@@ -25,6 +25,12 @@ namespace RoT_v6.Controllers
             return View(await _context.WorkTasks.ToListAsync());
         }
 
+        //public async Task<IActionResult> Details_Job(int id)
+        //{
+        //    var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+        //    return RedirectToAction("Details", "Jobs", new { id = JobID }); ;
+        //}
+
         // GET: WorkTasks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -59,7 +65,7 @@ namespace RoT_v6.Controllers
             {
                 _context.Add(workTask);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Jobs",new { id = JobID});
             }
             return View(workTask);
         }
@@ -110,7 +116,7 @@ namespace RoT_v6.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
             }
             return View(workTask);
         }
@@ -140,7 +146,7 @@ namespace RoT_v6.Controllers
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
             _context.WorkTasks.Remove(workTask);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
         }
 
         private bool WorkTaskExists(int id)
