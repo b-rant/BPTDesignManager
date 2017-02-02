@@ -43,9 +43,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/Create
-        public IActionResult Create()
+        public IActionResult Create(int JobID)
         {
-            return View();
+            Purchase purchase = new Purchase();
+            purchase.JobID = JobID;
+            return View(purchase);
         }
 
         // POST: Purchases/Create
@@ -55,11 +57,13 @@ namespace RoT_v6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
         {
+            DateTime dateOnly = DateTime.Today;
+            purchase.RequestDate = dateOnly.ToString("d");
             if (ModelState.IsValid)
             {
                 _context.Add(purchase);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
             return View(purchase);
         }
@@ -110,7 +114,7 @@ namespace RoT_v6.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
             return View(purchase);
         }
@@ -140,7 +144,7 @@ namespace RoT_v6.Controllers
             var purchase = await _context.Purchase.SingleOrDefaultAsync(m => m.purchID == id);
             _context.Purchase.Remove(purchase);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
         }
 
         private bool PurchaseExists(int id)

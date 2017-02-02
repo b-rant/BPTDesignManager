@@ -2,13 +2,19 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h2>Edit</h2>
+<h2>Edit Job</h2>
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Job</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="JobID" />
+        <div class="form-group">
+            <label asp-for="jobNum" class="col-md-2 control-label">Job Number</label>
+            <div class="col-md-10">
+                <input asp-for="jobNum" class="form-control" />
+                <span asp-validation-for="jobNum" class="text-danger" />
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Client" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -17,61 +23,54 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CompleteDate" class="form-control" />
-                <span asp-validation-for="CompleteDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="DesiredDate" class="col-md-2 control-label"></label>
+            <label asp-for="DesiredDate" class="col-md-2 control-label">Desired Comp. Date</label>
             <div class="col-md-10">
-                <input asp-for="DesiredDate" class="form-control" />
+                <input asp-for="DesiredDate" class="form-control datetime" />
                 <span asp-validation-for="DesiredDate" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="EstCost" class="col-md-2 control-label"></label>
+            <label asp-for="EstCost" class="col-md-2 control-label">Estimated Cost</label>
             <div class="col-md-10">
                 <input asp-for="EstCost" class="form-control" />
                 <span asp-validation-for="EstCost" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="EstHours" class="col-md-2 control-label"></label>
+            <label asp-for="EstHours" class="col-md-2 control-label">Estimated Hours</label>
             <div class="col-md-10">
                 <input asp-for="EstHours" class="form-control" />
                 <span asp-validation-for="EstHours" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="InvCost" class="col-md-2 control-label"></label>
+            <label asp-for="InvCost" class="col-md-2 control-label">Invested Cost</label>
             <div class="col-md-10">
                 <input asp-for="InvCost" class="form-control" />
                 <span asp-validation-for="InvCost" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="InvHours" class="col-md-2 control-label"></label>
+            <label asp-for="InvHours" class="col-md-2 control-label">Invested Hours</label>
             <div class="col-md-10">
                 <input asp-for="InvHours" class="form-control" />
                 <span asp-validation-for="InvHours" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="StartDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger" />
-            </div>
+        @*<div class="form-group">
+        <label asp-for="StartDate" class="col-md-2 control-label">Start Date</label>
+        <div class="col-md-10">
+            <input asp-for="StartDate" class="form-control datetime" />
+            <span asp-validation-for="StartDate" class="text-danger" />
         </div>
+    </div>*@
         <div class="form-group">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -84,22 +83,29 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="jobNum" class="col-md-2 control-label"></label>
+            <label asp-for="CompleteDate" class="col-md-2 control-label">Completion Date</label>
             <div class="col-md-10">
-                <input asp-for="jobNum" class="form-control" />
-                <span asp-validation-for="jobNum" class="text-danger" />
+                <input asp-for="CompleteDate" class="form-control datetime" />
+                <span asp-validation-for="CompleteDate" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script type="text/javascript">
+        $(function () {
+            $('.datetime').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+</script>

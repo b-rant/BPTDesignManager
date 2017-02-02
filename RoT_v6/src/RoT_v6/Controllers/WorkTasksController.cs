@@ -43,9 +43,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/Create
-        public IActionResult Create()
+        public IActionResult Create(int JobID)
         {
-            return View();
+            WorkTask worktask = new WorkTask();
+            worktask.JobID = JobID;
+            return View(worktask);
         }
 
         // POST: WorkTasks/Create
@@ -53,13 +55,13 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        public async Task<IActionResult> Create(int JobID, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(workTask);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Jobs",new { id = JobID});
             }
             return View(workTask);
         }
@@ -110,7 +112,7 @@ namespace RoT_v6.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
             }
             return View(workTask);
         }
@@ -140,7 +142,7 @@ namespace RoT_v6.Controllers
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
             _context.WorkTasks.Remove(workTask);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
         }
 
         private bool WorkTaskExists(int id)

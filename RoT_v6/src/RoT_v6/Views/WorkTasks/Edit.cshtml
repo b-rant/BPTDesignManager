@@ -4,11 +4,10 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Task</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>WorkTask</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="TaskID" />
@@ -20,17 +19,17 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="CompleteDate" class="form-control" />
                 <span asp-validation-for="CompleteDate" class="text-danger" />
             </div>
-        </div>
+        </div>*@
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
@@ -41,7 +40,7 @@
                 <span asp-validation-for="Employee" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="JobID" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="JobID" class="form-control" />
@@ -51,11 +50,11 @@
         <div class="form-group">
             <label asp-for="Notes" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Notes" class="form-control" />
+                <textarea asp-for="Notes" rows="4" class="form-control"></textarea>
                 <span asp-validation-for="Notes" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="StartDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="StartDate" class="form-control" />
@@ -67,6 +66,20 @@
             <div class="col-md-10">
                 <input asp-for="StartTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger" />
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="TotalTime" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TotalTime" class="form-control" />
+                <span asp-validation-for="TotalTime" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="partNum" class="col-md-2 control-label">Part Number</label>
+            <div class="col-md-10">
+                <input asp-for="partNum" class="form-control" />
+                <span asp-validation-for="partNum" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
@@ -82,29 +95,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="TotalTime" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="TotalTime" class="form-control" />
-                <span asp-validation-for="TotalTime" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="partNum" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="partNum" class="form-control" />
-                <span asp-validation-for="partNum" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input  type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
 </div>
 
 @section Scripts {

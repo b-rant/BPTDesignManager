@@ -1,6 +1,20 @@
-﻿body {
+﻿.container-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+body {
+    background-color:#DDE4EA;
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+a{
+    color:white;
+    text-decoration:none;
 }
 
 /* Wrapping element */
@@ -15,6 +29,96 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/*Navbar*/
+.navbar-new {
+    background-color:#2B303A;
+    color:white;
+}
+
+/*navbar link*/
+.navbar-new .navbar-nav > li > a
+{
+    color:white;
+}
+
+.navbar-new .navbar-nav  > li > a:hover,
+.navbar-new .navbar-nav  > li > a:focus {
+    background-color: #2B303A;
+    color:white;
+}
+
+/*Tables*/
+.table-bordered {
+    border: 2px solid #2B303A;
+}
+
+.data_table_head {
+    background-color:#2B303A;
+    color:white;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #2B303A;
+}
+
+div.dataTables_filter input {
+    border-radius: 7px;
+}
+
+/*buttons*/
+.btn-primary {
+    background: #E5C527;
+    color: black;
+    border: 1px solid #2B303A;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #2B303A;
+    color: white;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #007299;
+    box-shadow: none;
+}
+
+.btn-link{
+    color:white;
+}
+
+.btn-link:hover{
+    color:white;
+    text-decoration:none;
+}
+
+/*Date Picker*/
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: #E5C527;
+    color: #000;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.bootstrap-datetimepicker-widget table td span.active {
+  background-color: #E5C527;
+  color: #000;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/*Progress Bars*/
+.progress {
+    border: 1px solid #2B303A;
+}
+
+.progress-bar {
+   background-color: #E5C527;
+   color: #2B303A;
+}
+
+/*Hr divider*/
+hr {
+    border-top:1px solid #2B303A;
 }
 
 /* Carousel */
@@ -43,8 +147,8 @@ textarea {
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
 }

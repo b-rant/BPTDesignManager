@@ -4,177 +4,223 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Job Details</h2>
 
-<div>
-    <h4>Job</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.Client)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.Client)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.CompleteDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.CompleteDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.DesiredDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.DesiredDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.EstCost)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.EstCost)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.EstHours)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.EstHours)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.InvCost)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.InvCost)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.InvHours)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.InvHours)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.StartDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.StartDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.Status)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.jobNum)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Job.jobNum)
-        </dd>
-    </dl>
+<div class="container">
+    <div class="row" style="border: 2px solid #2B303A; border-radius:1em; padding-bottom:.5em;">
+        <div class="col-md-4">
+            <div class="">
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.jobNum)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.jobNum)
+                </span>
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.Client)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.Client)
+                </span>
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.Description)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.Description)
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="">
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.StartDate)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.StartDate)
+                </span>
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.DesiredDate)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.DesiredDate)
+                </span>
+                <h4>
+                    @Html.DisplayNameFor(model => model.Job.CompleteDate)
+                </h4>
+                <span>
+                    @Html.DisplayFor(model => model.Job.CompleteDate)
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Hours Current vs. Budgeted</h4>
+            <div class="progress" id="hours_Progress">
+            </div>
+            <h4>Cost Current vs. Budgeted</h4>
+            <div class="progress" id="cost_Progress">
+            </div>
+        </div>
+    </div>
 </div>
-
-<table class="table" id="WorkTasks">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].JobID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].TotalTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.WorkTasks)
-        {
+<div class="row">
+    <p>
+        <h2 style="display: inline-block; padding-right:1em;">Tasks</h2>
+        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
+    </p>
+    <table class="table table-striped table-bordered" id="WorkTasks">
+        <thead class="data_table_head">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Block)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompleteDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.partNum)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TaskID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].partNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].CompleteDate)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.WorkTasks)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Block)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.partNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompleteDate)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Edit" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Details" asp-route-id="@item.TaskID">Details</a>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<br />
+<div class="row">
+    <p>
+        <h2 style="display: inline-block; padding-right:1em;">Bill of Materials</h2>
+        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
+    </p>
+    <table class="table table-striped table-bordered" id="Purchases">
+        <thead class="data_table_head">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].ArrivedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].EstArrDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].RequestDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Purchases)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Block)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstArrDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Edit" asp-route-id="@item.purchID">Edit</a>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Details" asp-route-id="@item.purchID">Details</a>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Delete" asp-route-id="@item.purchID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Job.JobID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Job.JobID">Edit</a>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
 <script>
     $(document).ready(function () {
         $("#WorkTasks").DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "paging": false,
+            "ordering": false,
+            "info": false,
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" }
             ]
         });
+        $("#Purchases").DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "columnDefs": [
+                { "className": "dt-center", "targets": "_all" }
+            ]
+        });
+        var estHours = @Model.Job.EstHours;
+        var invHours = @Model.Job.InvHours;
+        var estCost = @Model.Job.EstCost;
+        var invCost = @Model.Job.InvCost;
+        var hourProg = parseInt((invHours / estHours) * 100);
+        var costProg = parseInt((invCost / estCost) * 100);
+        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + '/' + estHours + '</div>');
+        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + '/' + estCost + '</div>');
     });
 </script>
-

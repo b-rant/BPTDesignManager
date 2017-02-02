@@ -25,13 +25,18 @@ namespace RoT_v6.Models
         public int JobID { get; set; }
         public string Description { get; set; }
         public string Employee { get; set; }
+        [Display(Name = "Start Date")]
         public string StartDate { get; set; }
+        [Display(Name = "Date Completed")]
         public string CompleteDate { get; set; }
         public TaskStatus Status { get; set; }
+        [Display(Name = "Start Time")]
         public double StartTime { get; set; }
+        [Display(Name = "Total Time")]
         public double TotalTime { get; set; }
         public bool Block { get; set; }
         public string Notes { get; set; }
+        [Display(Name = "Part Number")]
         public string partNum { get; set; }
 
     }

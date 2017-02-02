@@ -19,13 +19,20 @@ namespace RoT_v6.Models
         public string Description { get; set; }
         public int Quantity { get; set; }
         public bool Block { get; set; }
+        [Display(Name = "Cost Per Unit")]
         public string CostPer { get; set; }
+        [Display(Name = "Total Cost")]
         public string TotalCost { get; set; }
         public string Vendor { get; set; }
+        [Display(Name = "Request Date")]
         public string RequestDate { get; set; }
+        [Display(Name = "Desired Delivery")]
         public string IdealDelDate { get; set; }
+        [Display(Name = "Date Purchased")]
         public string PurchDate { get; set; }
+        [Display(Name = "Estimated Arrival")]
         public string EstArrDate { get; set; }
+        [Display(Name = "Arrival Date")]
         public string ArrivedDate { get; set; }
 
     }
