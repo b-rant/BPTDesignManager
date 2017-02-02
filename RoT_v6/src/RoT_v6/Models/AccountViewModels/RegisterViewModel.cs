@@ -38,7 +38,7 @@ namespace RoT_v6.Models.AccountViewModels
         {
             Roles = new List<SelectListItem>();
 
-            /* Roles.Add(new SelectListItem()
+            Roles.Add(new SelectListItem()
             {
                 Value = "1",
                 Text = "Admin"
@@ -57,9 +57,9 @@ namespace RoT_v6.Models.AccountViewModels
             {
                 Value = "4",
                 Text = "Employee"
-            }); */
+            });
 
-            }
+        }
         public void getRoles(ApplicationDbContext _context)
         {
             var roles = from r in _context.identityRole select r;

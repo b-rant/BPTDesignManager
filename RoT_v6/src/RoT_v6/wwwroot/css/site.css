@@ -116,6 +116,11 @@ div.dataTables_filter input {
    color: #2B303A;
 }
 
+/*Labels*/
+.label-warning {
+    background-color: #E5C527;
+}
+
 /*Hr divider*/
 hr {
     border-top:1px solid #2B303A;

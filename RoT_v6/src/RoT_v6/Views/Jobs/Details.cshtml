@@ -59,6 +59,7 @@
             <h4>Cost Current vs. Budgeted</h4>
             <div class="progress" id="cost_Progress">
             </div>
+            <h3>Status <span class="label" id="project_status">@Html.DisplayFor(model => model.Job.Status)</span></h3>
         </div>
     </div>
 </div>
@@ -214,6 +215,7 @@
                 { "className": "dt-center", "targets": "_all" }
             ]
         });
+        // Handles Progress bars for the hours and cost
         var estHours = @Model.Job.EstHours;
         var invHours = @Model.Job.InvHours;
         var estCost = @Model.Job.EstCost;
@@ -223,4 +225,19 @@
         $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + '/' + estHours + '</div>');
         $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + '/' + estCost + '</div>');
     });
+    //Handle project status label
+    var status = "@Model.Job.Status";
+    switch(status) {
+        case "Active":
+            $("#project_status").addClass("label-warning");
+            break;
+        case "NotReady":
+            $("#project_status").addClass("label-danger");
+            break;
+        case "Complete":
+            $("#project_status").addClass("label-success");
+            break;
+        default:
+            $("#project_status").addClass("label-default");
+    }
 </script>
