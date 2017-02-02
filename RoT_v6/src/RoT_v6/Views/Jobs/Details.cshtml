@@ -138,19 +138,19 @@
                     @Html.DisplayNameFor(model => model.Purchases[0].Block)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Purchases[0].ArrivedDate)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Purchases[0].Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Purchases[0].EstArrDate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Purchases[0].Quantity)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Purchases[0].RequestDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].EstArrDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Purchases[0].ArrivedDate)
                 </th>
                 <th></th>
             </tr>
@@ -163,19 +163,19 @@
                         @Html.DisplayFor(modelItem => item.Block)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ArrivedDate)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EstArrDate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RequestDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstArrDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivedDate)
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-controller="Purchases" asp-action="Edit" asp-route-id="@item.purchID">Edit</a>
