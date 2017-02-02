@@ -57,6 +57,8 @@ namespace RoT_v6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
         {
+            DateTime dateOnly = DateTime.Today;
+            purchase.RequestDate = dateOnly.ToString("d");
             if (ModelState.IsValid)
             {
                 _context.Add(purchase);

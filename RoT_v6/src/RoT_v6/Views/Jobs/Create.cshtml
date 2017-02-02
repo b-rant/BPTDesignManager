@@ -14,13 +14,13 @@
                 <span asp-validation-for="Client" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CompleteDate" class="form-control" />
-                <span asp-validation-for="CompleteDate" class="text-danger" />
-            </div>
+        @*<div class="form-group">
+        <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="CompleteDate" class="form-control" />
+            <span asp-validation-for="CompleteDate" class="text-danger" />
         </div>
+        </div*@
         <div class="form-group">
             <label asp-for="jobNum" class="col-md-2 control-label">Job Number</label>
             <div class="col-md-10">
@@ -31,7 +31,7 @@
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
             <label asp-for="DesiredDate" class="col-md-2 control-label"> Desired Date</label>
             <div class="col-md-10">
-                <input asp-for="DesiredDate" class="form-control" id='datetime' />
+                <input asp-for="DesiredDate" class="form-control datetime" />
                 <span asp-validation-for="DesiredDate" class="text-danger" />
             </div>
         </div>
@@ -108,11 +108,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script type="text/javascript">
-  
+<script type="text/javascript">  
         $(function () {
-            $('#datetime').datetimepicker();
-        });
-         
-        
+            $('.datetime').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });        
 </script>

@@ -15,7 +15,7 @@
         <div class="form-group">
             <label asp-for="ArrivedDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ArrivedDate" class="form-control" />
+                <input asp-for="ArrivedDate" class="form-control datetime" />
                 <span asp-validation-for="ArrivedDate" class="text-danger" />
             </div>
         </div>
@@ -37,21 +37,21 @@
         <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="EstArrDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="EstArrDate" class="form-control" />
+                <input asp-for="EstArrDate" class="form-control datetime" />
                 <span asp-validation-for="EstArrDate" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="IdealDelDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="IdealDelDate" class="form-control" />
+                <input asp-for="IdealDelDate" class="form-control datetime" />
                 <span asp-validation-for="IdealDelDate" class="text-danger" />
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="form-group">
             <label asp-for="PurchDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PurchDate" class="form-control" />
+                <input asp-for="PurchDate" class="form-control datetime" />
                 <span asp-validation-for="PurchDate" class="text-danger" />
             </div>
         </div>
@@ -79,7 +79,7 @@
         <div class="form-group">
             <label asp-for="RequestDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="RequestDate" class="form-control" />
+                <input asp-for="RequestDate" class="form-control datetime" />
                 <span asp-validation-for="RequestDate" class="text-danger" />
             </div>
         </div>
@@ -99,16 +99,23 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script type="text/javascript">
+        $(function () {
+            $('.datetime').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+</script>
