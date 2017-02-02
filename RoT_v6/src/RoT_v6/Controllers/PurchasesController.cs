@@ -61,7 +61,7 @@ namespace RoT_v6.Controllers
             {
                 _context.Add(purchase);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
             return View(purchase);
         }
@@ -112,7 +112,7 @@ namespace RoT_v6.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
             return View(purchase);
         }
@@ -142,7 +142,7 @@ namespace RoT_v6.Controllers
             var purchase = await _context.Purchase.SingleOrDefaultAsync(m => m.purchID == id);
             _context.Purchase.Remove(purchase);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
         }
 
         private bool PurchaseExists(int id)
