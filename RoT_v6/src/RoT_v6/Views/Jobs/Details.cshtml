@@ -115,9 +115,9 @@
                         @Html.DisplayFor(modelItem => item.CompleteDate)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Edit" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a>
-                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Details" asp-route-id="@item.TaskID">Details</a>
-                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditJobDetails" asp-route-id="@item.TaskID" asp-route-JobID="@Model.Job.JobID">Edit</a>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
+                        <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteJobDetails" asp-route-id="@item.TaskID">Delete</a>
                     </td>
                 </tr>
             }
@@ -178,9 +178,9 @@
                         @Html.DisplayFor(modelItem => item.ArrivedDate)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Edit" asp-route-id="@item.purchID">Edit</a>
-                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Details" asp-route-id="@item.purchID">Details</a>
-                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="Delete" asp-route-id="@item.purchID">Delete</a>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="EditJobDetails" asp-route-id="@item.purchID">Edit</a>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
+                        <a class="btn btn-primary" asp-controller="Purchases" asp-action="DeleteJobDetails" asp-route-id="@item.purchID">Delete</a>
                     </td>
                 </tr>
             }
@@ -190,7 +190,7 @@
 </div>
 <br />
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Job.JobID">Edit</a>
+    <a class="btn btn-primary" asp-action="EditDetails" asp-route-id="@Model.Job.JobID">Edit</a>
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
 <script>
@@ -234,7 +234,7 @@
         case "NotReady":
             $("#project_status").addClass("label-danger");
             break;
-        case "Complete":
+        case "Completed":
             $("#project_status").addClass("label-success");
             break;
         default:

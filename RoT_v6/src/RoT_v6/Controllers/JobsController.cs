@@ -76,8 +76,24 @@ namespace RoT_v6.Controllers
             return View(job);
         }
 
-        // GET: Jobs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Jobs/EditDetails/5
+        public async Task<IActionResult> EditDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+            if (job == null)
+            {
+                return NotFound();
+            }
+            return View(job);
+        }
+
+        // GET: Jobs/EditJobsList/5
+        public async Task<IActionResult> EditJobsList(int? id)
         {
             if (id == null)
             {
@@ -97,7 +113,42 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("JobID,Client,CompleteDate,Description,DesiredDate,EstCost,EstHours,InvCost,InvHours,StartDate,Status,jobNum")] Job job)
+        public async Task<IActionResult> EditDetails(int id, [Bind("JobID,Client,CompleteDate,Description,DesiredDate,EstCost,EstHours,InvCost,InvHours,StartDate,Status,jobNum")] Job job)
+        {
+            if (id != job.JobID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(job);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!JobExists(job.JobID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", "Jobs", new { id = job.JobID }); ;
+            }
+            return View(job);
+        }
+
+        // POST: Jobs/EditJobsList/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditJobsList(int id, [Bind("JobID,Client,CompleteDate,Description,DesiredDate,EstCost,EstHours,InvCost,InvHours,StartDate,Status,jobNum")] Job job)
         {
             if (id != job.JobID)
             {

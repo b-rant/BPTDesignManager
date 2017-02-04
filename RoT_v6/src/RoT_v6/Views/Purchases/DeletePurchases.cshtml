@@ -1,7 +1,7 @@
 @model RoT_v6.Models.Purchase
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "DeletePurchases";
 }
 
 <h2>Delete</h2>
@@ -85,10 +85,10 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="DeletePurchases">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-primary" />
-            <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
         </div>
     </form>
 </div>

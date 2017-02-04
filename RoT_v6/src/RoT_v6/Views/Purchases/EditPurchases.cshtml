@@ -1,12 +1,12 @@
 @model RoT_v6.Models.Purchase
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EditPurchases";
 }
 
 <h2>Edit</h2>
 
-<form asp-action="Edit">
+<form asp-action="EditPurchases">
     <div class="form-horizontal">
         <h4>Purchase</h4>
         <hr />
@@ -106,7 +106,7 @@
 </form>
 
 <div>
-    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

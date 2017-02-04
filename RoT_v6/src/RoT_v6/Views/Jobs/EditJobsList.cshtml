@@ -1,9 +1,9 @@
 @model RoT_v6.Models.Job
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EditJobsList";
 }
 <h2>Edit Job</h2>
-<form asp-action="Edit">
+<form asp-action="EditJobsList">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -97,7 +97,7 @@
     </div>
 </form>
 <div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-action="Index">Back</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

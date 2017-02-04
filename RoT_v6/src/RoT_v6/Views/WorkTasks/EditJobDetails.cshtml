@@ -1,12 +1,12 @@
 @model RoT_v6.Models.WorkTask
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EditJobDetails";
 }
 
 <h2>Edit Task</h2>
 
-<form asp-action="Edit">
+<form asp-action="EditJobDetails">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -103,7 +103,7 @@
 </form>
 
 <div>
-    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
+    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a>
 </div>
 
 @section Scripts {

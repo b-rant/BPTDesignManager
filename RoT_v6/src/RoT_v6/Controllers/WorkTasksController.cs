@@ -25,8 +25,25 @@ namespace RoT_v6.Controllers
             return View(await _context.WorkTasks.ToListAsync());
         }
 
-        // GET: WorkTasks/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: WorkTasks/DetailsDashboard/5
+        public async Task<IActionResult> DetailsDashboard(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            if (workTask == null)
+            {
+                return NotFound();
+            }
+
+            return View(workTask);
+        }
+
+        // GET: WorkTasks/DetailsJobDetails/5
+        public async Task<IActionResult> DetailsJobDetails(int? id)
         {
             if (id == null)
             {
@@ -66,8 +83,8 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
-        // GET: WorkTasks/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: WorkTasks/EditDashboard/5
+        public async Task<IActionResult> EditDashboard(int? id)
         {
             if (id == null)
             {
@@ -82,12 +99,63 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
-        // POST: WorkTasks/Edit/5
+        // POST: WorkTasks/EditDashboard/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        public async Task<IActionResult> EditDashboard(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        {
+            if (id != workTask.TaskID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(workTask);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!WorkTaskExists(workTask.TaskID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Index", "Dashboard");
+            }
+            return View(workTask);
+        }
+
+        // GET: WorkTasks/EditJobDetails/5
+        public async Task<IActionResult> EditJobDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            if (workTask == null)
+            {
+                return NotFound();
+            }
+            return View(workTask);
+        }
+
+        // POST: WorkTasks/EditJobDetails/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditJobDetails(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
         {
             if (id != workTask.TaskID)
             {
@@ -117,8 +185,8 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
-        // GET: WorkTasks/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: WorkTasks/DeleteDashboard/5
+        public async Task<IActionResult> DeleteDashboard(int? id)
         {
             if (id == null)
             {
@@ -134,10 +202,38 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
-        // POST: WorkTasks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: WorkTasks/DeleteDashboard/5
+        [HttpPost, ActionName("DeleteDashboard")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteDashboardConfirmed(int id)
+        {
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            _context.WorkTasks.Remove(workTask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+        // GET: WorkTasks/DeleteJobDetails/5
+        public async Task<IActionResult> DeleteJobDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            if (workTask == null)
+            {
+                return NotFound();
+            }
+
+            return View(workTask);
+        }
+
+        // POST: WorkTasks/DeleteJobDetails/5
+        [HttpPost, ActionName("DeleteJobDetails")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteJobDetailsConfirmed(int id)
         {
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
             _context.WorkTasks.Remove(workTask);

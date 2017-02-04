@@ -85,9 +85,9 @@
                 @Html.DisplayFor(modelItem => item.partNum)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TaskID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+                <a asp-action="EditDashboard" asp-route-id="@item.TaskID">Edit</a> |
+                <a asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a> |
+                <a asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
             </td>
         </tr>
 }
