@@ -28,7 +28,7 @@ namespace RoT_v6.Models.AccountViewModels
 
 
 
-        [DataType(DataType.Text)]
+   /*  [DataType(DataType.Text)]
         [Display(Name = "Role")]
         [UIHint("List")]
         public List<SelectListItem> Roles { get; set; }
@@ -73,7 +73,7 @@ namespace RoT_v6.Models.AccountViewModels
                     Text = Data.Name
               });
            }
-        }
+        } UC*/
       }
    }
 

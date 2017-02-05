@@ -87,24 +87,24 @@ namespace RoT_v6
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            await CreateRoles(serviceProvider);
+          //UC  await CreateRoles(serviceProvider);
         }
-        private async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            var roleMan = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userMan = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] rolesNames = { "Admin", "ShopManager", "Purchaser", "Employee" };
-            IdentityResult result;
-            foreach (var rolesName in rolesNames)
-            {
-                var roleExist = await roleMan.RoleExistsAsync(rolesName);
-                if (!roleExist)
-                {
-                    result = await roleMan.CreateAsync(new IdentityRole(rolesName));
-                }
-            }
-            //var user = await userMan.FindByIdAsync("f577865d-4c37-4aaa-bd19-e828e18a54a8");
-            //await userMan.AddToRoleAsync(user, "Admin");
-        }
+      /*UC   private async Task CreateRoles(IServiceProvider serviceProvider)
+          {
+              var roleMan = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+              var userMan = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+              string[] rolesNames = { "Admin", "ShopManager", "Purchaser", "Employee" };
+              IdentityResult result;
+              foreach (var rolesName in rolesNames)
+              {
+                  var roleExist = await roleMan.RoleExistsAsync(rolesName);
+                  if (!roleExist)
+                  {
+                      result = await roleMan.CreateAsync(new IdentityRole(rolesName));
+                  }
+              }
+              //var user = await userMan.FindByIdAsync("f577865d-4c37-4aaa-bd19-e828e18a54a8");
+              //await userMan.AddToRoleAsync(user, "Admin");
+          } UC*/
     }
 }
