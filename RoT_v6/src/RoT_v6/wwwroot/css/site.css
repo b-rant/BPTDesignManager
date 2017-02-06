@@ -18,6 +18,12 @@ a{
 }
 
 /* Wrapping element */
+@media (min-width: 1500px) {
+  .container {
+    width: 1470px;
+  }
+}
+
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -50,6 +56,7 @@ textarea {
 }
 
 /*Tables*/
+th, td {white-space: nowrap;}
 .table-bordered {
     border: 2px solid #2B303A;
 }
