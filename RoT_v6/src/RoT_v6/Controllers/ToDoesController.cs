@@ -59,7 +59,7 @@ namespace RoT_v6.Controllers
             {
                 _context.Add(toDo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Dashboard");
             }
             return View(toDo);
         }
@@ -110,7 +110,7 @@ namespace RoT_v6.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Dashboard");
             }
             return View(toDo);
         }
@@ -140,7 +140,7 @@ namespace RoT_v6.Controllers
             var toDo = await _context.ToDos.SingleOrDefaultAsync(m => m.ToDoId == id);
             _context.ToDos.Remove(toDo);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Dashboard");
         }
 
         private bool ToDoExists(int id)

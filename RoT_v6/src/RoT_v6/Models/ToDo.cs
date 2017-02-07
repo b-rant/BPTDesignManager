@@ -21,9 +21,13 @@ namespace RoT_v6.Models
     {
         [Key]
         public int ToDoId { get; set; }
+        [Display(Name = "Description")]
         public string Description { get; set; }
+        [Display(Name = "Created Date")]
         public string CreatedDate { get; set; }
+        [Display(Name = "Due Date")]
         public string DueDate { get; set; }
+        [Display(Name = "Priority")]
         public priorityStatus Priority { get; set; }
     }
 }

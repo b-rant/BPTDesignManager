@@ -14,6 +14,7 @@ namespace RoT_v6.Models
     {
         Created,
         Pause,
+        [Display(Name = "In Progress")]
         InProgress,
         Completed
     }
@@ -38,6 +39,5 @@ namespace RoT_v6.Models
         public string Notes { get; set; }
         [Display(Name = "Part Number")]
         public string partNum { get; set; }
-
     }
 }

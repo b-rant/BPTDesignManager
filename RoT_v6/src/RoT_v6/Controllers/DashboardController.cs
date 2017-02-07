@@ -22,11 +22,13 @@ namespace RoT_v6.Controllers
         public async Task<IActionResult> Index()
         {
             var ToDos = await _context.ToDos.ToListAsync();
-            var WorkTasks = await _context.WorkTasks.ToListAsync();
+            var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
+            var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
             Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
             {
                 ToDos = ToDos,
-                WorkTasks = WorkTasks
+                ActiveTasks = ActiveTasks,
+                CompletedTasks = CompletedTasks
             };
             return View(WorkTaskToDo);
         }

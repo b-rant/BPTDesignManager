@@ -66,6 +66,34 @@ textarea {
 div.dataTables_filter input {
     border-radius: 7px;
 }
+/*Tabs*/
+.page-tabs > li.active > a, .page-tabs  > li.active > a:hover, .page-tabs  > li.active > a:focus {
+    color: #2B303A;
+    cursor: default;
+    background-color: #E5C527;
+    border: 1px solid #2B303A;
+}
+.page-tabs > li > a:hover, .page-tabs > li > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #2B303A;
+}
+.page-tabs > li > a {
+    color: #2B303A;
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid #2B303A;
+    border-radius: 4px 4px 0 0;
+    background-color: #2B303A;
+}
+.page-tabs  > li > a {
+    color: #fff;
+    position: relative;
+    top:20px;
+    display: block;
+    padding: 10px 15px;
+    background-color: #2B303A;
+}
 
 /*buttons*/
 .btn-primary {
