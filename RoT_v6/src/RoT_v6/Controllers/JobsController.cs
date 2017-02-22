@@ -37,8 +37,8 @@ namespace RoT_v6.Controllers
 
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
             var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
-            var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
-            var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
+            var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
+            var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
             JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
             {
                 Job = job,
