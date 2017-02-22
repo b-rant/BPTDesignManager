@@ -15,25 +15,51 @@ namespace RoT_v6.Models
 
     public class Job
     {
-
+        
         public int JobID { get; set; }
         [Display(Name = "Job Number")]
+
+        [Required]
         public string jobNum { get; set; }
+
+        [Required]
         public string Client { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }
+
+        [Required]
         [Display(Name = "Desired Delivery")]
         public string DesiredDate { get; set; }
+
+       
         [Display(Name = "Completion Date")]
         public string CompleteDate { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [Required]
         [Display(Name = "Estimated Cost")]
         public float EstCost { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         [Display(Name = "Invested Cost")]
-        public float InvCost { get; set; }
+        public decimal InvCost { get; set; }
+
+        
         public JobStatus Status { get; set; }
+
+        [Required]
         [Display(Name = "Estimated Hours")]
-        public int EstHours { get; set; }
+        public decimal EstHours { get; set; }
+
+
+
         [Display(Name = "Invested Hours")]
         public int InvHours { get; set; }
 
