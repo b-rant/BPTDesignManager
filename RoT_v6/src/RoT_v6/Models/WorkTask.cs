@@ -29,7 +29,6 @@ namespace RoT_v6.Models
         [Required]
         public string Description { get; set; }
 
-        [Required]
         public List<ApplicationUser> Employees { get; set; }
 
         [Display(Name = "Start Date")]

@@ -208,6 +208,23 @@ namespace RoT_v6.Controllers
         public async Task<IActionResult> DeleteDashboardConfirmed(int id)
         {
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+            // Update Total Hours in job
+            if (job != null)
+            {
+                job.InvHours = job.InvHours - (int)workTask.TotalTime;
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(job);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        throw;
+                    }
+                }
+            }
             _context.WorkTasks.Remove(workTask);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Dashboard");
@@ -236,6 +253,23 @@ namespace RoT_v6.Controllers
         public async Task<IActionResult> DeleteJobDetailsConfirmed(int id)
         {
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+            // Update Total Hours in job
+            if (job != null)
+            {
+                job.InvHours = job.InvHours - (int)workTask.TotalTime;
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(job);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        throw;
+                    }
+                }
+            }
             _context.WorkTasks.Remove(workTask);
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });

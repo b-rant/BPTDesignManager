@@ -81,7 +81,7 @@
                     @Html.DisplayNameFor(model => model.WorkTasks[0].Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.WorkTasks[0].Employee)
+                    @Html.DisplayNameFor(model => model.WorkTasks[0].Employees[0].firstName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.WorkTasks[0].Status)
@@ -106,7 +106,7 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Employee)
+                        @Html.DisplayFor(modelItem => item.Employees[0].firstName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)

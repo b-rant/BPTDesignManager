@@ -24,6 +24,8 @@ namespace RoT_v6.Models
 
         [Display(Name = "Description")]
 
+        public List<ApplicationUser> Employees { get; set; }
+
         [Required]
         public string Description { get; set; }
 

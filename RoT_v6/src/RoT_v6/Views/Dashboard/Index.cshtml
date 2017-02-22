@@ -18,61 +18,73 @@
                 <p>
                     <!--<h2 style="display: inline-block; padding-right:1em;">Active Tasks</h2>-->
                 </p>
-                <table class="table table-striped table-bordered" id="ActiveTasks">
-                    <thead class="data_table_head">
+            <table class="table table-striped table-bordered" id="ActiveTasks">
+                <thead class="data_table_head">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Block)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees[0].firstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ActiveTasks)
+                    {
+
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].Block)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].Employee)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
-                            </th>
-                            <th></th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Block)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.partNum)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employees[0].firstName)
+                            </td>
+                            <td>
+                                @{
+                                    var status = item.Status.ToString();
+                                    switch (status)
+                                    {
+                                        case "Created":
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
+                                            break;
+                                        case "Pause":
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
+                                            break;
+                                        case "InProgress":
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
+                                            break;
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditDashboard" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
+                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ActiveTasks)
-            {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.partNum)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Employee)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CompleteDate)
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditDashboard" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                    }
+                </tbody>
+            </table>
+
         </div>
         <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
                 <p>
@@ -91,7 +103,7 @@
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Employee)
+                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees[0].firstName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
@@ -116,7 +128,7 @@
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Employee)
+                                    @Html.DisplayFor(modelItem => item.Employees[0].firstName)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
