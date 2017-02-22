@@ -23,5 +23,9 @@ namespace RoT_v6.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
         public DbSet<IdentityRole> identityRole { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<Purchase> Purchase { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<WorkTask> WorkTasks { get; set; }
     }
 }

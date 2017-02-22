@@ -12,9 +12,9 @@ namespace RoT_v6.Controllers
 {
     public class WorkTasksController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public WorkTasksController(RoTContext context)
+        public WorkTasksController(ApplicationDbContext context)
         {
             _context = context;    
         }

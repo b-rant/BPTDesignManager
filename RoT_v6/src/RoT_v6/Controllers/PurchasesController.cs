@@ -12,9 +12,9 @@ namespace RoT_v6.Controllers
 {
     public class PurchasesController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PurchasesController(RoTContext context)
+        public PurchasesController(ApplicationDbContext context)
         {
             _context = context;    
         }

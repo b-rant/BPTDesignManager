@@ -44,7 +44,7 @@ namespace RoT_v6.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         [Required]
         [Display(Name = "Estimated Cost")]
-        public float EstCost { get; set; }
+        public decimal EstCost { get; set; }
 
         [DataType(DataType.Currency)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
@@ -56,8 +56,7 @@ namespace RoT_v6.Models
 
         [Required]
         [Display(Name = "Estimated Hours")]
-        public decimal EstHours { get; set; }
-
+        public int EstHours { get; set; }
 
 
         [Display(Name = "Invested Hours")]

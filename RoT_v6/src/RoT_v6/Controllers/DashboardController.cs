@@ -12,9 +12,9 @@ namespace RoT_v6.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DashboardController(RoTContext context)
+        public DashboardController(ApplicationDbContext context)
         {
             _context = context;
         }

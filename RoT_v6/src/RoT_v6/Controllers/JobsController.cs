@@ -14,9 +14,9 @@ namespace RoT_v6.Controllers
 {
     public class JobsController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public JobsController(RoTContext context)
+        public JobsController(ApplicationDbContext context)
         {
             _context = context;    
         }

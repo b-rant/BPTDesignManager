@@ -23,20 +23,33 @@ namespace RoT_v6.Models
     {
         [Key]
         public int TaskID { get; set; }
+
         public int JobID { get; set; }
+
+        [Required]
         public string Description { get; set; }
-        public string Employee { get; set; }
+
+        [Required]
+        public List<ApplicationUser> Employees { get; set; }
+
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }
+
         [Display(Name = "Date Completed")]
         public string CompleteDate { get; set; }
+
         public TaskStatus Status { get; set; }
+
         [Display(Name = "Start Time")]
-        public double StartTime { get; set; }
+        public string StartTime { get; set; }
+
         [Display(Name = "Total Time")]
-        public double TotalTime { get; set; }
+        public int TotalTime { get; set; }
+
         public bool Block { get; set; }
+        
         public string Notes { get; set; }
+
         [Display(Name = "Part Number")]
         public string partNum { get; set; }
     }
