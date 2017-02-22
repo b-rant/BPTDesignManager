@@ -111,7 +111,7 @@ namespace RoT_v6.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };                
+                var user = new ApplicationUser { firstName = model.firstName, lastName = model.lastName,UserName = model.Email, Email = model.Email };                
                 var result = await _userManager.CreateAsync(user, model.Password);
                //UC await _userManager.AddToRoleAsync(user, model.Role);
                 if (result.Succeeded)

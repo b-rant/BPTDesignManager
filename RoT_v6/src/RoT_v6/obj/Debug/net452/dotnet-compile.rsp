@@ -201,6 +201,8 @@ C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Cont
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\ApplicationDbContext.cs
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\Migrations\00000000000000_CreateIdentitySchema.cs
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs
+C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\Migrations\20170222212654_work.cs
+C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\Migrations\20170222212654_work.Designer.cs
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Data\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Models\ApplicationUser.cs
 C:\Users\saech\OneDrive\Documents\GitHub\BPTDesignManager\RoT_v6\src\RoT_v6\Models\Job.cs
