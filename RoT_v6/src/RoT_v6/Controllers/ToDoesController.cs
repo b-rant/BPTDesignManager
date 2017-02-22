@@ -12,9 +12,9 @@ namespace RoT_v6.Controllers
 {
     public class ToDoesController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ToDoesController(RoTContext context)
+        public ToDoesController(ApplicationDbContext context)
         {
             _context = context;    
         }
