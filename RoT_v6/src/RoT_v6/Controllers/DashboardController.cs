@@ -12,9 +12,9 @@ namespace RoT_v6.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly RoTContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DashboardController(RoTContext context)
+        public DashboardController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -31,6 +31,63 @@ namespace RoT_v6.Controllers
                 CompletedTasks = CompletedTasks
             };
             return View(WorkTaskToDo);
+        }
+
+        public async Task<IActionResult> editTaskStatus(int? id, string Status)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            // Get task
+            var task = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == task.JobID);
+            if (task == null || job == null)
+            {
+                return NotFound();
+            }
+            DateTime date = DateTime.UtcNow;
+            // Edit Status
+            switch (Status)
+            {
+                case "Complete":
+                    task.Status = Models.TaskStatus.Completed;
+                    DateTime startTime = Convert.ToDateTime(task.StartTime);
+                    task.TotalTime = task.TotalTime + date.Subtract(startTime).Minutes;
+                    task.CompleteDate = date.ToString("d");
+                    job.InvHours = job.InvHours + (int)task.TotalTime;
+                    break;
+                case "CompleteFromPause":
+                    task.Status = Models.TaskStatus.Completed;
+                    task.CompleteDate = date.ToString("d");
+                    job.InvHours = job.InvHours + (int)task.TotalTime;
+                    break;
+                case "Pause":
+                    task.Status = Models.TaskStatus.Pause;
+                    DateTime sTime = Convert.ToDateTime(task.StartTime);
+                    task.TotalTime = task.TotalTime + date.Subtract(sTime).Minutes;
+                    break;
+                case "InProgress":
+                    task.Status = Models.TaskStatus.InProgress;
+                    task.StartTime = date.ToString();
+                    break;
+            }
+            // Post to database
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(task);
+                    _context.Update(job);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+            // Return view
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

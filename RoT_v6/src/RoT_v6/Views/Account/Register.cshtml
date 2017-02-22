@@ -9,6 +9,25 @@
     <h4>Create a new account.</h4>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <div class="form-group">
+        <label asp-for="firstName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="firstName" class="form-control" />
+            <span asp-validation-for="firstName" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="lastName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="lastName" class="form-control" />
+            <span asp-validation-for="lastName" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="form-group">
         <label asp-for="Email" class="col-md-2 control-label"></label>
         <div class="col-md-10">
@@ -16,6 +35,12 @@
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
+
+
+
+
+
+
     <div class="form-group">
         <label asp-for="Password" class="col-md-2 control-label"></label>
         <div class="col-md-10">

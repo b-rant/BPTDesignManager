@@ -10,6 +10,18 @@ namespace RoT_v6.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name ="First Name")]
+        public string firstName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Last Name")]
+        public string lastName { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

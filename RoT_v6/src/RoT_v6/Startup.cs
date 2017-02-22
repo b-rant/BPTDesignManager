@@ -41,7 +41,7 @@ namespace RoT_v6
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<RoTContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>

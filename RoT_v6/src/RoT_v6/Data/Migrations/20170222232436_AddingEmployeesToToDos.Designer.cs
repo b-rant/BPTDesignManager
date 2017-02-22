@@ -8,9 +8,10 @@ using RoT_v6.Data;
 namespace RoT_v6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170222232436_AddingEmployeesToToDos")]
+    partial class AddingEmployeesToToDos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -155,6 +156,8 @@ namespace RoT_v6.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int?>("ToDoId");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -174,6 +177,8 @@ namespace RoT_v6.Data.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex");
+
+                    b.HasIndex("ToDoId");
 
                     b.HasIndex("WorkTaskTaskID");
 
@@ -347,6 +352,10 @@ namespace RoT_v6.Data.Migrations
 
             modelBuilder.Entity("RoT_v6.Models.ApplicationUser", b =>
                 {
+                    b.HasOne("RoT_v6.Models.ToDo")
+                        .WithMany("Employees")
+                        .HasForeignKey("ToDoId");
+
                     b.HasOne("RoT_v6.Models.WorkTask")
                         .WithMany("Employees")
                         .HasForeignKey("WorkTaskTaskID");
