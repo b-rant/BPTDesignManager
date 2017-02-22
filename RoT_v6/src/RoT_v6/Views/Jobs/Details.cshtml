@@ -134,6 +134,9 @@
                     }
                 </tbody>
             </table>
+            <p>
+                <a class="btn btn-primary btn-padding" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Task</a>
+            </p>
         </div>
         <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
             <p>
@@ -255,7 +258,7 @@
                 </tbody>
             </table>
             <p>
-                <a class="btn btn-primary btn-padding" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">Create New</a>
+                <a class="btn btn-primary btn-padding" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Purchase Request</a>
             </p>
         </div>
     </div>
