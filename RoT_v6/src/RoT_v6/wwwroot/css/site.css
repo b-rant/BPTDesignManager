@@ -128,6 +128,10 @@ div.dataTables_filter input {
     text-decoration:none;
 }
 
+.btn-padding{
+    position: relative;
+    top: 20px;
+}
 /*Date Picker*/
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
     background-color: #E5C527;

@@ -7,6 +7,7 @@ namespace RoT_v6.ViewModels
     {
         public Job Job { get; set; }
         public List<Purchase> Purchases { get; set; }
-        public List<WorkTask> WorkTasks { get; set; }
+        public List<WorkTask> ActiveTasks { get; set; }
+        public List<WorkTask> CompletedTasks { get; set; }
     }
 }
