@@ -152,7 +152,15 @@
         
         <p>
             <h2 style="display: inline-block; padding-right:1em;">ToDo</h2>
-            <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Create">Create New</a>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Create">Create New</a>
+            }
+           
+
+
+
         </p>
         <table class="table table-striped table-bordered" id="ToDos">
             <thead class="data_table_head">

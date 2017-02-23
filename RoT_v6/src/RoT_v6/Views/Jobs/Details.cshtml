@@ -5,7 +5,13 @@
 }
 <p>
     <h2>Job Details</h2>
-    <a class="btn btn-primary" asp-action="EditDetails" asp-route-id="@Model.Job.JobID">Edit</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+    {
+        <a class="btn btn-primary" asp-action="EditDetails" asp-route-id="@Model.Job.JobID">Edit</a>
+    }
+   
+
+
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </p>
 <div class="container">
@@ -134,9 +140,17 @@
                     }
                 </tbody>
             </table>
-            <p>
-                <a class="btn btn-primary btn-padding" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Task</a>
-            </p>
+
+            @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+            {
+                <p>
+                    <a class="btn btn-primary btn-padding" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Task</a>
+                </p>
+
+            }
+            
+
+
         </div>
         <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
             <p>
