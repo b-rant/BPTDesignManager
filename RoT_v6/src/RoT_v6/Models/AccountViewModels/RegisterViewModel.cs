@@ -39,8 +39,7 @@ namespace RoT_v6.Models.AccountViewModels
         public string ConfirmPassword { get; set; }
 
 
-
-   /*  [DataType(DataType.Text)]
+   /*   [DataType(DataType.Text)]
         [Display(Name = "Role")]
         [UIHint("List")]
         public List<SelectListItem> Roles { get; set; }
