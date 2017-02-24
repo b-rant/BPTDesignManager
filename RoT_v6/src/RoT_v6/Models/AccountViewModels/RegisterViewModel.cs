@@ -39,13 +39,13 @@ namespace RoT_v6.Models.AccountViewModels
         public string ConfirmPassword { get; set; }
 
 
-   /*   [DataType(DataType.Text)]
+        [DataType(DataType.Text)]
         [Display(Name = "Role")]
         [UIHint("List")]
         public List<SelectListItem> Roles { get; set; }
         public string Role { get; set; }
 
-        public RegisterViewModel()
+        /*public RegisterViewModel()
         {
             Roles = new List<SelectListItem>();
 
@@ -70,21 +70,21 @@ namespace RoT_v6.Models.AccountViewModels
                 Text = "Employee"
             });
 
-        }
-        public void getRoles(ApplicationDbContext _context)
-        {
-            var roles = from r in _context.identityRole select r;
-            var listRole = roles.ToList();
-            foreach (var Data in listRole)
-            {
-                Roles.Add(new SelectListItem()
-                {
+        }*/
 
-                    Value = Data.Id,
-                    Text = Data.Name
-              });
-           }
-        } UC*/
-      }
-   }
+       /* public void getRoles(ApplicationDbContext _context)
+           {
+               var roles = from r in _context.identityRole select r;
+               var listRole = roles.ToList();
+               foreach (var Data in listRole)
+               {
+                   Roles.Add(new SelectListItem()
+                   {
+                       Value = Data.Id,
+                       Text = Data.Name
+                 });
+              }
+           }*/
+    }
+}
 

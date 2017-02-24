@@ -96,7 +96,7 @@ namespace RoT_v6.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             RegisterViewModel R = new RegisterViewModel();
-            //UC R.getRoles(_context);
+            // R.getRoles(_context);
             ViewData["ReturnUrl"] = returnUrl;
             return View(R);
         }

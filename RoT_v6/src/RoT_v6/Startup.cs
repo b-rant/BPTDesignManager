@@ -88,8 +88,8 @@ namespace RoT_v6
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            initialize r = new initialize();
-            //await r.CreateRoles(serviceProvider);
+            initialize initi = new initialize();
+            //await initi.CreateRoles(serviceProvider);
         }
      
     }
