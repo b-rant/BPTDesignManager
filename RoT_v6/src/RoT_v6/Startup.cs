@@ -60,7 +60,7 @@ namespace RoT_v6
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -89,7 +89,7 @@ namespace RoT_v6
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             initialize initi = new initialize();
-            //await initi.CreateRoles(serviceProvider);
+            await initi.CreateRoles(serviceProvider);
         }
      
     }

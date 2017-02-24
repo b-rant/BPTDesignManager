@@ -96,7 +96,7 @@ namespace RoT_v6.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             RegisterViewModel R = new RegisterViewModel();
-            //R.getRoles(_context);
+            R.getRoles(_context);
             ViewData["ReturnUrl"] = returnUrl;
             return View(R);
         }
@@ -113,7 +113,7 @@ namespace RoT_v6.Controllers
             {
                 var user = new ApplicationUser { firstName = model.firstName, lastName = model.lastName,UserName = model.Email, Email = model.Email };                
                 var result = await _userManager.CreateAsync(user, model.Password);
-               // await _userManager.AddToRoleAsync(user, model.Role);
+               await _userManager.AddToRoleAsync(user, model.Role);
                 if (result.Succeeded)
                 {
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
