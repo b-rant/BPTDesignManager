@@ -2,8 +2,10 @@
 @{
     ViewData["Title"] = "EditJobsList";
 }
+@{ Layout = "";
+    }
 <h2>Edit Job</h2>
-<form asp-action="EditJobsList">
+<form asp-action="EditJobsList/@Model.JobID">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -108,4 +110,7 @@
                 format: 'DD/MM/YYYY'
             });
         });
+    //var jobId = @Model.JobID;
+    //var requestString = '/Jobs/EditJobsList/' + jobId;
+    //$('#form').attr('action',requestString);
 </script>

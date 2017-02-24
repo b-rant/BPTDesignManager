@@ -157,3 +157,25 @@ hr {
         display: none;
     }
 }
+
+ /* Create modal test resizing */
+ .modal-content {
+        top: 10%;
+        left: 20%;
+        bottom: 20%;
+        max-width: 100%;
+        width: 600px;
+        height: 700px;
+        max-height: 100%;
+        overflow-y: auto;
+        outline: none;
+ }
+
+ /*#editModal {
+     top: 10%;
+     left: 20%;
+     bottom: 15%;
+     width: 600px;
+     max-width: 100%;
+     outline: none;
+ }*/

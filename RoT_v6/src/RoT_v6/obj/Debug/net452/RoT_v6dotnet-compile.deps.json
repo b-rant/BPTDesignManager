@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.5.2/",
-    "signature": "bb1bac70afeaedb51baed860f049bb41ae6df1cd"
+    "signature": "593789fdc182026ed4ef4ce4f9be379b31fa5f7f"
   },
   "compilationOptions": {
     "defines": [
@@ -17,6 +17,9 @@
     ".NETFramework,Version=v4.5.2": {
       "RoT_v6/1.0.0": {
         "dependencies": {
+          "bootstrap": "3.3.7",
+          "Bootstrap.v3.Datetimepicker": "4.17.45",
+          "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -34,12 +37,36 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "Moment.js": "2.17.1"
         },
         "compile": {
           "RoT_v6.exe": {}
         }
       },
+      "bootstrap/3.3.7": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap.Less/3.3.5": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.17.1",
+          "bootstrap.Less": "3.3.5"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.17.1",
+          "bootstrap": "3.3.7"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
@@ -928,6 +955,7 @@
           "lib/net451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
+      "Moment.js/2.17.1": {},
       "Newtonsoft.Json/9.0.1": {
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -1226,6 +1254,9 @@
     ".NETFramework,Version=v4.5.2/": {
       "RoT_v6/1.0.0": {
         "dependencies": {
+          "bootstrap": "3.3.7",
+          "Bootstrap.v3.Datetimepicker": "4.17.45",
+          "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -1243,12 +1274,36 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "Moment.js": "2.17.1"
         },
         "runtime": {
           "RoT_v6.exe": {}
         }
       },
+      "bootstrap/3.3.7": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap.Less/3.3.5": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.17.1",
+          "bootstrap.Less": "3.3.5"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.17.1",
+          "bootstrap": "3.3.7"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
@@ -2133,6 +2188,7 @@
           "lib/net451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
+      "Moment.js/2.17.1": {},
       "Newtonsoft.Json/9.0.1": {
         "runtime": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -2274,6 +2330,31 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "bootstrap/3.3.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3YTWhPNh6UcnUvzw9u6A2/hy2w0h4lznxPbX6FY47lFia3+Ib4zBixTpW6YieYA/b2fLXbkjoD59OjcVF3cJXw=="
+    },
+    "bootstrap.Less/3.3.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+xxiEyTJdWwO9G7Ig9gHoXl7grsncyQVy1bhWY9L41fSFUayIZYlziGcwB+ORQDzHAZJrCNa+y1bke11wJy0Ug=="
+    },
+    "Bootstrap.v3.Datetimepicker/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0/m8BCfhDRhWdiXm8RAHS0lVfaE64/93tDyINtrf4/cBpXGnVU7o5pFP6FhGhelTX7eH0hpLc8+j2obumhI9oA=="
+    },
+    "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-O6uUKSMe4KvfSJ1pON8yI8JzTxpf/InaDChbC3kwfUFG7hjysyIpx8fmgEtb8sojMJcfRRO5NFyLsz+rRX3Fdw=="
+    },
+    "jQuery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw=="
     },
     "Libuv/1.9.0": {
       "type": "package",
@@ -2704,6 +2785,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-f01OAOfsctcN7gSa05qYK8AgU1E/BFeZizvszNJMXY3BMJbYSj+3+YqyLunkMSf7LN92kcl7gQsAY9FayEH3ag=="
+    },
+    "Moment.js/2.17.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CeI6ZS2a28yA2Y371c5W854YxmmryfVDHecRyRCUR+3FDByX7WVvmk8N/Lw6LAWzqMwXlj2b+VGBJujK7DoSGg=="
     },
     "Newtonsoft.Json/9.0.1": {
       "type": "package",
