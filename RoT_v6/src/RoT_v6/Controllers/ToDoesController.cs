@@ -43,8 +43,10 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            List<ApplicationUser> employ = await _context.Users.ToListAsync();
+            ViewBag.Employees = new SelectList(employ);
             return View();
         }
 
@@ -53,8 +55,12 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ToDoId,CreatedDate,Description,DueDate,Priority")] ToDo toDo)
+        public async Task<IActionResult> Create([Bind("ToDoId,CreatedDate,Description,DueDate,Priority,Employees")] ToDo toDo)
         {
+         
+             
+        
+         
             if (ModelState.IsValid)
             {
                 _context.Add(toDo);

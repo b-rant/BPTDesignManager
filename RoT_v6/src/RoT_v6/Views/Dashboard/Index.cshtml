@@ -31,7 +31,7 @@
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees[0].firstName)
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees.First().name);
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
@@ -54,7 +54,7 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Employees[0].firstName)
+                                @Html.DisplayFor(modelItem => item.Employees.First().name)
                             </td>
                             <td>
                                 @{
@@ -103,7 +103,7 @@
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees[0].firstName)
+                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees.First().name)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
@@ -128,7 +128,7 @@
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Employees[0].firstName)
+                                    @Html.DisplayFor(modelItem => item.Employees.First().name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)

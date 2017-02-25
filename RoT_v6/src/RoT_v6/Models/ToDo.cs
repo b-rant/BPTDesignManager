@@ -22,10 +22,9 @@ namespace RoT_v6.Models
         [Key]
         public int ToDoId { get; set; }
 
+        public List<EmployeeTodo> employees { get; set; }
+
         [Display(Name = "Description")]
-
-        public List<ApplicationUser> Employees { get; set; }
-
         [Required]
         public string Description { get; set; }
 

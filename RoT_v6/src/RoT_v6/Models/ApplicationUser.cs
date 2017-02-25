@@ -9,7 +9,10 @@ namespace RoT_v6.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+      
+        public List<EmployeeTodo> todos { get; set; }
+        public string name { get; set; }
+
+       
     }
 }

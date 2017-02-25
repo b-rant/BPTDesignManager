@@ -155,8 +155,6 @@ namespace RoT_v6.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("ToDoId");
-
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
@@ -164,9 +162,7 @@ namespace RoT_v6.Migrations
 
                     b.Property<int?>("WorkTaskTaskID");
 
-                    b.Property<string>("firstName");
-
-                    b.Property<string>("lastName");
+                    b.Property<string>("name");
 
                     b.HasKey("Id");
 
@@ -177,11 +173,24 @@ namespace RoT_v6.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.HasIndex("ToDoId");
-
                     b.HasIndex("WorkTaskTaskID");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeTodo", b =>
+                {
+                    b.Property<string>("employeeId");
+
+                    b.Property<int>("todoID");
+
+                    b.HasKey("employeeId", "todoID");
+
+                    b.HasIndex("employeeId");
+
+                    b.HasIndex("todoID");
+
+                    b.ToTable("EmmployeeTodo");
                 });
 
             modelBuilder.Entity("RoT_v6.Models.Job", b =>
@@ -346,13 +355,22 @@ namespace RoT_v6.Migrations
 
             modelBuilder.Entity("RoT_v6.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("RoT_v6.Models.ToDo")
-                        .WithMany("Employees")
-                        .HasForeignKey("ToDoId");
-
                     b.HasOne("RoT_v6.Models.WorkTask")
                         .WithMany("Employees")
                         .HasForeignKey("WorkTaskTaskID");
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeTodo", b =>
+                {
+                    b.HasOne("RoT_v6.Models.ApplicationUser", "employee")
+                        .WithMany("todos")
+                        .HasForeignKey("employeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RoT_v6.Models.ToDo", "todoItem")
+                        .WithMany("employees")
+                        .HasForeignKey("todoID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

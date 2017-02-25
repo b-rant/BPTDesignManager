@@ -13,14 +13,8 @@ namespace RoT_v6.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name ="First Name")]
-        public string firstName { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Last Name")]
-        public string lastName { get; set; }
-
+        [Display(Name ="First and Last Name")]
+        public string name { get; set; }
 
         [Required]
         [EmailAddress]

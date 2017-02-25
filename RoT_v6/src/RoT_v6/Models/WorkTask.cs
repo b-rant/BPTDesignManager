@@ -29,7 +29,7 @@ namespace RoT_v6.Models
         [Required]
         public string Description { get; set; }
 
-        public List<ApplicationUser> Employees { get; set; }
+        public IEnumerable<ApplicationUser> Employees { get; set; }
 
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }

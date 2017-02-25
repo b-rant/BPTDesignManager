@@ -18,14 +18,17 @@ namespace RoT_v6.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<EmployeeTodo>().HasKey(k => new { k.employeeId, k.todoID });
+
         }
         public DbSet<IdentityRole> identityRole { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<WorkTask> WorkTasks { get; set; }
+        public DbSet<EmployeeTodo> EmployeeTodo { get; set; }
+     
     }
+
 }

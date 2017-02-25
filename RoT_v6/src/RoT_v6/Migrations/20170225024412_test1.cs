@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RoT_v6.Migrations
 {
-    public partial class first : Migration
+    public partial class test1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -160,22 +160,14 @@ namespace RoT_v6.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    ToDoId = table.Column<int>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     WorkTaskTaskID = table.Column<int>(nullable: true),
-                    firstName = table.Column<string>(nullable: true),
-                    lastName = table.Column<string>(nullable: true)
+                    name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_ToDos_ToDoId",
-                        column: x => x.ToDoId,
-                        principalTable: "ToDos",
-                        principalColumn: "ToDoId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_WorkTasks_WorkTaskTaskID",
                         column: x => x.WorkTaskTaskID,
@@ -249,6 +241,30 @@ namespace RoT_v6.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EmmployeeTodo",
+                columns: table => new
+                {
+                    employeeId = table.Column<string>(nullable: false),
+                    todoID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmmployeeTodo", x => new { x.employeeId, x.todoID });
+                    table.ForeignKey(
+                        name: "FK_EmmployeeTodo_AspNetUsers_employeeId",
+                        column: x => x.employeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmmployeeTodo_ToDos_todoID",
+                        column: x => x.todoID,
+                        principalTable: "ToDos",
+                        principalColumn: "ToDoId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -291,14 +307,19 @@ namespace RoT_v6.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ToDoId",
-                table: "AspNetUsers",
-                column: "ToDoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_WorkTaskTaskID",
                 table: "AspNetUsers",
                 column: "WorkTaskTaskID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmmployeeTodo_employeeId",
+                table: "EmmployeeTodo",
+                column: "employeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmmployeeTodo_todoID",
+                table: "EmmployeeTodo",
+                column: "todoID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -317,6 +338,9 @@ namespace RoT_v6.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "EmmployeeTodo");
 
             migrationBuilder.DropTable(
                 name: "Jobs");
