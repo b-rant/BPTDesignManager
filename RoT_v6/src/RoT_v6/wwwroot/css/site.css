@@ -4,7 +4,21 @@
     align-items: center;
 }
 
-
+/*Login css*/
+.login-container{
+ position: absolute;
+ margin: auto;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ width: 400px;
+ height: 400px;
+ float:none;
+ background-color:#404756;
+ color:white;
+ border-radius: 7px;
+}
 
 body {
     background-color:#DDE4EA;
