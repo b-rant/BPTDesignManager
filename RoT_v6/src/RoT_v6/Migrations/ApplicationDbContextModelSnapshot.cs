@@ -276,8 +276,6 @@ namespace RoT_v6.Migrations
 
                     b.Property<int>("Priority");
 
-                    b.Property<string>("employee");
-
                     b.HasKey("ToDoId");
 
                     b.ToTable("ToDos");

@@ -8,8 +8,8 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170226024912_x")]
-    partial class x
+    [Migration("20170226051615_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,8 +276,6 @@ namespace RoT_v6.Migrations
                         .IsRequired();
 
                     b.Property<int>("Priority");
-
-                    b.Property<string>("employee");
 
                     b.HasKey("ToDoId");
 

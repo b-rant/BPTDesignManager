@@ -44,7 +44,8 @@ namespace RoT_v6.Models
         [UIHint("List")]
         [NotMapped]
         public List<SelectListItem> Employed { get; set; }
-        public string employee{ get; set; }
+        [NotMapped]
+        public List<string>employee{ get; set; }
 
         public ToDo()
         {
@@ -60,7 +61,7 @@ namespace RoT_v6.Models
                 Employed.Add(new SelectListItem()
                 {
                     Value = Data.Id,
-                    Text = Data.Id
+                    Text = Data.name
                 });
             }
         }

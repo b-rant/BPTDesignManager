@@ -52,13 +52,24 @@
 
        
 
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="employee" class="col-md-2 control-label">Employees</label>
             <div class="col-md-10">
                 @Html.DropDownList("Employee", new SelectList(Model.Employed, "Text", "Text"))
             </div>
+        </div>*@ 
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <select asp-for="employee" asp-items="@Model.Employed">
+                    <option>Please select one</option>
+                </select>
+
+
+            </div>
         </div> 
 
+       
 
 
 

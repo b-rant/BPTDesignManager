@@ -65,15 +65,13 @@ namespace RoT_v6.Controllers
             {
                 _context.Add(test);
                 await _context.SaveChangesAsync();
-
-                var todent = new EmployeeTodo { employeeId = test.employee.ToString(), ToDoId = test.ToDoId };
-                  _context.Add(todent);
-                await _context.SaveChangesAsync();
-
-
-
-
-
+                foreach (string e in test.employee)
+                {
+                    var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = test.ToDoId };
+                    _context.Add(todent);
+                    await _context.SaveChangesAsync();
+                }
+               
 
                 return RedirectToAction("Index","Dashboard");
             }

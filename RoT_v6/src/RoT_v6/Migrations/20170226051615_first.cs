@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RoT_v6.Migrations
 {
-    public partial class x : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -119,8 +119,7 @@ namespace RoT_v6.Migrations
                     CreatedDate = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     DueDate = table.Column<string>(nullable: false),
-                    Priority = table.Column<int>(nullable: false),
-                    employee = table.Column<string>(nullable: true)
+                    Priority = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
