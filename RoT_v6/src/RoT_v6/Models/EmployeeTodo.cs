@@ -8,11 +8,22 @@ namespace RoT_v6.Models
 {   
 
     public class EmployeeTodo
-    {
+    {       
+
+        [ForeignKey("employeeId")]
         public string employeeId { get; set; }
-        public int todoID { get; set; }
-        public ApplicationUser employee { get; set; }        
+        public ApplicationUser employee { get; set; }
+     
+        [ForeignKey("ToDoId")]
+        public int ToDoId { get; set; }         
         public ToDo todoItem { get; set; }
 
+
+
+
+
     }
+
+
+
 }

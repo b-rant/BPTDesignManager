@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using RoT_v6.Data;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,9 +22,7 @@ namespace RoT_v6.Models
     public class ToDo
     {
         [Key]
-        public int ToDoId { get; set; }
-
-        public List<EmployeeTodo> employees { get; set; }
+        public int ToDoId { get; set; }        
 
         [Display(Name = "Description")]
         [Required]
@@ -37,5 +37,34 @@ namespace RoT_v6.Models
 
         [Display(Name = "Priority")]
         public priorityStatus Priority { get; set; }
+
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Employee")]
+        [UIHint("List")]
+        [NotMapped]
+        public List<SelectListItem> Employed { get; set; }
+        public string employee{ get; set; }
+
+        public ToDo()
+        {
+            Employed = new List<SelectListItem>();
+        }
+
+        public void getEmployees(ApplicationDbContext _context)
+        {
+            var emp = from r in _context.Users select r;
+            var listEmp = emp.ToList();
+            foreach (var Data in listEmp)
+            {
+                Employed.Add(new SelectListItem()
+                {
+                    Value = Data.Id,
+                    Text = Data.Id
+                });
+            }
+        }
+        [NotMapped]
+        public ICollection<EmployeeTodo> EmployeeTodo { get; set; }
     }
 }

@@ -19,7 +19,18 @@ namespace RoT_v6.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<EmployeeTodo>().HasKey(k => new { k.employeeId, k.todoID });
+            builder.Entity<EmployeeTodo>().HasKey(k => new { k.employeeId, k.ToDoId });
+
+        builder.Entity<EmployeeTodo>()
+        .HasOne(pc => pc.employee)
+        .WithMany(p => p.EmployeeTodo)
+        .HasForeignKey(pc => pc.employeeId);
+
+         builder.Entity<EmployeeTodo>()
+        .HasOne(pc => pc.todoItem)
+        .WithMany(p => p.EmployeeTodo)
+        .HasForeignKey(pc => pc.ToDoId);
+
 
         }
         public DbSet<IdentityRole> identityRole { get; set; }

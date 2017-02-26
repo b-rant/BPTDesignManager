@@ -66,13 +66,12 @@ namespace RoT_v6.Controllers
                 _context.Add(test);
                 await _context.SaveChangesAsync();
 
-                 var todent = new EmployeeTodo { UserId = "9b754fb1-9d93-429e-b82e-f66b3bba3e6f", ToDoId = test.ToDoId };
-
-                 _context.Add(todent);
+                var todent = new EmployeeTodo { employeeId = test.employee.ToString(), ToDoId = test.ToDoId };
+                  _context.Add(todent);
                 await _context.SaveChangesAsync();
-                
-             
-               
+
+
+
 
 
 

@@ -30,9 +30,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees.First().name);
-                        </th>
+                       
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
@@ -53,9 +51,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Employees.First().name)
-                            </td>
+                          
                             <td>
                                 @{
                                     var status = item.Status.ToString();
@@ -102,9 +98,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees.First().name)
-                            </th>
+                            
                             <th>
                                 @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
                             </th>
@@ -127,9 +121,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Employees.First().name)
-                                </td>
+                               
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Status)
                                 </td>

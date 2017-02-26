@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RoT_v6.Migrations
 {
-    public partial class test1 : Migration
+    public partial class x : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,32 @@ namespace RoT_v6.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +119,8 @@ namespace RoT_v6.Migrations
                     CreatedDate = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     DueDate = table.Column<string>(nullable: false),
-                    Priority = table.Column<int>(nullable: false)
+                    Priority = table.Column<int>(nullable: false),
+                    employee = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -141,39 +168,6 @@ namespace RoT_v6.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    WorkTaskTaskID = table.Column<int>(nullable: true),
-                    name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_WorkTasks_WorkTaskTaskID",
-                        column: x => x.WorkTaskTaskID,
-                        principalTable: "WorkTasks",
-                        principalColumn: "TaskID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,26 +236,26 @@ namespace RoT_v6.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmmployeeTodo",
+                name: "EmployeeTodo",
                 columns: table => new
                 {
                     employeeId = table.Column<string>(nullable: false),
-                    todoID = table.Column<int>(nullable: false)
+                    ToDoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmmployeeTodo", x => new { x.employeeId, x.todoID });
+                    table.PrimaryKey("PK_EmployeeTodo", x => new { x.employeeId, x.ToDoId });
                     table.ForeignKey(
-                        name: "FK_EmmployeeTodo_AspNetUsers_employeeId",
+                        name: "FK_EmployeeTodo_ToDos_ToDoId",
+                        column: x => x.ToDoId,
+                        principalTable: "ToDos",
+                        principalColumn: "ToDoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeTodo_AspNetUsers_employeeId",
                         column: x => x.employeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EmmployeeTodo_ToDos_todoID",
-                        column: x => x.todoID,
-                        principalTable: "ToDos",
-                        principalColumn: "ToDoId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -307,19 +301,14 @@ namespace RoT_v6.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_WorkTaskTaskID",
-                table: "AspNetUsers",
-                column: "WorkTaskTaskID");
+                name: "IX_EmployeeTodo_ToDoId",
+                table: "EmployeeTodo",
+                column: "ToDoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmmployeeTodo_employeeId",
-                table: "EmmployeeTodo",
+                name: "IX_EmployeeTodo_employeeId",
+                table: "EmployeeTodo",
                 column: "employeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EmmployeeTodo_todoID",
-                table: "EmmployeeTodo",
-                column: "todoID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -340,7 +329,7 @@ namespace RoT_v6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "EmmployeeTodo");
+                name: "EmployeeTodo");
 
             migrationBuilder.DropTable(
                 name: "Jobs");
@@ -349,16 +338,16 @@ namespace RoT_v6.Migrations
                 name: "Purchase");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "WorkTasks");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "ToDos");
 
             migrationBuilder.DropTable(
-                name: "WorkTasks");
+                name: "AspNetUsers");
         }
     }
 }
