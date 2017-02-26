@@ -178,11 +178,13 @@ div.dataTables_filter input {
 /*Progress Bars*/
 .progress {
     border: 1px solid #2B303A;
+    height: 40px;
 }
 
 .progress-bar {
    background-color: #E5C527;
    color: #2B303A;
+   font-size: 12px;
 }
 
 /*Labels*/

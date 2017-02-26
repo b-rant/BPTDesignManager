@@ -13,6 +13,7 @@ namespace RoT_v6.Controllers
     public class WorkTasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private decimal HourRate = 75;
 
         public WorkTasksController(ApplicationDbContext context)
         {
@@ -74,6 +75,7 @@ namespace RoT_v6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int JobID, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
         {
+            workTask.Status = Models.TaskStatus.Created;
             if (ModelState.IsValid)
             {
                 _context.Add(workTask);
@@ -109,6 +111,18 @@ namespace RoT_v6.Controllers
             if (id != workTask.TaskID)
             {
                 return NotFound();
+            }
+
+            var oldTask = await _context.WorkTasks.AsNoTracking().SingleOrDefaultAsync(m => m.TaskID == id);
+
+            if (oldTask.TotalTime != workTask.TotalTime)
+            {
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+                var oldCost = (oldTask.TotalTime * HourRate) / 60;
+                var newCost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - oldCost + newCost;
+                job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
+                _context.Jobs.Update(job);
             }
 
             if (ModelState.IsValid)
@@ -162,11 +176,24 @@ namespace RoT_v6.Controllers
                 return NotFound();
             }
 
+            var oldTask = await _context.WorkTasks.AsNoTracking().SingleOrDefaultAsync(m => m.TaskID == id);
+
+            if (oldTask.TotalTime != workTask.TotalTime)
+            {
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+                var oldCost = (oldTask.TotalTime * HourRate) / 60;
+                var newCost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - oldCost + newCost;
+                job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
+                _context.Jobs.Update(job);
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(workTask);
+                    
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -212,7 +239,9 @@ namespace RoT_v6.Controllers
             // Update Total Hours in job
             if (job != null)
             {
-                job.InvHours = job.InvHours - (int)workTask.TotalTime;
+                job.InvHours = job.InvHours - workTask.TotalTime;
+                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - cost;
                 if (ModelState.IsValid)
                 {
                     try
@@ -257,7 +286,9 @@ namespace RoT_v6.Controllers
             // Update Total Hours in job
             if (job != null)
             {
-                job.InvHours = job.InvHours - (int)workTask.TotalTime;
+                job.InvHours = job.InvHours - workTask.TotalTime;
+                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - cost;
                 if (ModelState.IsValid)
                 {
                     try

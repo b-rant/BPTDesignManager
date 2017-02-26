@@ -203,6 +203,16 @@ namespace RoT_v6.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+            var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+            var Tasks = await _context.WorkTasks.Where(m => m.JobID == id).ToListAsync();
+            foreach (WorkTask task in Tasks)
+            {
+                _context.WorkTasks.Remove(task);
+            }
+            foreach (Purchase purchase in Purchases)
+            {
+                _context.Purchase.Remove(purchase);
+            }
             _context.Jobs.Remove(job);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");

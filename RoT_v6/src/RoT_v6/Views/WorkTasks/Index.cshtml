@@ -18,33 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Block)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompleteDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employees.First().name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalTime)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.partNum)
             </th>
@@ -58,39 +32,9 @@
                 @Html.DisplayFor(modelItem => item.Block)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompleteDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employees.First().name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalTime)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.partNum)
             </td>
             <td>
-                <a asp-action="EditDashboard" asp-route-id="@item.TaskID">Edit</a> |
-                <a asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a> |
-                <a asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
             </td>
         </tr>
 }

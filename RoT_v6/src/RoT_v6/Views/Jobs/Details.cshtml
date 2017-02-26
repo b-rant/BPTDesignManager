@@ -98,9 +98,6 @@
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees.First().name)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
                         <th>
@@ -121,9 +118,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Employees.First().name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Status)
@@ -168,9 +162,6 @@
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees.First().name)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
                         </th>
                         <th>
@@ -191,9 +182,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Employees.First().name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Status)
@@ -315,12 +303,13 @@
         // Handles Progress bars for the hours and cost
         var estHours = @Model.Job.EstHours;
         var invHours = @Model.Job.InvHours;
+        invHours = (invHours / 60).toFixed(2);
         var estCost = @Model.Job.EstCost;
         var invCost = @Model.Job.InvCost;
         var hourProg = parseInt((invHours / estHours) * 100);
         var costProg = parseInt((invCost / estCost) * 100);
-        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + '/' + estHours + '</div>');
-        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + '/' + estCost + '</div>');
+        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + ' / ' + estHours + '</div>');
+        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + ' / ' + estCost + '</div>');
     })
     $('#JobDetailsTabs a').click(function (e) {
         e.preventDefault()

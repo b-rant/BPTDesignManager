@@ -13,6 +13,7 @@ namespace RoT_v6.Controllers
     public class DashboardController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private decimal HourRate = 75;
 
         public DashboardController(ApplicationDbContext context)
         {
@@ -56,11 +57,15 @@ namespace RoT_v6.Controllers
                     task.TotalTime = task.TotalTime + date.Subtract(startTime).Minutes;
                     task.CompleteDate = date.ToString("d");
                     job.InvHours = job.InvHours + (int)task.TotalTime;
+                    Decimal cost = (task.TotalTime * HourRate) / 60;
+                    job.InvCost = job.InvCost + cost; //((task.TotalTime / 60) * HourRate);
                     break;
                 case "CompleteFromPause":
                     task.Status = Models.TaskStatus.Completed;
                     task.CompleteDate = date.ToString("d");
                     job.InvHours = job.InvHours + (int)task.TotalTime;
+                    Decimal cost2 = (task.TotalTime * HourRate) / 60;
+                    job.InvCost = job.InvCost + cost2; //((task.TotalTime / 60) * HourRate);
                     break;
                 case "Pause":
                     task.Status = Models.TaskStatus.Pause;
