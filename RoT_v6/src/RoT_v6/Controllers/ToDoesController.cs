@@ -13,6 +13,8 @@ namespace RoT_v6.Controllers
     public class ToDoesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
+      
 
         public ToDoesController(ApplicationDbContext context)
         {
@@ -43,11 +45,12 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Create
-        public async Task<IActionResult> Create()
+        public  IActionResult Create(string returnUrl = null)
         {
-            List<ApplicationUser> employ = await _context.Users.ToListAsync();
-            ViewBag.Employees = new SelectList(employ);
-            return View();
+            ToDo A = new ToDo();
+            A.getEmployees(_context);
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(A);
         }
 
         // POST: ToDoes/Create
@@ -55,19 +58,27 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ToDoId,CreatedDate,Description,DueDate,Priority,Employees")] ToDo toDo)
-        {
-         
+        public async Task<IActionResult> Create(ToDo test) {          
              
-        
-         
+
             if (ModelState.IsValid)
             {
-                _context.Add(toDo);
+                _context.Add(test);
                 await _context.SaveChangesAsync();
+
+                 var todent = new EmployeeTodo { UserId = "9b754fb1-9d93-429e-b82e-f66b3bba3e6f", ToDoId = test.ToDoId };
+
+                 _context.Add(todent);
+                await _context.SaveChangesAsync();
+                
+             
+               
+
+
+
                 return RedirectToAction("Index","Dashboard");
             }
-            return View(toDo);
+            return View(test);
         }
 
         // GET: ToDoes/Edit/5

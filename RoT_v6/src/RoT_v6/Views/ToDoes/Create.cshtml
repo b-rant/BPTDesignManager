@@ -1,5 +1,6 @@
 @model RoT_v6.Models.ToDo
 
+
 @{
     ViewData["Title"] = "Create";
 }
@@ -47,20 +48,18 @@
                 <span asp-validation-for="Priority" class="text-danger" />
             </div>
         </div>
-
+        
 
         @{
-            SelectList list = ViewBag.Employees;
+            SelectList list = ViewBag.Employed;
         }
 
         <div class="form-group">
-            <label asp-for="employees" class="col-md-2 control-label"> Employees</label>
+            <label asp-for="employee" class="col-md-2 control-label">Employees</label>
             <div class="col-md-10">
-                <select asp-for="employees" asp-items="ViewBag.Employees">                                       
-                </select>
+                @Html.DropDownList("Employee", new SelectList(Model.Employed, "Text", "Text"))
             </div>
-        </div>
-
+        </div> 
 
 
 
