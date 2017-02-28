@@ -7,7 +7,7 @@
     }
 <h2>Create Job</h2>
 <form asp-action="Create">
-    <div class="form-horizontal">
+    <div class="form-horizontal text-center">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -93,15 +93,13 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input class="btn btn-primary" type="submit" value="Create"/>
+            <div>
+                <a class="btn btn-primary" asp-action="Index">Back to List</a> <input class="btn btn-primary" type="submit" value="Create"/>
             </div>
         </div>
     </div>
 </form>
-<div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
-</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -5,8 +5,7 @@
 
 <h2>Jobs List</h2>
 <p>
-    <!--Old create button: <a class="btn btn-primary" asp-action="Create">Create New</a>-->
-    <button class="btn btn-primary" onclick="testDataUrl('Create')">Create New</button>
+    <button class="btn btn-primary" onclick="dataUrl('Jobs','Create')">Create New</button>
 </p>
 <table id="allJobs" class="table table-striped table-bordered">
     <thead class="data_table_head">
@@ -48,57 +47,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CompleteDate)
                 </td>
-                <td>
-                    <!--Old edit button: <a class="btn btn-primary" asp-action="EditJobsList" asp-route-id="@item.JobID">Edit</a>-->                 
-                    <button class="btn btn-primary" onclick="testDataUrl('EditJobsList',@item.JobID)">Edit</button>
+                <td>                
+                    <button class="btn btn-primary" onclick="dataUrl('Jobs','EditJobsList',@item.JobID)">Edit</button>
                     <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.JobID">Details</a>
-                    <button class="btn btn-primary" onclick="testDataUrl('Delete',@item.JobID)">Delete</button>
-                    <!--<a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.JobID">Delete</a>-->
+                    <button class="btn btn-primary" onclick="dataUrl('Jobs','Delete',@item.JobID)">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <script>
-
-    testDataUrl = function (action, jobId) {
-        $.ajax({
-            url: '/Jobs/' + action,
-            type: 'GET',
-            data: { id: parseInt(jobId) },
-            success: function (result) {
-                doModal(result);
-            }
-        });
-    }
-
-    function doModal(result) {
-        html = '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
-        html += '<div class="modal-dialog">';
-        html += '<div class="modal-content">';
-        html += '<div class="modal-header">';
-        html += '<a class="close" data-dismiss="modal">×</a>';
-        html += '</div>';
-        html += '<div class="modal-body">';
-        html += '<div id = "dynamicContainer">';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="modal-footer">';
-        html += '<span class="btn btn-primary" data-dismiss="modal">Close</span>';
-        html += '</div>';  // content
-        html += '</div>';  // dialog
-        html += '</div>';  // footer
-        html += '</div>';  // modalWindow
-        $('body').append(html);
-        $("#dynamicModal").modal();
-        $('#dynamicContainer').html(result);
-        $('#dynamicModal').modal('show');
-        $('#dynamicModal').on('hidden.bs.modal', function (e) {
-            $(this).remove();
-        });
-
-    }
-
     $(document).ready(function () {
         $("#allJobs").DataTable({
                         "paging": false,
@@ -108,28 +66,5 @@
                 { "className": "dt-center", "targets": "_all" }
             ]
         });
-
-        $('#createJob').click(function () {
-            var url = $('#createModal').data('url');
-
-
-            $.get(url, function (data) {
-                $('#createContainer').html(data);
-
-                $('#createModal').modal('show')
-            });
-        });
-
-        $('#editJob').click(function () {
-            var url = $('#editModal').data('url');
-
-            $.get(url, function (data) {
-                $('#editContainer').html(data);
-
-                $('#editModal').modal('show')
-            });
-        });
     });
-
-
 </script>

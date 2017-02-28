@@ -28,7 +28,7 @@ a{
 input,
 select,
 textarea {
-    max-width: 280px;
+   
 }
 
 /*Navbar*/
@@ -159,7 +159,7 @@ hr {
 }
 
  /* Create modal test resizing */
- .modal-content {
+ /*.modal-content {
         top: 10%;
         left: 20%;
         bottom: 20%;
@@ -169,13 +169,15 @@ hr {
         max-height: 100%;
         overflow-y: auto;
         outline: none;
- }
-
- /*#editModal {
-     top: 10%;
-     left: 20%;
-     bottom: 15%;
-     width: 600px;
-     max-width: 100%;
-     outline: none;
  }*/
+
+ .modal-content {
+     top: 0%;
+     right: 0%;
+     max-width: 100%;
+     max-height: 100%;
+     width: 600px;
+     height: 700px;
+     overflow-y: auto;
+     text-align: center;
+ }

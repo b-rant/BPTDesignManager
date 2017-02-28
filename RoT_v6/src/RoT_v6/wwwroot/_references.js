@@ -2,6 +2,7 @@
 /// <reference path="js/bootstrap.min.js" />
 /// <reference path="js/collapse.js" />
 /// <reference path="js/datetimepicker.js" />
+/// <reference path="js/javascript.js" />
 /// <reference path="js/moment.min.js" />
 /// <reference path="js/site.js" />
 /// <reference path="js/transition.js" />

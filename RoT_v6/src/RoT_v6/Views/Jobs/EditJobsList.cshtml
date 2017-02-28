@@ -6,13 +6,13 @@
     }
 <h2>Edit Job</h2>
 <form asp-action="EditJobsList/@Model.JobID">
-    <div class="form-horizontal">
+    <div class="form-horizontal text-center">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="JobID" />
         <div class="form-group">
             <label asp-for="jobNum" class="col-md-2 control-label">Job Number</label>
-            <div class="col-md-10">
+            <div class="col-md-10 text-center">
                 <input asp-for="jobNum" class="form-control" />
                 <span asp-validation-for="jobNum" class="text-danger" />
             </div>
@@ -92,14 +92,14 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div>
+                <a class="btn btn-primary" asp-action="Index">Back</a> <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 <div>
-    <a class="btn btn-primary" asp-action="Index">Back</a>
+    
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -110,7 +110,4 @@
                 format: 'DD/MM/YYYY'
             });
         });
-    //var jobId = @Model.JobID;
-    //var requestString = '/Jobs/EditJobsList/' + jobId;
-    //$('#form').attr('action',requestString);
 </script>

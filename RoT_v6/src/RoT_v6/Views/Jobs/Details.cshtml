@@ -179,6 +179,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary" asp-controller="Purchases" asp-action="EditJobDetails" asp-route-id="@item.purchID">Edit</a>
+                        <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit Modal</button>
                         <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
                         <a class="btn btn-primary" asp-controller="Purchases" asp-action="DeleteJobDetails" asp-route-id="@item.purchID">Delete</a>
                     </td>

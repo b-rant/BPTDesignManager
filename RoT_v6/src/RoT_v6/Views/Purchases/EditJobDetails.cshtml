@@ -4,9 +4,12 @@
     ViewData["Title"] = "EditJobDetails";
 }
 
+@{ Layout = "";
+}
+
 <h2>Edit</h2>
 
-<form asp-action="EditJobDetails">
+<form asp-action="EditJobDetails/@Model.purchID">
     <div class="form-horizontal">
         <h4>Purchase</h4>
         <hr />
