@@ -15,9 +15,9 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="ActiveTasksTab">
-                <p>
-                    <!--<h2 style="display: inline-block; padding-right:1em;">Active Tasks</h2>-->
-                </p>
+            <p>
+                <!--<h2 style="display: inline-block; padding-right:1em;">Active Tasks</h2>-->
+            </p>
             <table class="table table-striped table-bordered" id="ActiveTasks">
                 <thead class="data_table_head">
                     <tr>
@@ -30,7 +30,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
-                       
+
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
@@ -51,7 +51,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                          
+
                             <td>
                                 @{
                                     var status = item.Status.ToString();
@@ -62,19 +62,25 @@
                                             break;
                                         case "Pause":
                                             <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
                                             break;
                                         case "InProgress":
                                             <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
                                             break;
                                     }
                                 }
                             </td>
                             <td>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
+                                }
                             </td>
                         </tr>
                                     }
@@ -83,65 +89,71 @@
 
         </div>
         <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
-                <p>
-                    <!--<h2 style="display: inline-block; padding-right:1em;">Completed Tasks</h2>-->
-                </p>
-                <table class="table table-striped table-bordered" id="CompletedTasks">
-                    <thead class="data_table_head">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Block)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].partNum)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
-                            </th>
-                            
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.CompletedTasks)
+            <p>
+                <!--<h2 style="display: inline-block; padding-right:1em;">Completed Tasks</h2>-->
+            </p>
+            <table class="table table-striped table-bordered" id="CompletedTasks">
+                <thead class="data_table_head">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Block)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].partNum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CompletedTasks)
             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.partNum)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                               
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CompleteDate)
-                                </td>
-                                <td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Block)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.partNum)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompleteDate)
+                            </td>
+                            <td>
+                                @if (!User.IsInRole("Employee"))
+                                {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
+                                }
+                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
+                                @if (!User.IsInRole("Employee"))
+                                {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div>
-        
+
         <p>
             <h2 style="display: inline-block; padding-right:1em;">ToDo</h2>
 
@@ -149,7 +161,7 @@
             {
                 <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Create')">Create New</button>
             }
-           
+
 
 
 
@@ -189,9 +201,15 @@
                             @Html.DisplayFor(modelItem => item.Priority)
                         </td>
                         <td>
-                            <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Edit', @item.ToDoId)">Edit</button>
+                            @if (!User.IsInRole("Employee"))
+                            {
+                                <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Edit', @item.ToDoId)">Edit</button>
+                            }
                             <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Details" asp-route-id="@item.ToDoId">Details</a>
-                            <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Delete', @item.ToDoId)">Delete</button>
+                            @if (!User.IsInRole("Employee"))
+                            {
+                                <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Delete', @item.ToDoId)">Delete</button>
+                            }
                         </td>
                     </tr>
                 }
@@ -213,7 +231,7 @@
             ]
         });
         CompletedTable = $("#CompletedTasks").DataTable({
-            "scrollY":"200px",
+            "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": false,

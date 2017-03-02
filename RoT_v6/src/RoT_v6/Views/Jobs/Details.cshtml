@@ -9,7 +9,7 @@
     {
         <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditDetails', @Model.Job.JobID)">Edit</button>
     }
-   
+
 
 
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
@@ -126,9 +126,15 @@
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
@@ -142,7 +148,7 @@
                 </p>
 
             }
-            
+
 
 
         </div>
@@ -190,9 +196,15 @@
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
@@ -201,8 +213,8 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="PurchasesTab">
             <p>
-               
-                
+
+
             </p>
             <table class="table table-striped table-bordered" id="Purchases">
                 <thead class="data_table_head">
@@ -251,9 +263,15 @@
                                 @Html.DisplayFor(modelItem => item.ArrivedDate)
                             </td>
                             <td>
-                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
-                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
+                                @if (!User.IsInRole("Employee"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
