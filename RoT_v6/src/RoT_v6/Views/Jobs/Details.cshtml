@@ -133,7 +133,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsJobDetails', @item.TaskID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
@@ -197,7 +197,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsJobDetails', @item.TaskID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
@@ -258,7 +258,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
-                                <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsJobDetails', @item.purchID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
                             </td>
                         </tr>

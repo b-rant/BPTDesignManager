@@ -73,7 +73,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
@@ -190,7 +190,7 @@
                         </td>
                         <td>
                             <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Edit', @item.ToDoId)">Edit</button>
-                            <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Details" asp-route-id="@item.ToDoId">Details</a>
+                            <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Details', @item.ToDoId)">Details</button>
                             <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Delete', @item.ToDoId)">Delete</button>
                         </td>
                     </tr>
