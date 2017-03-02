@@ -17,7 +17,7 @@ function doModal(result) {
     html += '<div class="modal-body">';
     html += '<div id = "modal-container">';
     html += '</div>'; //container
-    html += '<span class="btn btn-primary" data-dismiss="modal">Close</span>';
+    html += '<span style="float: left; margin-bottom: 10px;" class="btn btn-primary" data-dismiss="modal">Close</span>';
     html += '</div>'; //body
     html += '</div>'; //content
     html += '</div>'; //dialog

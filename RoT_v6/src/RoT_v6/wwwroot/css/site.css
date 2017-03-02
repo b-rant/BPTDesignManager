@@ -229,13 +229,11 @@ hr {
 }
 
 .modal-content {
-    top: 0%;
-    left: 0%;
-    width: 600px;
-    height: 700px;
-    max-height: 100%;
-    max-width: 100%;
-    text-align: center;
-    outline: none;
-    overflow-y: auto;
+   top: 0%;
+   left: 0%;
+   max-height: 100%;
+   max-width: 100%;
+   text-align: center;
+   outline: none;
+   overflow-y: auto;
 }
