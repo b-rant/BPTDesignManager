@@ -65,7 +65,13 @@ namespace RoT_v6.Controllers
         {
             WorkTask worktask = new WorkTask();
             worktask.JobID = id;
-            return View(worktask);
+            worktask.getEmployees(_context);
+            return View(worktask);            
+           
+
+
+
+
         }
 
         // POST: WorkTasks/Create
@@ -73,17 +79,33 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int JobID, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        public async Task<IActionResult> Create(int JobID, WorkTask workTask)
         {
             workTask.Status = Models.TaskStatus.Created;
             if (ModelState.IsValid)
             {
                 _context.Add(workTask);
                 await _context.SaveChangesAsync();
+
+
+                //foreach (string e in workTask.employee)
+                //{
+                //    var todent = new EmployeeWorkTask { employeeId = e.ToString(), TaskId = workTask.TaskID };
+                //    _context.Add(todent);
+                //    await _context.SaveChangesAsync();
+                //}
+
+
+
+
                 return RedirectToAction("Details","Jobs",new { id = JobID});
             }
             return View(workTask);
         }
+
+
+
+
 
         // GET: WorkTasks/EditDashboard/5
         public async Task<IActionResult> EditDashboard(int? id)

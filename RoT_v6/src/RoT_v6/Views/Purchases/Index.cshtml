@@ -71,7 +71,7 @@
             </td>
             <td>
                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
-                <a class="btn btn-primary" asp-action="DetailsPurchases" asp-route-id="@item.purchID">Details</a>
+                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsPurchases', @item.purchID)">Details</button>
                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeletePurchases', @item.purchID)">Delete</button>
             </td>
         </tr>
