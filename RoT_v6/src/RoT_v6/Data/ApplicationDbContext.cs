@@ -31,6 +31,20 @@ namespace RoT_v6.Data
         .WithMany(p => p.EmployeeTodo)
         .HasForeignKey(pc => pc.ToDoId);
 
+        builder.Entity<EmployeeWorkTask>().HasKey(k => new { k.employeeId, k.TaskId });
+
+        builder.Entity<EmployeeWorkTask>()
+        .HasOne(pc => pc.employee)
+        .WithMany(p => p.EmployeeWorkTask)
+            .HasForeignKey(pc => pc.employeeId);
+
+            builder.Entity<EmployeeWorkTask>()
+           .HasOne(pc => pc.WorkTaskItem)
+           .WithMany(p => p.EmployeeWorkTask)
+           .HasForeignKey(pc => pc.TaskId);
+
+
+
 
         }
         public DbSet<IdentityRole> identityRole { get; set; }
@@ -39,7 +53,8 @@ namespace RoT_v6.Data
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<WorkTask> WorkTasks { get; set; }
         public DbSet<EmployeeTodo> EmployeeTodo { get; set; }
-     
+        public DbSet<EmployeeWorkTask> EmployeeTask { get; set; }
+
     }
 
 }

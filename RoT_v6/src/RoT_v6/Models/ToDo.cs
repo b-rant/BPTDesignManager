@@ -67,5 +67,21 @@ namespace RoT_v6.Models
         }
         [NotMapped]
         public ICollection<EmployeeTodo> EmployeeTodo { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

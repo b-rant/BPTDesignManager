@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using RoT_v6.Data;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,8 +29,7 @@ namespace RoT_v6.Models
         public int JobID { get; set; }
 
         [Required]
-        public string Description { get; set; }
-      
+        public string Description { get; set; }      
 
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }
@@ -50,5 +51,56 @@ namespace RoT_v6.Models
 
         [Display(Name = "Part Number")]
         public string partNum { get; set; }
+        [NotMapped]
+        public ICollection<EmployeeWorkTask> EmployeeWorkTask { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Employee")]
+        [UIHint("List")]
+        [NotMapped]
+        public List<SelectListItem> Employed { get; set; }
+        [NotMapped]
+        public List<string> employee { get; set; }
+
+        public WorkTask()
+        {
+            Employed = new List<SelectListItem>();
+        }
+
+        public void getEmployees(ApplicationDbContext _context)
+        {
+            var emp = from r in _context.Users select r;
+            var listEmp = emp.ToList();
+            foreach (var Data in listEmp)
+            {
+                Employed.Add(new SelectListItem()
+                {
+                    Value = Data.Id,
+                    Text = Data.name
+                });
+            }
+        }
+    
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
