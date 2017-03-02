@@ -7,7 +7,7 @@
 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
 {
     <p>
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
+        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'Create')">Create New</button>
     </p>
 }
 
@@ -55,7 +55,7 @@
                 <td>
                     @if (User.IsInRole("Admin")|| User.IsInRole("ShopManager"))
                     {
-                        <a class="btn btn-primary" asp-action="EditJobsList" asp-route-id="@item.JobID">Edit</a>
+                        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditJobsList', @item.JobID)">Edit</button>
                     }
                    
 
@@ -63,7 +63,7 @@
 
                     @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                     {
-                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.JobID">Delete</a>
+                        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'Delete', @item.JobID)">Delete</button>
                     }
                    
                 </td>

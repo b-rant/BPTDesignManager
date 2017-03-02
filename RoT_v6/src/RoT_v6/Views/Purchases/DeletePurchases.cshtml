@@ -4,6 +4,9 @@
     ViewData["Title"] = "DeletePurchases";
 }
 
+@{ 
+    Layout = "";
+}
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -85,10 +88,9 @@
         </dd>
     </dl>
     
-    <form asp-action="DeletePurchases">
+    <form asp-action="DeletePurchases/@Model.purchID">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" />
-            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            <a class="btn btn-primary" asp-action="Index">Back to List</a> <input type="submit" value="Delete" class="btn btn-primary" />            
         </div>
     </form>
 </div>

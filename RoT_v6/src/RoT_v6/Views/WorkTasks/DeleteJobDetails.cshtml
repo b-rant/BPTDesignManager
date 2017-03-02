@@ -4,6 +4,9 @@
     ViewData["Title"] = "DeleteJobDetails";
 }
 
+@{ 
+    Layout = "";
+}
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -73,10 +76,9 @@
         </dd>
     </dl>
     
-    <form asp-action="DeleteJobDetails">
+    <form asp-action="DeleteJobDetails/@Model.TaskID">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-primary" />
-            <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a>
+            <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back to List</a> <input type="submit" value="Delete" class="btn btn-primary" />            
         </div>
     </form>
 </div>

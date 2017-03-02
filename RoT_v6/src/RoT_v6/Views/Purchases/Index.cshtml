@@ -70,9 +70,9 @@
                 @Html.DisplayFor(modelItem => item.ArrivedDate)
             </td>
             <td>
-                <a class="btn btn-primary" asp-action="EditPurchases" asp-route-id="@item.purchID">Edit</a>
+                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
                 <a class="btn btn-primary" asp-action="DetailsPurchases" asp-route-id="@item.purchID">Details</a>
-                <a class="btn btn-primary" asp-action="DeletePurchases" asp-route-id="@item.purchID">Delete</a>
+                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeletePurchases', @item.purchID)">Delete</button>
             </td>
         </tr>
 }

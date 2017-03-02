@@ -60,10 +60,10 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/Create
-        public IActionResult Create(int JobID)
+        public IActionResult Create(int id)
         {
             Purchase purchase = new Purchase();
-            purchase.JobID = JobID;
+            purchase.JobID = id;
             return View(purchase);
         }
 
@@ -130,7 +130,7 @@ namespace RoT_v6.Controllers
                     {
                         throw;
                     }
-                }
+               }
                 return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
             return View(purchase);

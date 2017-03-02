@@ -61,10 +61,10 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/Create
-        public IActionResult Create(int JobID)
+        public IActionResult Create(int id)
         {
             WorkTask worktask = new WorkTask();
-            worktask.JobID = JobID;
+            worktask.JobID = id;
             return View(worktask);
         }
 

@@ -2,9 +2,14 @@
 @{
     ViewData["Title"] = "EditDetails";
 }
+
+@{ 
+    Layout = "";
+}
+
 <h2>Edit Job</h2>
 
-<form asp-action="EditDetails">
+<form asp-action="EditDetails/@Model.JobID">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -92,14 +97,12 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a> <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
-<div>
-    <a class="btn btn-primary"  asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a>
-</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

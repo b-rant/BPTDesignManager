@@ -72,9 +72,9 @@
                                 }
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditDashboard" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
                                     }
@@ -129,9 +129,9 @@
                                     @Html.DisplayFor(modelItem => item.CompleteDate)
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditDashboard" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
                                     <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
-                                    <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteDashboard" asp-route-id="@item.TaskID">Delete</a>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
                                 </td>
                             </tr>
                         }
@@ -147,7 +147,7 @@
 
             @if (User.IsInRole("Admin"))
             {
-                <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Create">Create New</a>
+                <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Create')">Create New</button>
             }
            
 
@@ -189,9 +189,9 @@
                             @Html.DisplayFor(modelItem => item.Priority)
                         </td>
                         <td>
-                            <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Edit" asp-route-id="@item.ToDoId">Edit</a>
+                            <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Edit', @item.ToDoId)">Edit</button>
                             <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Details" asp-route-id="@item.ToDoId">Details</a>
-                            <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Delete" asp-route-id="@item.ToDoId">Delete</a>
+                            <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Delete', @item.ToDoId)">Delete</button>
                         </td>
                     </tr>
                 }

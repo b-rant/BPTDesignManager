@@ -7,7 +7,7 @@
     <h2>Job Details</h2>
     @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
     {
-        <a class="btn btn-primary" asp-action="EditDetails" asp-route-id="@Model.Job.JobID">Edit</a>
+        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditDetails', @Model.Job.JobID)">Edit</button>
     }
    
 
@@ -126,9 +126,9 @@
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditJobDetails" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteJobDetails" asp-route-id="@item.TaskID">Delete</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
                     }
@@ -138,7 +138,7 @@
             @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
             {
                 <p>
-                    <a class="btn btn-primary btn-padding" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Task</a>
+                    <button class="btn btn-primary btn-padding" onclick="dataUrl('WorkTasks', 'Create', @Model.Job.JobID)">New Task</button>
                 </p>
 
             }
@@ -190,9 +190,9 @@
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditJobDetails" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteJobDetails" asp-route-id="@item.TaskID">Delete</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                             </td>
                         </tr>
                     }
@@ -251,16 +251,16 @@
                                 @Html.DisplayFor(modelItem => item.ArrivedDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="Purchases" asp-action="EditJobDetails" asp-route-id="@item.purchID">Edit</a>
+                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
                                 <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
-                                <a class="btn btn-primary" asp-controller="Purchases" asp-action="DeleteJobDetails" asp-route-id="@item.purchID">Delete</a>
+                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
             <p>
-                <a class="btn btn-primary btn-padding" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Purchase Request</a>
+                <button class="btn btn-primary btn-padding" onclick="dataUrl('Purchases', 'Create', @Model.Job.JobID)">New Purchase Request</button>
             </p>
         </div>
     </div>
