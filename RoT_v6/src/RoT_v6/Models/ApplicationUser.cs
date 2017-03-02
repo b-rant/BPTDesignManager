@@ -15,7 +15,7 @@ namespace RoT_v6.Models
         public string name { get; set; }
         [NotMapped]
         public ICollection<EmployeeTodo> EmployeeTodo { get; set; }
-        public ICollection<EmployeeWorkTask> EmployeeWorkTask { get; set; }
+     public ICollection<EmployeeWorkTask> EmployeeWorkTask { get; set; }
 
     }
 }

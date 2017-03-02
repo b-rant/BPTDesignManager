@@ -103,6 +103,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].EmployeeWorkTask)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -124,6 +127,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>

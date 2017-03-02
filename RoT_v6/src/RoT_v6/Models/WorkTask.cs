@@ -51,7 +51,10 @@ namespace RoT_v6.Models
 
         [Display(Name = "Part Number")]
         public string partNum { get; set; }
+        public string employeeId { get; set; }
+
         [NotMapped]
+        [Display(Name = "Employee's")]
         public ICollection<EmployeeWorkTask> EmployeeWorkTask { get; set; }
 
         [DataType(DataType.Text)]
@@ -59,8 +62,9 @@ namespace RoT_v6.Models
         [UIHint("List")]
         [NotMapped]
         public List<SelectListItem> Employed { get; set; }
-        [NotMapped]
-        public List<string> employee { get; set; }
+
+        //[NotMapped]
+        //public List<string> employee { get; set; }
 
         public WorkTask()
         {
@@ -75,32 +79,13 @@ namespace RoT_v6.Models
             {
                 Employed.Add(new SelectListItem()
                 {
-                    Value = Data.Id,
+                    Value = Data.name,
                     Text = Data.name
                 });
             }
         }
-    
+
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

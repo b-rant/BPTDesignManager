@@ -66,8 +66,7 @@ namespace RoT_v6.Controllers
             WorkTask worktask = new WorkTask();
             worktask.JobID = id;
             worktask.getEmployees(_context);
-            return View(worktask);
-                        
+            return View(worktask);            
            
 
 
@@ -89,12 +88,12 @@ namespace RoT_v6.Controllers
                 await _context.SaveChangesAsync();
 
 
-                foreach (string e in workTask.employee)
-                {
-                    var todent = new EmployeeWorkTask { employeeId = e.ToString(), TaskId = workTask.TaskID };
-                    _context.Add(todent);
-                    await _context.SaveChangesAsync();
-                }
+                //foreach (string e in workTask.employee)
+                //{
+                //    var todent = new EmployeeWorkTask { employeeId = e.ToString(), TaskId = workTask.TaskID };
+                //    _context.Add(todent);
+                //    await _context.SaveChangesAsync();
+                //}
 
 
 
