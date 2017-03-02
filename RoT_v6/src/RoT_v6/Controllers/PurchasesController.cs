@@ -164,6 +164,15 @@ namespace RoT_v6.Controllers
                 return NotFound();
             }
 
+            var oldPurchase = await _context.Purchase.AsNoTracking().SingleOrDefaultAsync(m => m.purchID == id);
+            // If the purchase total cost was changed, update the Invested cost in the Database for the given Job
+            if (oldPurchase.TotalCost != purchase.TotalCost)
+            {
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == purchase.JobID);
+                job.InvCost = job.InvCost - oldPurchase.TotalCost + purchase.TotalCost;
+                _context.Update(job);
+            }
+
             if (ModelState.IsValid)
             {
                 try

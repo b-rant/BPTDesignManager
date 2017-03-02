@@ -32,7 +32,7 @@ namespace RoT_v6.Models
         public string CostPer { get; set; }
 
         [Display(Name = "Total Cost")]
-        public string TotalCost { get; set; }
+        public decimal TotalCost { get; set; }
 
        
         public string Vendor { get; set; }

@@ -56,14 +56,14 @@
                 <span asp-validation-for="EstHours" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="InvCost" class="col-md-2 control-label">Invested Cost</label>
             <div class="col-md-10">
                 <input asp-for="InvCost" class="form-control" />
                 <span asp-validation-for="InvCost" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="InvHours" class="col-md-2 control-label">Invested Hours</label>
             <div class="col-md-10">
                 <input asp-for="InvHours" class="form-control" />
@@ -88,7 +88,7 @@
                 <span asp-validation-for="Status" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="CompleteDate" class="col-md-2 control-label">Completion Date</label>
             <div class="col-md-10">
                 <input asp-for="CompleteDate" class="form-control datetime" />
@@ -97,7 +97,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a> <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
