@@ -4,9 +4,13 @@
     ViewData["Title"] = "EditJobDetails";
 }
 
+@{ 
+    Layout = "";
+}
+
 <h2>Edit Task</h2>
 
-<form asp-action="EditJobDetails">
+<form asp-action="EditJobDetails/@Model.TaskID">
     <div class="form-horizontal">
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -33,13 +37,13 @@
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label asp-for="Employees" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="Employees" class="form-control" />
                 <span asp-validation-for="Employees" class="text-danger" />
             </div>
-        </div>
+        </div>-->
         <div class="form-group" style="display:none;">
             <label asp-for="JobID" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -82,7 +86,7 @@
                 <span asp-validation-for="partNum" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="Status" class="form-control">
@@ -101,10 +105,6 @@
         </div>
     </div>
 </form>
-
-<div>
-    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

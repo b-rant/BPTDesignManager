@@ -4,9 +4,14 @@
 }
 
 <h2>Jobs List</h2>
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+{
+    <p>
+        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'Create')">Create New</button>
+    </p>
+}
+
+
 <table id="allJobs" class="table table-striped table-bordered">
     <thead class="data_table_head">
         <tr>
@@ -25,6 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CompleteDate)
             </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -48,9 +54,19 @@
                     @Html.DisplayFor(modelItem => item.CompleteDate)
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-action="EditJobsList" asp-route-id="@item.JobID">Edit</a>
+                    @if (User.IsInRole("Admin")|| User.IsInRole("ShopManager"))
+                    {
+                        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditJobsList', @item.JobID)">Edit</button>
+                    }
+                   
+
                     <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.JobID">Details</a>
-                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.JobID">Delete</a>
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                    {
+                        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'Delete', @item.JobID)">Delete</button>
+                    }
+                   
                 </td>
             </tr>
         }

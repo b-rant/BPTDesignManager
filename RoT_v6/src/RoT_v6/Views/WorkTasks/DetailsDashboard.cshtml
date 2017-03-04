@@ -4,6 +4,10 @@
     ViewData["Title"] = "DetailsDashboard";
 }
 
+@{ 
+    Layout = "";
+}
+
 <h2>Task Details</h2>
 
 <div>
@@ -26,12 +30,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Employees[0].firstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Employees[0].firstName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.partNum)
@@ -77,7 +75,4 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-primary" asp-action="EditDashboard" asp-route-id="@Model.TaskID">Edit</a>
-    <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Back</a>
-</div>
+

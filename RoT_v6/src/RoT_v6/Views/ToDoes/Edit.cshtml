@@ -4,9 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
+@{ 
+    Layout = "";
+}
 <h2>Edit</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit/@Model.ToDoId">
     <div class="form-horizontal">
         <h4>ToDo</h4>
         <hr />
@@ -51,10 +54,6 @@
         </div>
     </div>
 </form>
-
-<div>
-    <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Back</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

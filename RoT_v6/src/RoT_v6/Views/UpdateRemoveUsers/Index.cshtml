@@ -1,0 +1,65 @@
+@model RoT_v6.ViewModels.UpdateUserRoleModel
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>UpdateRoles</h2>
+
+<table id="rolesTable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Current Role
+            </th>
+            <th>
+                Set Role
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                   @foreach (var role in Model.roles)
+                   {
+                        @if (role.Id == item.Roles.First().RoleId)
+                        {
+                            @Html.DisplayFor(modelItem => role.Name)
+                        }
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Employee" >Employee</a>
+                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Admin">Admin</a>
+                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="ShopManager">Shop Manager</a>
+                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Purchaser">Purchaser</a>
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    var MODEL = @Html.Raw(JsonConvert.SerializeObject(Model));
+    $(document).ready(function () {
+        $("#rolesTable").DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "columnDefs": [
+                { "className": "dt-center", "targets": "_all" }
+            ]
+        });
+    })
+</script>

@@ -4,6 +4,9 @@
     ViewData["Title"] = "DetailsJobDetails";
 }
 
+@{ 
+    Layout = "";
+}
 <h2>Task Details</h2>
 
 <div>
@@ -27,12 +30,7 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Employees[0].firstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Employees[0].firstName)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.partNum)
         </dt>
@@ -77,7 +75,4 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-primary" asp-action="EditJobDetails" asp-route-id="@Model.TaskID">Edit</a>
-    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a>
-</div>
+

@@ -4,6 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
+@{ 
+    Layout = "";
+}
+
 <h2>Details</h2>
 
 <div>
@@ -36,7 +40,4 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ToDoId">Edit</a>
-    <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Back</a>
-</div>
+

@@ -4,30 +4,37 @@
     ViewData["Title"] = "EditJobDetails";
 }
 
+@{ 
+    Layout = "";
+}
+
 <h2>Edit</h2>
 
-<form asp-action="EditJobDetails">
+<form asp-action="EditJobDetails/@Model.purchID">
     <div class="form-horizontal">
         <h4>Purchase</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="purchID" />
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="ArrivedDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="ArrivedDate" class="form-control datetime" />
                 <span asp-validation-for="ArrivedDate" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="Block" />
-                    <label asp-for="Block"></label>
+        @if (!User.IsInRole("Employee"))
+        {
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div>
+                        <label asp-for="Block"></label>
+                        <input asp-for="Block" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
+        }
+        <div class="form-group" style="display:none;">
             <label asp-for="CostPer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="CostPer" class="form-control" />
@@ -41,7 +48,7 @@
                 <span asp-validation-for="Description" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="EstArrDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="EstArrDate" class="form-control datetime" />
@@ -55,14 +62,14 @@
                 <span asp-validation-for="IdealDelDate" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="JobID" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="JobID" class="form-control" />
                 <span asp-validation-for="JobID" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="PurchDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="PurchDate" class="form-control datetime" />
@@ -76,21 +83,21 @@
                 <span asp-validation-for="Quantity" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="RequestDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="RequestDate" class="form-control datetime" />
                 <span asp-validation-for="RequestDate" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="TotalCost" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="TotalCost" class="form-control" />
                 <span asp-validation-for="TotalCost" class="text-danger" />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="Vendor" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="Vendor" class="form-control" />
@@ -104,10 +111,6 @@
         </div>
     </div>
 </form>
-
-<div>
-    <a class="btn btn-primary" asp-route-id="@Model.JobID" asp-controller="Jobs" asp-action="Details">Back</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

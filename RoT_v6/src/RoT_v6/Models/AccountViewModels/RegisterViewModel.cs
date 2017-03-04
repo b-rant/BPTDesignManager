@@ -13,14 +13,8 @@ namespace RoT_v6.Models.AccountViewModels
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name ="First Name")]
-        public string firstName { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        [Display(Name = "Last Name")]
-        public string lastName { get; set; }
-
+        [Display(Name ="First and Last Name")]
+        public string name { get; set; }
 
         [Required]
         [EmailAddress]
@@ -39,8 +33,7 @@ namespace RoT_v6.Models.AccountViewModels
         public string ConfirmPassword { get; set; }
 
 
-
-   /*  [DataType(DataType.Text)]
+        [DataType(DataType.Text)]
         [Display(Name = "Role")]
         [UIHint("List")]
         public List<SelectListItem> Roles { get; set; }
@@ -49,29 +42,8 @@ namespace RoT_v6.Models.AccountViewModels
         public RegisterViewModel()
         {
             Roles = new List<SelectListItem>();
-
-            Roles.Add(new SelectListItem()
-            {
-                Value = "1",
-                Text = "Admin"
-            });
-            Roles.Add(new SelectListItem()
-            {
-                Value = "2",
-                Text = "ShopManager"
-            });
-            Roles.Add(new SelectListItem()
-            {
-                Value = "3",
-                Text = "Purchaser"
-            });
-            Roles.Add(new SelectListItem()
-            {
-                Value = "4",
-                Text = "Employee"
-            });
-
         }
+
         public void getRoles(ApplicationDbContext _context)
         {
             var roles = from r in _context.identityRole select r;
@@ -80,12 +52,11 @@ namespace RoT_v6.Models.AccountViewModels
             {
                 Roles.Add(new SelectListItem()
                 {
-
                     Value = Data.Id,
                     Text = Data.Name
-              });
-           }
-        } UC*/
-      }
-   }
+                });
+            }
+        }
+    }
+}
 

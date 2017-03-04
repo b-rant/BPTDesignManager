@@ -1,10 +1,41 @@
-﻿.container-center{
+﻿
+.container-center{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/*Login css*/
+.login-container{
+ position: absolute;
+ margin: auto;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ width: 400px;
+ height: 400px;
+ float:none;
+ background-color:#404756;
+ color:white;
+ border-radius: 7px;
+}
 
+/*Registration css*/
+.registration-container{
+ position: absolute;
+ margin: auto;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ width: 400px;
+ height: 500px;
+ float:none;
+ background-color:#404756;
+ color:white;
+ border-radius: 7px;
+}
 
 body {
     background-color:#DDE4EA;
@@ -34,7 +65,6 @@ a{
 input,
 select,
 textarea {
-    max-width: 280px;
 }
 
 /*Navbar*/
@@ -53,6 +83,11 @@ textarea {
 .navbar-new .navbar-nav  > li > a:focus {
     background-color: #2B303A;
     color:white;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #2B303A;
+    border-color: #337ab7;
 }
 
 /*Tables*/
@@ -148,11 +183,17 @@ div.dataTables_filter input {
 /*Progress Bars*/
 .progress {
     border: 1px solid #2B303A;
+    height: 40px;
 }
 
 .progress-bar {
    background-color: #E5C527;
    color: #2B303A;
+   font-size: 12px;
+}
+
+.red-back {
+    background-color: red;
 }
 
 /*Labels*/
@@ -195,4 +236,14 @@ hr {
     .carousel-caption {
         display: none;
     }
+}
+
+.modal-content {
+   top: 0%;
+   left: 0%;
+   max-height: 100%;
+   max-width: 100%;
+   text-align: center;
+   outline: none;
+   overflow-y: auto;
 }

@@ -1,11 +1,19 @@
 @model RoT_v6.ViewModels.JobsDetails_JobPurchasesWorkTask
+@using Newtonsoft.Json
 
 @{
     ViewData["Title"] = "Details";
 }
 <p>
-    <h2>Job Details</h2>
-    <a class="btn btn-primary" asp-action="EditDetails" asp-route-id="@Model.Job.JobID">Edit</a>
+    <br />
+    @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+    {
+        <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditDetails', @Model.Job.JobID)">Edit</button>
+        <a class="btn btn-primary" id="downloadAnchorElem" onclick="getCSV()">Download CSV</a>
+    }
+
+
+
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </p>
 <div class="container">
@@ -55,10 +63,10 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h4>Hours Current vs. Budgeted</h4>
+            <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
             <div class="progress" id="hours_Progress">
             </div>
-            <h4>Cost Current vs. Budgeted</h4>
+            <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
             <div class="progress" id="cost_Progress">
             </div>
             <h3>Status <span class="label" id="project_status">@Html.DisplayFor(model => model.Job.Status)</span></h3>
@@ -92,13 +100,13 @@
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Employees[0].firstName)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].employeeId)
                         </th>
                         <th></th>
                     </tr>
@@ -117,26 +125,40 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Employees[0].firstName)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditJobDetails" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                @Html.DisplayFor(modelItem => item.employeeId)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteJobDetails" asp-route-id="@item.TaskID">Delete</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <p>
-                <a class="btn btn-primary btn-padding" asp-controller="WorkTasks" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Task</a>
-            </p>
+
+            @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+            {
+                <p>
+                    <button class="btn btn-primary btn-padding" onclick="dataUrl('WorkTasks', 'Create', @Model.Job.JobID)">New Task</button>
+                </p>
+
+            }
+
+
+
         </div>
         <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
             <p>
@@ -154,13 +176,13 @@
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Employees[0].firstName)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].employeeId)
                         </th>
                         <th></th>
                     </tr>
@@ -179,18 +201,25 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Employees[0].firstName)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="EditJobDetails" asp-route-id="@item.TaskID" asp-route-JobID="@item.JobID">Edit</a>
+                                @Html.DisplayFor(modelItem => item.employeeId)
+                            </td>
+
+                            <td>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DeleteJobDetails" asp-route-id="@item.TaskID">Delete</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
@@ -199,8 +228,8 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="PurchasesTab">
             <p>
-               
-                
+
+
             </p>
             <table class="table table-striped table-bordered" id="Purchases">
                 <thead class="data_table_head">
@@ -249,21 +278,31 @@
                                 @Html.DisplayFor(modelItem => item.ArrivedDate)
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="Purchases" asp-action="EditJobDetails" asp-route-id="@item.purchID">Edit</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
+                                }
                                 <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
-                                <a class="btn btn-primary" asp-controller="Purchases" asp-action="DeleteJobDetails" asp-route-id="@item.purchID">Delete</a>
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                                {
+                                    <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
+                                }
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
             <p>
-                <a class="btn btn-primary btn-padding" asp-controller="Purchases" asp-action="Create" asp-route-JobID="@Model.Job.JobID">New Purchase Request</a>
+                <button class="btn btn-primary btn-padding" onclick="dataUrl('Purchases', 'Create', @Model.Job.JobID)">New Purchase Request</button>
             </p>
         </div>
     </div>
 </div>
 <script>
+    var MODEL = @Html.Raw(JsonConvert.SerializeObject(Model));
+    function getCSV(){
+        JSONToCSVConvertor(MODEL, MODEL.Job.jobNum);  
+    }
     var ActiveTable;
     var CompletedTable;
     var PurchasesTable;
@@ -301,12 +340,24 @@
         // Handles Progress bars for the hours and cost
         var estHours = @Model.Job.EstHours;
         var invHours = @Model.Job.InvHours;
+        invHours = (invHours / 60).toFixed(2);
         var estCost = @Model.Job.EstCost;
         var invCost = @Model.Job.InvCost;
         var hourProg = parseInt((invHours / estHours) * 100);
         var costProg = parseInt((invCost / estCost) * 100);
-        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + '/' + estHours + '</div>');
-        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + '/' + estCost + '</div>');
+        
+        $("#Hours_Label").text('Hours Current vs. Budgeted : ' + invHours + ' / ' + estHours);
+        $("#Cost_Label").text('Cost Current vs. Budgeted : ' + invCost + ' / ' + estCost);
+        if (parseInt(invCost) > parseInt(estCost)){
+            $("#cost_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
+        } else {
+            $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
+        }
+        if (parseInt(invCost) > parseInt(estCost)){
+            $("#hours_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
+        } else {
+            $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
+        }
     })
     $('#JobDetailsTabs a').click(function (e) {
         e.preventDefault()
@@ -315,6 +366,7 @@
         CompletedTable.columns.adjust().draw()
         PurchasesTable.columns.adjust().draw()
     })
+
     //Handle project status label
     var status = "@Model.Job.Status";
     switch(status) {

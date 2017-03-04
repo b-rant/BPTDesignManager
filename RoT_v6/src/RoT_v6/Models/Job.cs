@@ -41,13 +41,13 @@ namespace RoT_v6.Models
         public string CompleteDate { get; set; }
 
         [DataType(DataType.Currency)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
         [Required]
         [Display(Name = "Estimated Cost")]
         public decimal EstCost { get; set; }
 
         [DataType(DataType.Currency)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F2}")]
         [Display(Name = "Invested Cost")]
         public decimal InvCost { get; set; }
 

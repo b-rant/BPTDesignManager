@@ -13,6 +13,8 @@ namespace RoT_v6.Controllers
     public class ToDoesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        
+      
 
         public ToDoesController(ApplicationDbContext context)
         {
@@ -43,9 +45,12 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Create
-        public IActionResult Create()
+        public  IActionResult Create(string returnUrl = null)
         {
-            return View();
+            ToDo A = new ToDo();
+            A.getEmployees(_context);
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(A);
         }
 
         // POST: ToDoes/Create
@@ -53,15 +58,24 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ToDoId,CreatedDate,Description,DueDate,Priority")] ToDo toDo)
-        {
+        public async Task<IActionResult> Create(ToDo test) {          
+             
+
             if (ModelState.IsValid)
             {
-                _context.Add(toDo);
+                _context.Add(test);
                 await _context.SaveChangesAsync();
+                foreach (string e in test.employee)
+                {
+                    var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = test.ToDoId };
+                    _context.Add(todent);
+                    await _context.SaveChangesAsync();
+                }
+               
+
                 return RedirectToAction("Index","Dashboard");
             }
-            return View(toDo);
+            return View(test);
         }
 
         // GET: ToDoes/Edit/5

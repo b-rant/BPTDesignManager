@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using RoT_v6.Data;
 
-namespace RoT_v6.Data.Migrations
+namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170222212654_work")]
-    partial class work
+    [Migration("20170303233527_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,11 +161,7 @@ namespace RoT_v6.Data.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
-                    b.Property<int?>("WorkTaskTaskID");
-
-                    b.Property<string>("firstName");
-
-                    b.Property<string>("lastName");
+                    b.Property<string>("name");
 
                     b.HasKey("Id");
 
@@ -176,9 +172,37 @@ namespace RoT_v6.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.HasIndex("WorkTaskTaskID");
-
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeTodo", b =>
+                {
+                    b.Property<string>("employeeId");
+
+                    b.Property<int>("ToDoId");
+
+                    b.HasKey("employeeId", "ToDoId");
+
+                    b.HasIndex("ToDoId");
+
+                    b.HasIndex("employeeId");
+
+                    b.ToTable("EmployeeTodo");
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeWorkTask", b =>
+                {
+                    b.Property<string>("employeeId");
+
+                    b.Property<int>("TaskId");
+
+                    b.HasKey("employeeId", "TaskId");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("employeeId");
+
+                    b.ToTable("EmployeeTask");
                 });
 
             modelBuilder.Entity("RoT_v6.Models.Job", b =>
@@ -226,32 +250,27 @@ namespace RoT_v6.Data.Migrations
 
                     b.Property<bool>("Block");
 
-                    b.Property<string>("CostPer")
-                        .IsRequired();
+                    b.Property<string>("CostPer");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<string>("EstArrDate")
-                        .IsRequired();
+                    b.Property<string>("EstArrDate");
 
                     b.Property<string>("IdealDelDate")
                         .IsRequired();
 
                     b.Property<int>("JobID");
 
-                    b.Property<string>("PurchDate")
-                        .IsRequired();
+                    b.Property<string>("PurchDate");
 
                     b.Property<int>("Quantity");
 
-                    b.Property<string>("RequestDate")
-                        .IsRequired();
+                    b.Property<string>("RequestDate");
 
-                    b.Property<string>("TotalCost");
+                    b.Property<decimal>("TotalCost");
 
-                    b.Property<string>("Vendor")
-                        .IsRequired();
+                    b.Property<string>("Vendor");
 
                     b.HasKey("purchID");
 
@@ -302,6 +321,8 @@ namespace RoT_v6.Data.Migrations
 
                     b.Property<int>("TotalTime");
 
+                    b.Property<string>("employeeId");
+
                     b.Property<string>("partNum");
 
                     b.HasKey("TaskID");
@@ -346,11 +367,30 @@ namespace RoT_v6.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("RoT_v6.Models.ApplicationUser", b =>
+            modelBuilder.Entity("RoT_v6.Models.EmployeeTodo", b =>
                 {
-                    b.HasOne("RoT_v6.Models.WorkTask")
-                        .WithMany("Employees")
-                        .HasForeignKey("WorkTaskTaskID");
+                    b.HasOne("RoT_v6.Models.ToDo", "todoItem")
+                        .WithMany("EmployeeTodo")
+                        .HasForeignKey("ToDoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RoT_v6.Models.ApplicationUser", "employee")
+                        .WithMany("EmployeeTodo")
+                        .HasForeignKey("employeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeWorkTask", b =>
+                {
+                    b.HasOne("RoT_v6.Models.WorkTask", "WorkTaskItem")
+                        .WithMany("EmployeeWorkTask")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RoT_v6.Models.ApplicationUser", "employee")
+                        .WithMany("EmployeeWorkTask")
+                        .HasForeignKey("employeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
