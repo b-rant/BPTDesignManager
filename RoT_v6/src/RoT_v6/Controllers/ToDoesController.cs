@@ -94,6 +94,7 @@ namespace RoT_v6.Controllers
             }
 
             var toDo = await _context.ToDos.SingleOrDefaultAsync(m => m.ToDoId == id);
+            toDo.getEmployees(_context);
             if (toDo == null)
             {
                 return NotFound();
@@ -107,17 +108,36 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("ToDoId,CreatedDate,Description,DueDate,Priority")] ToDo toDo)
+        public async Task<IActionResult> Edit(int id, ToDo toDo)
         {
             if (id != toDo.ToDoId)
             {
                 return NotFound();
             }
 
+
+            var empList = await _context.EmployeeTodo.ToListAsync();
+
+            foreach (EmployeeTodo e in empList)
+            {
+                 if(e.ToDoId == toDo.ToDoId) { _context.EmployeeTodo.Remove(e); }
+              
+                await _context.SaveChangesAsync();
+            }
+            foreach (string e in toDo.employee)
+            {
+                var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = toDo.ToDoId };
+                _context.Add(todent);
+                await _context.SaveChangesAsync();
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 try
                 {
+
                     _context.Update(toDo);
                     await _context.SaveChangesAsync();
                 }
