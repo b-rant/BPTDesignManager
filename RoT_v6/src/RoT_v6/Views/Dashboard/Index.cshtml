@@ -135,12 +135,12 @@
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
                             <td>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsDashboard" asp-route-id="@item.TaskID">Details</a>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
                                 }
@@ -223,12 +223,12 @@
                         </td>
 
                         <td>
-                            @if (!User.IsInRole("Employee"))
+                            @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                             {
                                 <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Edit', @item.ToDoId)">Edit</button>
                             }
                             <a class="btn btn-primary" asp-controller="ToDoes" asp-action="Details" asp-route-id="@item.ToDoId">Details</a>
-                            @if (!User.IsInRole("Employee"))
+                            @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                             {
                                 <button class="btn btn-primary" onclick="dataUrl('ToDoes', 'Delete', @item.ToDoId)">Delete</button>
                             }

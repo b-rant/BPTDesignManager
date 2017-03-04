@@ -6,10 +6,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    ApplicationUser a = await UserManager.GetUserAsync(User);
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a>Hello @a.name </a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
@@ -19,14 +20,14 @@
     <ul class="nav navbar-nav">
         <li><a asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
         <li><a asp-area="" asp-controller="Jobs" asp-action="Index">Jobs List</a></li>
-        @if (!User.IsInRole("Employee"))
+        @if (User.IsInRole("Admin") || User.IsInRole("Purchaser"))
         {
             <li><a asp-area="" asp-controller="Purchases" asp-action="Index">Purchases</a></li>
         }
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">User Settings<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                @if (!User.IsInRole("Employee"))
+                @if (User.IsInRole("Admin"))
                 {
                     <li><a asp-area="" asp-controller="Account" asp-action="Register">Register Users</a></li>
                     <li><a asp-area="" asp-controller="UpdateRemoveUsers" asp-action="Index">Manage Users</a></li>

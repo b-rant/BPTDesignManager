@@ -1,13 +1,15 @@
 @model RoT_v6.ViewModels.JobsDetails_JobPurchasesWorkTask
+@using Newtonsoft.Json
 
 @{
     ViewData["Title"] = "Details";
 }
 <p>
-    <h2>Job Details</h2>
+    <br />
     @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
     {
         <button class="btn btn-primary" onclick="dataUrl('Jobs', 'EditDetails', @Model.Job.JobID)">Edit</button>
+        <a class="btn btn-primary" id="downloadAnchorElem" onclick="getCSV()">Download CSV</a>
     }
 
 
@@ -61,10 +63,10 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h4>Hours Current vs. Budgeted</h4>
+            <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
             <div class="progress" id="hours_Progress">
             </div>
-            <h4>Cost Current vs. Budgeted</h4>
+            <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
             <div class="progress" id="cost_Progress">
             </div>
             <h3>Status <span class="label" id="project_status">@Html.DisplayFor(model => model.Job.Status)</span></h3>
@@ -132,12 +134,12 @@
                                 @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
                             <td>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                                 }
@@ -209,12 +211,12 @@
                             </td>
 
                             <td>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                                 }
@@ -276,12 +278,12 @@
                                 @Html.DisplayFor(modelItem => item.ArrivedDate)
                             </td>
                             <td>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="Purchases" asp-action="DetailsJobDetails" asp-route-id="@item.purchID">Details</a>
-                                @if (!User.IsInRole("Employee"))
+                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
                                 }
@@ -297,6 +299,10 @@
     </div>
 </div>
 <script>
+    var MODEL = @Html.Raw(JsonConvert.SerializeObject(Model));
+    function getCSV(){
+        JSONToCSVConvertor(MODEL, MODEL.Job.jobNum);  
+    }
     var ActiveTable;
     var CompletedTable;
     var PurchasesTable;
@@ -339,8 +345,19 @@
         var invCost = @Model.Job.InvCost;
         var hourProg = parseInt((invHours / estHours) * 100);
         var costProg = parseInt((invCost / estCost) * 100);
-        $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%; min-width: 5em;">' + invHours + ' / ' + estHours + '</div>');
-        $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%; min-width: 5em;">' + invCost + ' / ' + estCost + '</div>');
+        
+        $("#Hours_Label").text('Hours Current vs. Budgeted : ' + invHours + ' / ' + estHours);
+        $("#Cost_Label").text('Cost Current vs. Budgeted : ' + invCost + ' / ' + estCost);
+        if (parseInt(invCost) > parseInt(estCost)){
+            $("#cost_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
+        } else {
+            $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
+        }
+        if (parseInt(invCost) > parseInt(estCost)){
+            $("#hours_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
+        } else {
+            $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
+        }
     })
     $('#JobDetailsTabs a').click(function (e) {
         e.preventDefault()
@@ -349,6 +366,7 @@
         CompletedTable.columns.adjust().draw()
         PurchasesTable.columns.adjust().draw()
     })
+
     //Handle project status label
     var status = "@Model.Job.Status";
     switch(status) {
