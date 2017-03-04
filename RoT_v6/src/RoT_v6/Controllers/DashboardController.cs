@@ -7,29 +7,34 @@ using RoT_v6.ViewModels;
 using RoT_v6.Models;
 using RoT_v6.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace RoT_v6.Controllers
 {
     public class DashboardController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
         private decimal HourRate = 75;
 
-        public DashboardController(ApplicationDbContext context)
+        public DashboardController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var ToDos = await _context.ToDos.ToListAsync();
+            var user = await _userManager.Users.ToListAsync();
             var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
             var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
+            var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
             Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
             {
-                ToDos = ToDos,
+                EmpToDo = EmployeeTodo,
                 ActiveTasks = ActiveTasks,
-                CompletedTasks = CompletedTasks
+                CompletedTasks = CompletedTasks,
+                User = user
             };
             return View(WorkTaskToDo);
         }

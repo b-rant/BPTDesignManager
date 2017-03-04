@@ -8,10 +8,9 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170302032754_updatePurchase")]
-    partial class updatePurchase
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -190,6 +189,21 @@ namespace RoT_v6.Migrations
                     b.ToTable("EmployeeTodo");
                 });
 
+            modelBuilder.Entity("RoT_v6.Models.EmployeeWorkTask", b =>
+                {
+                    b.Property<string>("employeeId");
+
+                    b.Property<int>("TaskId");
+
+                    b.HasKey("employeeId", "TaskId");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("employeeId");
+
+                    b.ToTable("EmployeeTask");
+                });
+
             modelBuilder.Entity("RoT_v6.Models.Job", b =>
                 {
                     b.Property<int>("JobID")
@@ -306,6 +320,8 @@ namespace RoT_v6.Migrations
 
                     b.Property<int>("TotalTime");
 
+                    b.Property<string>("employeeId");
+
                     b.Property<string>("partNum");
 
                     b.HasKey("TaskID");
@@ -359,6 +375,19 @@ namespace RoT_v6.Migrations
 
                     b.HasOne("RoT_v6.Models.ApplicationUser", "employee")
                         .WithMany("EmployeeTodo")
+                        .HasForeignKey("employeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RoT_v6.Models.EmployeeWorkTask", b =>
+                {
+                    b.HasOne("RoT_v6.Models.WorkTask", "WorkTaskItem")
+                        .WithMany("EmployeeWorkTask")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RoT_v6.Models.ApplicationUser", "employee")
+                        .WithMany("EmployeeWorkTask")
                         .HasForeignKey("employeeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

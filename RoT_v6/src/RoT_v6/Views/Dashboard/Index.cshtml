@@ -170,22 +170,26 @@
             <thead class="data_table_head">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ToDos[0].CreatedDate)
+                        @Html.DisplayNameFor(model => model.EmpToDo[0].CreatedDate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ToDos[0].Description)
+                        @Html.DisplayNameFor(model => model.EmpToDo[0].Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ToDos[0].DueDate)
+                        @Html.DisplayNameFor(model => model.EmpToDo[0].DueDate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ToDos[0].Priority)
+                        @Html.DisplayNameFor(model => model.EmpToDo[0].Priority)
                     </th>
+                    <th>
+                        Employees
+                    </th>
+
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.ToDos)
+                @foreach (var item in Model.EmpToDo)
             {
                     <tr>
                         <td>
@@ -200,6 +204,24 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Priority)
                         </td>
+                        <td>
+                            @foreach (var emp in item.EmployeeTodo)
+                            {    @foreach (var r in Model.User)
+                            {
+                                @if (emp.employeeId == r.Id)
+                                {
+                                    @r.name
+                                    <br />
+
+                                }
+                            }
+                            }
+
+
+
+
+                        </td>
+
                         <td>
                             @if (!User.IsInRole("Employee"))
                             {

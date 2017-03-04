@@ -103,6 +103,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].employeeId)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -124,6 +127,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
                             <td>
                                 @if (!User.IsInRole("Employee"))
@@ -173,6 +179,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].employeeId)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -195,6 +204,10 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
                             </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
+                            </td>
+
                             <td>
                                 @if (!User.IsInRole("Employee"))
                                 {
