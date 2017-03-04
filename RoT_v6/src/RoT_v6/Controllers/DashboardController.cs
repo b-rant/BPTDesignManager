@@ -8,9 +8,11 @@ using RoT_v6.Models;
 using RoT_v6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -22,7 +24,7 @@ namespace RoT_v6.Controllers
             _userManager = userManager;
             _context = context;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.Users.ToListAsync();
@@ -38,7 +40,7 @@ namespace RoT_v6.Controllers
             };
             return View(WorkTaskToDo);
         }
-
+        [Authorize]
         public async Task<IActionResult> editTaskStatus(int? id, string Status)
         {
             if (id == null)

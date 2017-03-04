@@ -7,27 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RoT_v6.Data;
 using RoT_v6.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    [Authorize]
     public class ToDoesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        
-      
 
+
+       
         public ToDoesController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
         // GET: ToDoes
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.ToDos.ToListAsync());
         }
 
         // GET: ToDoes/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +49,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Create
+        [Authorize]
         public  IActionResult Create(string returnUrl = null)
         {
             ToDo A = new ToDo();
@@ -58,6 +63,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(ToDo test) {          
              
 
@@ -79,6 +85,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -99,6 +106,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ToDoId,CreatedDate,Description,DueDate,Priority")] ToDo toDo)
         {
             if (id != toDo.ToDoId)
@@ -130,6 +138,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,6 +156,7 @@ namespace RoT_v6.Controllers
         }
 
         // POST: ToDoes/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -157,6 +167,7 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Index","Dashboard");
         }
 
+        [Authorize]
         private bool ToDoExists(int id)
         {
             return _context.ToDos.Any(e => e.ToDoId == id);

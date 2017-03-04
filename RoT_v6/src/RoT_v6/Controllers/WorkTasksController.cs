@@ -7,26 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RoT_v6.Data;
 using RoT_v6.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    [Authorize]
     public class WorkTasksController : Controller
     {
         private readonly ApplicationDbContext _context;
         private decimal HourRate = 75;
-
+      
         public WorkTasksController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
         // GET: WorkTasks
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.WorkTasks.ToListAsync());
         }
 
         // GET: WorkTasks/DetailsDashboard/5
+        [Authorize]
         public async Task<IActionResult> DetailsDashboard(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DetailsJobDetails/5
+        [Authorize]
         public async Task<IActionResult> DetailsJobDetails(int? id)
         {
             if (id == null)
@@ -61,6 +66,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/Create
+        [Authorize]
         public IActionResult Create(int id)
         {
             WorkTask worktask = new WorkTask();
@@ -79,6 +85,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(int JobID, WorkTask workTask)
         {
             workTask.Status = Models.TaskStatus.Created;
@@ -108,6 +115,7 @@ namespace RoT_v6.Controllers
 
 
         // GET: WorkTasks/EditDashboard/5
+        [Authorize]
         public async Task<IActionResult> EditDashboard(int? id)
         {
             if (id == null)
@@ -128,6 +136,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> EditDashboard(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
         {
             if (id != workTask.TaskID)
@@ -171,6 +180,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/EditJobDetails/5
+        [Authorize]
         public async Task<IActionResult> EditJobDetails(int? id)
         {
             if (id == null)
@@ -191,6 +201,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> EditJobDetails(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
         {
             if (id != workTask.TaskID)
@@ -235,6 +246,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DeleteDashboard/5
+        [Authorize]
         public async Task<IActionResult> DeleteDashboard(int? id)
         {
             if (id == null)
@@ -252,6 +264,7 @@ namespace RoT_v6.Controllers
         }
 
         // POST: WorkTasks/DeleteDashboard/5
+        [Authorize]
         [HttpPost, ActionName("DeleteDashboard")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteDashboardConfirmed(int id)
@@ -282,6 +295,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DeleteJobDetails/5
+        [Authorize]
         public async Task<IActionResult> DeleteJobDetails(int? id)
         {
             if (id == null)
@@ -301,6 +315,7 @@ namespace RoT_v6.Controllers
         // POST: WorkTasks/DeleteJobDetails/5
         [HttpPost, ActionName("DeleteJobDetails")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteJobDetailsConfirmed(int id)
         {
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
