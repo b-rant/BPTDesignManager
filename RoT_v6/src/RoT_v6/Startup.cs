@@ -85,9 +85,14 @@ namespace RoT_v6
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                name: "change-role",
+                template: "UpdateRemoveUsers/updateRole/{userID}/{role}",
+                defaults: new { controller = "UpdateRemoveUsers", action = "updateRole" });
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
+        });
             initialize initi = new initialize();
             await initi.CreateRoles(serviceProvider);
         }

@@ -73,6 +73,7 @@
     </tbody>
 </table>
 <script>
+    var elementExists = document.getElementById("Error");
     $(document).ready(function () {
         $("#allJobs").DataTable({
             "paging": false,
@@ -86,5 +87,9 @@
                 }
             ]
         });
+        if (elementExists == true) {
+            elementExists.click();
+
+        }
     });
 </script>

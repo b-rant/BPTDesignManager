@@ -38,9 +38,9 @@ namespace RoT_v6.Controllers
         }
 
         //[ValidateAntiForgeryToken]
-        [HttpPost]
-        [Route("UpdateRemoveUsers/updateRole/{userID:maxLength(34)}/{role:maxLength(14)}", Name = "updateRole")]
-        public async Task<ActionResult> updateRole(String userID, String role)
+        //[HttpPost]
+        [HttpGet("updateRole/{userID}/{role}")]
+        public async Task<ActionResult> updateRole(string userID, string role)
         {
             var roles = _context.Roles.ToList();
             var users = _context.Users.ToList();
