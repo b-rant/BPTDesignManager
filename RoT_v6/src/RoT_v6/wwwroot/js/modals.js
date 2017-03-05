@@ -135,3 +135,13 @@ function objectToString(JSONData, ReportTitle) {
 
     return CSV;
 }
+
+
+// Renderer for descriptions
+$.fn.dataTable.render.ellipsis = function () {
+    return function (data, type, row) {
+        return type === 'display' && data.length > 25 ?
+            data.substr(0, 25) + '...' :
+            data;
+    }
+};
