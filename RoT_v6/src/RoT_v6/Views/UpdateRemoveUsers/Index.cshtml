@@ -8,7 +8,7 @@
 <h2>UpdateRoles</h2>
 
 <table id="rolesTable" class="table table-striped table-bordered">
-    <thead>
+    <thead class="data_table_head">
         <tr>
             <th>
                 Name
@@ -19,11 +19,15 @@
             <th>
                 Set Role
             </th>
+            <th>
+                Delete
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.users)
         {
+            var currRole = "";
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
@@ -33,15 +37,31 @@
                    {
                         @if (role.Id == item.Roles.First().RoleId)
                         {
+                            currRole = role.Name;
                             @Html.DisplayFor(modelItem => role.Name)
                         }
                     }
                 </td>
                 <td>
-                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Employee" >Employee</a>
-                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Admin">Admin</a>
-                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="ShopManager">Shop Manager</a>
-                    <a class="btn btn-primary"  asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Purchaser">Purchaser</a>
+                    @if (currRole != "Employee")
+                    {                     
+                        <a class="btn btn-primary" asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Employee">Employee</a>
+                    }
+                    @if (currRole != "Admin")
+                    {                    
+                        <a class="btn btn-primary" asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Admin">Admin</a>
+                    }
+                    @if (currRole != "ShopManager")
+                    {                     
+                        <a class="btn btn-primary" asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="ShopManager">Shop Manager</a>
+                    }
+                    @if (currRole != "Purchaser")
+                    {                     
+                        <a class="btn btn-primary" asp-action="updateRole" asp-route-userID="@item.Id" asp-route-role="Purchaser">Purchaser</a>
+                    }
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="deleteUser" asp-route-userID="@item.Id">Delete</a>
             </td>
             </tr>
         }

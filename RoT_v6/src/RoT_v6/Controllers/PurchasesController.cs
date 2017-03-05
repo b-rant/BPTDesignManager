@@ -9,17 +9,21 @@ using RoT_v6.Data;
 using RoT_v6.Models;
 using Microsoft.AspNetCore.Authorization;
 using RoT_v6.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace RoT_v6.Controllers
 {
     [Authorize]
     public class PurchasesController : Controller
-    {   
+    {
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
        
-        public PurchasesController(ApplicationDbContext context)
+        public PurchasesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;    
+            _context = context;
+            _userManager = userManager;  
         }
     
         // GET: Purchases
@@ -69,7 +73,7 @@ namespace RoT_v6.Controllers
         }
         [Authorize]
         // GET: Purchases/Create
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int id)
         {
             Purchase purchase = new Purchase();
             purchase.JobID = id;
@@ -83,10 +87,12 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
+        public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,employeeId,Notes")] Purchase purchase)
         {
             DateTime dateOnly = DateTime.Today;
             purchase.RequestDate = dateOnly.ToString("d");
+            var user = await GetCurrentUserAsync();
+            purchase.employeeId = user.name;
             if (ModelState.IsValid)
             {
                 _context.Add(purchase);
@@ -120,7 +126,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]        
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
+        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {
@@ -175,7 +181,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
+        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {

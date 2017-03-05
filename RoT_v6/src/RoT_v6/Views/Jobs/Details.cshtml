@@ -267,6 +267,9 @@
                             @Html.DisplayNameFor(model => model.Purchases[0].Description)
                         </th>
                         <th>
+                            Employee
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Purchases[0].Quantity)
                         </th>
                         <th>
@@ -299,6 +302,9 @@
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Quantity)

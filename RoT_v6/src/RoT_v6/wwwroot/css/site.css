@@ -255,3 +255,40 @@ hr {
    outline: none;
    overflow-y: auto;
 }
+
+.dl {
+    letter-spacing: -0.31em;
+    *letter-spacing: normal;
+    word-spacing: -0.43em;
+}
+/*
+ * Reset of the white-space hack
+ * The width + left/right padding of DTs/DDs equals 50%
+ * (to create two equal columns)
+ */
+dt,
+dd {
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    width: 68%;
+    margin: 0;
+}
+/*
+* To keep things tight
+*/
+dt {
+    margin-right: -1px;
+}
+/*
+* borders
+*/
+dl {
+    border-bottom: 1px solid #999;
+}
+
+dd {
+    border-top: 1px solid #999;
+}

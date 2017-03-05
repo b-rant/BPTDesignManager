@@ -40,6 +40,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="Notes" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Notes" rows="4" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="EstArrDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="EstArrDate" class="form-control datetime" />
@@ -123,7 +130,8 @@
 <script type="text/javascript">
         $(function () {
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY'
+                format: 'MM/DD/YYYY',
+                minDate: new Date()
             });
         });
 </script>

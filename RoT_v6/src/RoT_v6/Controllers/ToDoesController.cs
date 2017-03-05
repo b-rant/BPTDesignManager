@@ -54,8 +54,7 @@ namespace RoT_v6.Controllers
         {
             ToDo A = new ToDo();
             A.getEmployees(_context);
-            DateTime dateOnly = DateTime.Today;
-            A.CreatedDate = dateOnly.ToString("d");
+            
             ViewData["ReturnUrl"] = returnUrl;
             return View(A);
         }
@@ -66,9 +65,10 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(ToDo test) {          
-             
+        public async Task<IActionResult> Create(ToDo test) {
 
+            DateTime dateOnly = DateTime.Today;
+            test.CreatedDate = dateOnly.ToString("d");
             if (ModelState.IsValid)
             {
                 _context.Add(test);
@@ -84,6 +84,7 @@ namespace RoT_v6.Controllers
                 return RedirectToAction("Index","Dashboard");
             }
             ViewBag.Fail = "1";
+            test.getEmployees(_context);
             return View(test);
         }
 
@@ -127,6 +128,12 @@ namespace RoT_v6.Controllers
               
                 await _context.SaveChangesAsync();
             }
+            if (toDo.employee.Count() == 0)
+            {
+                ViewBag.Fail = "1";
+                toDo.getEmployees(_context);
+                return View(toDo);
+            }
             foreach (string e in toDo.employee)
             {
                 var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = toDo.ToDoId };
@@ -158,6 +165,7 @@ namespace RoT_v6.Controllers
                 return RedirectToAction("Index","Dashboard");
             }
             ViewBag.Fail = "1";
+            toDo.getEmployees(_context);
             return View(toDo);
         }
 

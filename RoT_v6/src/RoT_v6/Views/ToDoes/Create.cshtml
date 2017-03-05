@@ -68,7 +68,6 @@
             <label asp-for="employee" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="employee" asp-items="@Model.Employed">
-                    <option>Please select one</option>
                 </select>
             </div>
         </div> 
@@ -91,7 +90,8 @@
 <script type="text/javascript">
         $(function () {
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY'
+                format: 'MM/DD/YYYY',
+                minDate: new Date()
             });
         });
 </script>

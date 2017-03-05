@@ -25,6 +25,9 @@
                             @Html.DisplayNameFor(model => model.Purchases_New[0].Description)
                         </th>
                         <th>
+                            Employee
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Purchases_New[0].IdealDelDate)
                         </th>
                         <th>
@@ -33,12 +36,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Purchases_New[0].Quantity)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_New[0].Vendor)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_New[0].TotalCost)
-                        </th>
+                     
                         <th></th>
                     </tr>
                 </thead>
@@ -62,6 +60,9 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.IdealDelDate)
                             </td>
                             <td>
@@ -70,12 +71,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Quantity)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Vendor)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TotalCost)
-                            </td>
+                           
                             <td>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsPurchases', @item.purchID)">Details</button>
@@ -98,12 +94,6 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Purchases_Purchased[0].IdealDelDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_Purchased[0].RequestDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_Purchased[0].Quantity)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Purchases_Purchased[0].Vendor)
@@ -140,12 +130,6 @@
                                 @Html.DisplayFor(modelItem => item.IdealDelDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.RequestDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantity)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.Vendor)
                             </td>
                             <td>
@@ -173,15 +157,6 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Purchases_Delivered[0].Description)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_Delivered[0].IdealDelDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_Delivered[0].RequestDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Purchases_Delivered[0].Quantity)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Purchases_Delivered[0].Vendor)
@@ -216,15 +191,6 @@
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IdealDelDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.RequestDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantity)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Vendor)

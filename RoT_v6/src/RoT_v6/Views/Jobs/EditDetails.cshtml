@@ -10,7 +10,12 @@
     }
 }
 <h2>Edit Job</h2>
-
+@{
+    if (ViewBag.Fail == "1")
+    {
+        <h3 style="color: red;">Something went wrong, please retry your input here</h3>
+    }
+}
 <form asp-action="EditDetails/@Model.JobID">
     <div class="form-horizontal">
         <hr />
@@ -111,7 +116,8 @@
 <script type="text/javascript">
         $(function () {
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY'
+                format: 'MM/DD/YYYY',
+                minDate: new Date()
             });
         });
 </script>

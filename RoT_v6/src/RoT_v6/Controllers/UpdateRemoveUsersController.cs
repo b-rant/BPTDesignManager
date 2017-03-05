@@ -17,6 +17,7 @@ namespace RoT_v6.Controllers
     [Authorize(Roles = "Admin")]
     public class UpdateRemoveUsersController : Controller
     {
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
@@ -31,7 +32,8 @@ namespace RoT_v6.Controllers
         public async  Task<IActionResult> Index()
         {
             UpdateUserRoleModel model = new UpdateUserRoleModel();
-            model.users = await _userManager.Users.Include(item => item.Roles).ToListAsync();
+            var currentUser = await GetCurrentUserAsync();
+            model.users = await _userManager.Users.Where(m => m.Id != currentUser.Id).Include(item => item.Roles).ToListAsync();
             model.roles = await _roleManager.Roles.ToListAsync();
 
             return View(model);
@@ -44,7 +46,6 @@ namespace RoT_v6.Controllers
         {
             var roles = _context.Roles.ToList();
             var users = _context.Users.ToList();
-            bool successfullyChanged = false;
 
             if (ModelState.IsValid)
             {
@@ -55,13 +56,21 @@ namespace RoT_v6.Controllers
  
                     await _userManager.RemoveFromRoleAsync(user, oldRoleName[0]);
                     await _userManager.AddToRoleAsync(user, role);
-                    successfullyChanged = true;
 
                 _context.Entry(user).State = EntityState.Modified;
 
                 return RedirectToAction("Index");
             }
 
+            return RedirectToAction("Index");
+        }
+
+        //[HttpPost]
+        [HttpGet("deleteUser/{userID}")]
+        public async Task<ActionResult> deleteUser(string userID)
+        {
+            var user = await _userManager.FindByIdAsync(userID);
+            await _userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
     }

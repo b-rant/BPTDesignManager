@@ -34,10 +34,13 @@ namespace RoT_v6.Models
         [Display(Name = "Total Cost")]
         public decimal TotalCost { get; set; }
 
-       
+        public string Notes { get; set; }
+
         public string Vendor { get; set; }
 
-        
+        [Display(Name = "Employee")]
+        public string employeeId { get; set; }
+
         [Display(Name = "Request Date")]
         public string RequestDate { get; set; }
 
