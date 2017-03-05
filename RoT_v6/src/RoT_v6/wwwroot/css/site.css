@@ -193,7 +193,15 @@ div.dataTables_filter input {
 }
 
 .red-back {
-    background-color: red;
+    background-color: #d9534f;
+}
+
+.yellow-back {
+    background-color: #E5C527;
+}
+
+.green-back {
+    background-color: #5cb85c;
 }
 
 /*Labels*/

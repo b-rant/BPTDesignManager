@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-@{ 
+@{
     Layout = "";
 }
 <h2>Create Purchase Request</h2>
@@ -20,19 +20,29 @@
                 <span asp-validation-for="ArrivedDate" class="text-danger" />
             </div>
         </div>
-        @if (!User.IsInRole("Employee"))
+        @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
         {
-            <div class="form-group">
+            <div class="form-group" style="">
                 <div class="col-md-offset-2 col-md-10">
                     <div>
                         <label asp-for="Block"></label>
-                        <input asp-for="Block" class="checkbox" />
+                        <input asp-for="Block" />
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group" style="display:none;">
+                <div class="col-md-offset-2 col-md-10">
+                    <div>
+                        <label asp-for="Block"></label>
+                        <input asp-for="Block" />
                     </div>
                 </div>
             </div>
         }
         
-
         <div class="form-group" style="display:none;">
             <label asp-for="CostPer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -83,7 +93,7 @@
             </div>
         </div>
         <div class="form-group" style="display:none;">
-            <label asp-for="RequestDate" class="col-md-2 control-label datetime"></label>
+            <label asp-for="RequestDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="RequestDate" class="form-control" />
                 <span asp-validation-for="RequestDate" class="text-danger" />
@@ -105,7 +115,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input  type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -115,12 +125,9 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 <script type="text/javascript">
-        $(function () {
-            $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY'
-            });
+    $(function () {
+        $('.datetime').datetimepicker({
+            format: 'MM/DD/YYYY'
         });
-</script>
-<script type="text/javascript">
-    $(".checkbox").prop("checked", true);
+    });
 </script>

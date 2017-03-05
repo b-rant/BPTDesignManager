@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RoT_v6.Data;
 using RoT_v6.Models;
 using Microsoft.AspNetCore.Authorization;
+using RoT_v6.ViewModels;
 
 namespace RoT_v6.Controllers
 {
@@ -25,7 +26,12 @@ namespace RoT_v6.Controllers
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Purchase.ToListAsync());
+            var model = new Purchase_IndexThreeTables();
+            model.Purchases_New = await _context.Purchase.Where(m => m.PurchDate == null && m.ArrivedDate == null).ToListAsync();
+            model.Purchases_Purchased = await _context.Purchase.Where(m => m.PurchDate != null && m.ArrivedDate == null).ToListAsync();
+            model.Purchases_Delivered = await _context.Purchase.Where(m => m.PurchDate != null && m.ArrivedDate != null).ToListAsync();
+
+            return View(model);
         }
         [Authorize(Roles = "Admin, Purchaser")]
         // GET: Purchases/DetailsPurchases/5
@@ -67,6 +73,7 @@ namespace RoT_v6.Controllers
         {
             Purchase purchase = new Purchase();
             purchase.JobID = id;
+            purchase.Block = true;
             return View(purchase);
         }
 
