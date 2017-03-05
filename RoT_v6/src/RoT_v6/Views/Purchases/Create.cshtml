@@ -12,7 +12,12 @@
 
 }
 <h2>Create Purchase Request</h2>
-
+@{
+    if (ViewBag.Fail == "1")
+    {
+        <h3 style="color: red;">Something went wrong, please retry your input here</h3>
+    }
+}
 <form asp-action="Create/@Model.JobID">
     <div class="form-horizontal">
         <hr />

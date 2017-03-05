@@ -10,6 +10,12 @@
     }
 }
 <h2>Edit Job</h2>
+@{
+    if (ViewBag.Fail == "1")
+    {
+        <h3 style="color: red;">Something went wrong, please retry your input here</h3>
+    }
+}
 <form asp-action="EditJobsList/@Model.JobID">
     <div class="form-horizontal">
         <hr />

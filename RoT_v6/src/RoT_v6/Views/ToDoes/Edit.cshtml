@@ -11,14 +11,19 @@
     }
 }
 <h2>Edit</h2>
-
+@{
+    if (ViewBag.Fail == "1")
+    {
+        <h3 style="color: red;">Something went wrong, please retry your input here</h3>
+    }
+}
 <form asp-action="Edit/@Model.ToDoId">
     <div class="form-horizontal">
         <h4>ToDo</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ToDoId" />
-        <div class="form-group">
+        <div class="form-group" style="display:none;">
             <label asp-for="CreatedDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="CreatedDate" class="form-control datetime" />

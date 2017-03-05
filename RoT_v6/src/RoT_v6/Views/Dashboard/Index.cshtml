@@ -5,13 +5,12 @@
 }
 
 <div class="row">
-
-    <ul class="nav nav-tabs page-tabs" role="tablist" id="DashboardTabs">
-        <li role="presentation" class="active"><a href="#ActiveTasksTab" aria-controls="ActiveTasksTab" role="tab" data-toggle="tab">Active Tasks</a></li>
-        <li role="presentation"><a href="#CompletedTasksTab" aria-controls="CompletedTasksTab" role="tab" data-toggle="tab">Completed Tasks</a></li>
-        <a id="showAllTasks" style="margin-top: 23px; margin-left: 10px;" class="btn btn-primary" asp-controller="Dashboard" asp-action="AllTasks">All Tasks</a>
-    </ul>
-    
+    <a id="showAllTasks" style="margin-top: 23px; margin-left: 10px; float:right;" class="btn btn-primary" asp-controller="Dashboard" asp-action="AllTasks">View All Tasks</a>
+        <ul class="nav nav-tabs page-tabs" role="tablist" id="DashboardTabs">
+            <li role="presentation" class="active"><a href="#ActiveTasksTab" aria-controls="ActiveTasksTab" role="tab" data-toggle="tab">Active Tasks</a></li>
+            <li role="presentation"><a href="#CompletedTasksTab" aria-controls="CompletedTasksTab" role="tab" data-toggle="tab">Completed Tasks</a></li>
+        </ul>
+        
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="ActiveTasksTab">
@@ -338,15 +337,8 @@
         });
     })
     $('#DashboardTabs a').click(function (e) {
-        try{
-            e.preventDefault()
-            $(this).tab('show')
-            redrawTable();
-        } catch(e){
-
-        }
+        e.preventDefault()
+        $(this).tab('show')
+        CompletedTable.columns.adjust().draw()
     })
-    function redrawTable(){
-        CompletedTable.columns.adjust().draw();
-    }
 </script>
