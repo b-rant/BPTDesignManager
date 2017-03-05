@@ -62,15 +62,20 @@
                 </span>
             </div>
         </div>
+       
         <div class="col-md-4">
-            <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
-            <div class="progress" id="hours_Progress">
-            </div>
-            <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
-            <div class="progress" id="cost_Progress">
-            </div>
+            @if (!User.IsInRole("Employee"))
+            {
+                <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
+                <div class="progress" id="hours_Progress">
+                </div>
+                <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
+                <div class="progress" id="cost_Progress">
+                </div>
+            }
             <h3>Status <span class="label" id="project_status">@Html.DisplayFor(model => model.Job.Status)</span></h3>
         </div>
+
     </div>
 </div>
 
@@ -94,19 +99,16 @@
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Block)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
+                            @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].employeeId)
+                            Employee
                         </th>
                         <th></th>
                     </tr>
@@ -115,21 +117,41 @@
                     @foreach (var item in Model.ActiveTasks)
             {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Block)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.partNum)
-                            </td>
+                            @if (item.Block == true) {
+                                <td class="red-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="green-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @Html.DisplayFor(modelItem => item.partNum)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CompleteDate)
-                            </td>
+                            @if (item.Status.ToString() == "Pause")
+                            {
+                                <td class="red-back">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            @if (item.Status.ToString() == "Created")
+                            {
+                                <td class="green-back">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            @if (item.Status.ToString() == "InProgress")
+                            {
+                                <td class="yellow-back">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
                             <td>
                                 @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
@@ -138,11 +160,12 @@
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 }
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsJobDetails', @item.TaskID)">Details</button>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                                 }
+
                             </td>
                         </tr>
                     }
@@ -170,19 +193,16 @@
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Block)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].partNum)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Status)
+                            @Html.DisplayNameFor(model => model.CompletedTasks[0].partNum)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].employeeId)
+                           Employee
                         </th>
                         <th></th>
                     </tr>
@@ -191,17 +211,23 @@
                     @foreach (var item in Model.CompletedTasks)
             {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Block)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.partNum)
-                            </td>
+                            @if (item.Block == true)
+                            {
+                                <td class="red-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="green-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @Html.DisplayFor(modelItem => item.partNum)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CompleteDate)
@@ -215,7 +241,7 @@
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditJobDetails', @item.TaskID)">Edit</button>
                                 }
-                                <a class="btn btn-primary" asp-controller="WorkTasks" asp-action="DetailsJobDetails" asp-route-id="@item.TaskID">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsJobDetails', @item.TaskID)">Details</button>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
@@ -259,9 +285,18 @@
                     @foreach (var item in Model.Purchases)
             {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Block)
-                            </td>
+                            @if (item.Block == true)
+                            {
+                                <td class="red-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="green-back">
+                                    @Html.DisplayFor(modelItem => item.Block)
+                                </td>
+                            }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
@@ -282,7 +317,7 @@
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditJobDetails', @item.purchID)">Edit</button>
                                 }
-                                <a class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsJobDetails','@item.purchID')">Details</a>
+                                <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsJobDetails', @item.purchID)">Details</button>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeleteJobDetails', @item.purchID)">Delete</button>
@@ -306,35 +341,48 @@
     var ActiveTable;
     var CompletedTable;
     var PurchasesTable;
+
     $(document).ready(function () {
         ActiveTable = $("#ActiveTasks").DataTable({
             "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
-            "ordering": false,
+            "ordering": true,
             "info": false,
             "columnDefs": [
-                { "className": "dt-center", "targets": "_all" }
+                { "className": "dt-center", "targets": "_all" },
+                {
+                    "targets": 1,
+                    "render": $.fn.dataTable.render.ellipsis()
+                }
             ]
         });
         CompletedTable = $("#CompletedTasks").DataTable({
             "scrollY":"200px",
             "scrollCollapse": true,
             "paging": false,
-            "ordering": false,
+            "ordering": true,
             "info": false,
             "columnDefs": [
-                { "className": "dt-center", "targets": "_all" }
+                { "className": "dt-center", "targets": "_all" },
+                {
+                    "targets": 1,
+                    "render": $.fn.dataTable.render.ellipsis()
+                }
             ]
         });
         PurchasesTable = $("#Purchases").DataTable({
             "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
-            "ordering": false,
+            "ordering": true,
             "info": false,
             "columnDefs": [
-                { "className": "dt-center", "targets": "_all" }
+                { "className": "dt-center", "targets": "_all" },
+                {
+                    "targets": 1,
+                    "render": $.fn.dataTable.render.ellipsis()
+                }
             ]
         });
         // Handles Progress bars for the hours and cost
@@ -353,7 +401,7 @@
         } else {
             $("#cost_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
         }
-        if (parseInt(invCost) > parseInt(estCost)){
+        if (parseInt(invHours) > parseInt(estHours)){
             $("#hours_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
         } else {
             $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
