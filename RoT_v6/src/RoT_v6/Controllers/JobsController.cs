@@ -9,17 +9,21 @@ using RoT_v6.Data;
 using RoT_v6.Models;
 using RoT_v6.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace RoT_v6.Controllers
 {
-   [Authorize]
+    [Authorize]
     public class JobsController : Controller
     {
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public JobsController(ApplicationDbContext context)
+        public JobsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;    
+            _userManager = userManager;
+            _context = context;
         }
 
         // GET: Jobs
@@ -36,27 +40,74 @@ namespace RoT_v6.Controllers
                 return NotFound();
             }
 
-            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
-            var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
-            var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
-            var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
-            JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
-            {
-                Job = job,
-                Purchases = Purchases,
-                ActiveTasks = ActiveTasks,
-                CompletedTasks = CompletedTasks
-            };
-            if (job == null)
-            {
-                return NotFound();
-            }
+            var currentUser = await GetCurrentUserAsync();
+            var roleList = await _userManager.GetRolesAsync(currentUser);
 
-            return View(JobPurchasesWorkTasks);
+            if (roleList.Contains("Employee"))
+            {
+
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+                var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+                var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
+                List<WorkTask> pickList = new List<WorkTask>();
+                foreach (WorkTask w in ActiveTasks)
+                {
+                    if (w.employeeId == currentUser.name && !w.Block)
+                    {
+                        pickList.Add(w);
+                    }
+
+                }
+
+                var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
+                JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
+                {
+                    Job = job,
+                    Purchases = Purchases,
+                    ActiveTasks = pickList,
+                    CompletedTasks = CompletedTasks
+                };
+                if (job == null)
+                {
+                    return NotFound();
+                }
+
+                return View(JobPurchasesWorkTasks);
+            }
+            else
+            {
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+                var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+                var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
+                List<WorkTask> pickList = new List<WorkTask>();
+                foreach (WorkTask w in ActiveTasks)
+                {
+                    if (w.employeeId == currentUser.name && !w.Block)
+                    {
+                        pickList.Add(w);
+                    }
+
+                }
+
+                var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
+                JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
+                {
+                    Job = job,
+                    Purchases = Purchases,
+                    ActiveTasks = pickList,
+                    CompletedTasks = CompletedTasks
+                };
+                if (job == null)
+                {
+                    return NotFound();
+                }
+
+                return View(JobPurchasesWorkTasks);
+            }
         }
 
         // GET: Jobs/Create
-        [Authorize(Roles ="Admin, ShopManager")]
+        [Authorize(Roles = "Admin, ShopManager")]
         public IActionResult Create()
         {
             return View();
@@ -102,7 +153,7 @@ namespace RoT_v6.Controllers
         [Authorize(Roles = "Admin, ShopManager")]
         public async Task<IActionResult> EditJobsList(int? id)
         {
-            if (id == null)    
+            if (id == null)
             {
                 return NotFound();
             }

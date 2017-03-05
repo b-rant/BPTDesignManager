@@ -28,7 +28,7 @@ namespace RoT_v6.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-
+            List<WorkTask> pickList = new List<WorkTask>();
             var currentUser = await GetCurrentUserAsync();
             var roleList = await _userManager.GetRolesAsync(currentUser);
 
@@ -37,32 +37,32 @@ namespace RoT_v6.Controllers
                 var user = await _userManager.Users.ToListAsync();
                 var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
                 var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
-                List<WorkTask> pickList = new List<WorkTask>();
-                foreach (WorkTask w in CompletedTasks) {
-                    if (w.employeeId == currentUser.name) {
+               
+                foreach (WorkTask w in ActiveTasks)
+                {
+                    if (w.employeeId == currentUser.name && !w.Block)
+                    {
                         pickList.Add(w);
                     }
-
                 }
-
-                var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();                
+                var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
                 List<ToDo> pick2List = new List<ToDo>();
                 List<EmployeeTodo> bridge = await _context.EmployeeTodo.ToListAsync();
                 List<int> toIDs = new List<int>();
-                foreach (EmployeeTodo et in bridge) {
-                    if (currentUser.Id == et.employee.Id) {
+                foreach (EmployeeTodo et in bridge)
+                {
+                    if (currentUser.Id == et.employee.Id)
+                    {
                         toIDs.Add(et.ToDoId);
                     }
                 }
-                foreach (ToDo td in EmployeeTodo) {
-                    if (toIDs.Contains(td.ToDoId)) {
+                foreach (ToDo td in EmployeeTodo)
+                {
+                    if (toIDs.Contains(td.ToDoId))
+                    {
                         pick2List.Add(td);
-
                     }
                 }
-
-            
-
                 Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
                 {
                     EmpToDo = pick2List,
@@ -78,11 +78,36 @@ namespace RoT_v6.Controllers
                 var user = await _userManager.Users.ToListAsync();
                 var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
                 var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
+
+                foreach (WorkTask w in ActiveTasks)
+                {
+                    if (w.employeeId == currentUser.name)
+                    {
+                        pickList.Add(w);
+                    }
+                }
                 var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
+                List<ToDo> pick2List = new List<ToDo>();
+                List<EmployeeTodo> bridge = await _context.EmployeeTodo.ToListAsync();
+                List<int> toIDs = new List<int>();
+                foreach (EmployeeTodo et in bridge)
+                {
+                    if (currentUser.Id == et.employee.Id)
+                    {
+                        toIDs.Add(et.ToDoId);
+                    }
+                }
+                foreach (ToDo td in EmployeeTodo)
+                {
+                    if (toIDs.Contains(td.ToDoId))
+                    {
+                        pick2List.Add(td);
+                    }
+                }
                 Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
                 {
-                    EmpToDo = EmployeeTodo,
-                    ActiveTasks = ActiveTasks,
+                    EmpToDo = pick2List,
+                    ActiveTasks = pickList,
                     CompletedTasks = CompletedTasks,
                     User = user
                 };
