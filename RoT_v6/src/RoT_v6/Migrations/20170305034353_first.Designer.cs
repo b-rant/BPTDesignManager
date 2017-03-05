@@ -8,7 +8,7 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170303233527_first")]
+    [Migration("20170305034353_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

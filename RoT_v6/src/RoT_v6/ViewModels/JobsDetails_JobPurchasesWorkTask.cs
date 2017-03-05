@@ -12,9 +12,10 @@ namespace RoT_v6.ViewModels
         public List<WorkTask> CompletedTasks { get; set; }        
         public List<EmployeeWorkTask> EmployeeWorkTask { get; set; }
         public List<EmployeeTodo> EmployeeTodo { get; set; }
+        public List<ApplicationUser> User { get; set; }
 
-      
 
-        
+
+
     }
 }

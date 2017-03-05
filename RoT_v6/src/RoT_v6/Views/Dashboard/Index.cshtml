@@ -31,6 +31,9 @@
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
                         </th>
                         <th>
+                           Employee
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
                         </th>
                         <th>
@@ -39,6 +42,9 @@
                         <th></th>
                     </tr>
                 </thead>
+
+
+
                 <tbody>
                     @foreach (var item in Model.ActiveTasks)
                     {
@@ -62,6 +68,15 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.partNum)
                             </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
+                            </td>
+
+
                             @if (item.Status.ToString() == "Pause")
                             {
                                 <td class="red-back">
@@ -113,6 +128,11 @@
                         </tr>
                                     }
                 </tbody>
+
+
+
+
+
             </table>
 
         </div>

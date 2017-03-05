@@ -51,6 +51,7 @@ namespace RoT_v6.Models
 
         [Display(Name = "Part Number")]
         public string partNum { get; set; }
+        [Display(Name = "Employee")]
         public string employeeId { get; set; }
 
         [NotMapped]

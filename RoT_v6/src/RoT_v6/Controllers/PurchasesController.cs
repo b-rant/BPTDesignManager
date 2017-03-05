@@ -7,20 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RoT_v6.Data;
 using RoT_v6.Models;
+using Microsoft.AspNetCore.Authorization;
 using RoT_v6.ViewModels;
 
 namespace RoT_v6.Controllers
 {
+    [Authorize]
     public class PurchasesController : Controller
-    {
+    {   
         private readonly ApplicationDbContext _context;
-
+       
         public PurchasesController(ApplicationDbContext context)
         {
             _context = context;    
         }
-
+    
         // GET: Purchases
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> Index()
         {
             var model = new Purchase_IndexThreeTables();
@@ -30,7 +33,7 @@ namespace RoT_v6.Controllers
 
             return View(model);
         }
-
+        [Authorize(Roles = "Admin, Purchaser")]
         // GET: Purchases/DetailsPurchases/5
         public async Task<IActionResult> DetailsPurchases(int? id)
         {
@@ -47,7 +50,7 @@ namespace RoT_v6.Controllers
 
             return View(purchase);
         }
-
+        [Authorize(Roles = "Admin, Purchaser")]
         // GET: Purchases/DetailsDetails/5
         public async Task<IActionResult> DetailsJobDetails(int? id)
         {
@@ -64,7 +67,7 @@ namespace RoT_v6.Controllers
 
             return View(purchase);
         }
-
+        [Authorize]
         // GET: Purchases/Create
         public IActionResult Create(int id)
         {
@@ -79,6 +82,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
         {
             DateTime dateOnly = DateTime.Today;
@@ -93,6 +97,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/EditJobDetails/5
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditJobDetails(int? id)
         {
             if (id == null)
@@ -112,7 +117,8 @@ namespace RoT_v6.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]        
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
         {
             if (id != purchase.purchID)
@@ -144,6 +150,8 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/EditPurchases/5
+        
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditPurchases(int? id)
         {
             if (id == null)
@@ -164,6 +172,7 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor")] Purchase purchase)
         {
             if (id != purchase.purchID)
@@ -204,6 +213,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/DeleteJobDetails/5
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeleteJobDetails(int? id)
         {
             if (id == null)
@@ -223,6 +233,7 @@ namespace RoT_v6.Controllers
         // POST: Purchases/DeleteJobDetails/5
         [HttpPost, ActionName("DeleteJobDetails")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeleteJobDetailsConfirmed(int id)
         {
             var purchase = await _context.Purchase.SingleOrDefaultAsync(m => m.purchID == id);
@@ -232,6 +243,7 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/DeletePurchases/5
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeletePurchases(int? id)
         {
             if (id == null)
@@ -251,6 +263,7 @@ namespace RoT_v6.Controllers
         // POST: Purchases/DeletePurchases/5
         [HttpPost, ActionName("DeletePurchases")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeletePurchasesConfirmed(int id)
         {
             var purchase = await _context.Purchase.SingleOrDefaultAsync(m => m.purchID == id);

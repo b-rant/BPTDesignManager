@@ -12,7 +12,7 @@ using RoT_v6.Services;
 
 namespace RoT_v6.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -38,6 +38,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/Index
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
@@ -69,6 +70,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
         {
             ManageMessageId? message = ManageMessageId.Error;
@@ -87,6 +89,7 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        [Authorize(Roles = "Admin")]
         public IActionResult AddPhoneNumber()
         {
             return View();
@@ -96,6 +99,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -117,6 +121,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EnableTwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();
@@ -133,6 +138,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DisableTwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();
@@ -148,6 +154,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/VerifyPhoneNumber
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var user = await GetCurrentUserAsync();
@@ -164,6 +171,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -189,6 +197,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RemovePhoneNumber()
         {
             var user = await GetCurrentUserAsync();
@@ -207,6 +216,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/ChangePassword
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ChangePassword()
         {
             return View();
@@ -216,6 +226,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -241,6 +252,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/SetPassword
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult SetPassword()
         {
             return View();
@@ -250,6 +262,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -274,6 +287,7 @@ namespace RoT_v6.Controllers
 
         //GET: /Manage/ManageLogins
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
@@ -300,6 +314,7 @@ namespace RoT_v6.Controllers
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
@@ -311,6 +326,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/LinkLoginCallback
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var user = await GetCurrentUserAsync();
