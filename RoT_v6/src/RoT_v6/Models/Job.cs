@@ -59,7 +59,7 @@ namespace RoT_v6.Models
         public int EstHours { get; set; }
 
 
-        [Display(Name = "Invested Hours")]
+        [Display(Name = "Invested Hours (Stored in Minutes)")]
         public int InvHours { get; set; }
 
     }

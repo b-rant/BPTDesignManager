@@ -62,15 +62,20 @@
                 </span>
             </div>
         </div>
+       
         <div class="col-md-4">
-            <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
-            <div class="progress" id="hours_Progress">
-            </div>
-            <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
-            <div class="progress" id="cost_Progress">
-            </div>
+            @if (!User.IsInRole("Employee"))
+            {
+                <h4 id="Hours_Label">Hours Current vs. Budgeted</h4>
+                <div class="progress" id="hours_Progress">
+                </div>
+                <h4 id="Cost_Label">Cost Current vs. Budgeted</h4>
+                <div class="progress" id="cost_Progress">
+                </div>
+            }
             <h3>Status <span class="label" id="project_status">@Html.DisplayFor(model => model.Job.Status)</span></h3>
         </div>
+
     </div>
 </div>
 
@@ -101,9 +106,6 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].CompleteDate)
                         </th>
                         <th>
                             Employee
@@ -151,9 +153,6 @@
                                 </td>
                             }
                             <td>
-                                @Html.DisplayFor(modelItem => item.CompleteDate)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
                             <td>
@@ -166,6 +165,7 @@
                                 {
                                     <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteJobDetails', @item.TaskID)">Delete</button>
                                 }
+
                             </td>
                         </tr>
                     }

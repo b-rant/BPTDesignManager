@@ -54,6 +54,8 @@ namespace RoT_v6.Controllers
         {
             ToDo A = new ToDo();
             A.getEmployees(_context);
+            DateTime dateOnly = DateTime.Today;
+            A.CreatedDate = dateOnly.ToString("d");
             ViewData["ReturnUrl"] = returnUrl;
             return View(A);
         }

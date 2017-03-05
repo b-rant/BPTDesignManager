@@ -43,67 +43,68 @@ namespace RoT_v6.Controllers
             var currentUser = await GetCurrentUserAsync();
             var roleList = await _userManager.GetRolesAsync(currentUser);
 
-            if (roleList.Contains("Employee"))
+            //if (roleList.Contains("Employee"))
+            //{
+
+            //    var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+            //    var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+            //    var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
+            //    List<WorkTask> pickList = new List<WorkTask>();
+            //    foreach (WorkTask w in ActiveTasks)
+            //    {
+            //        if (w.employeeId == currentUser.name && !w.Block)
+            //        {
+            //            pickList.Add(w);
+            //        }
+
+            //    }
+
+            //    var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
+            //    JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
+            //    {
+            //        Job = job,
+            //        Purchases = Purchases,
+            //        ActiveTasks = pickList,
+            //        CompletedTasks = CompletedTasks
+            //    };
+            //    if (job == null)
+            //    {
+            //        return NotFound();
+            //    }
+
+            //    return View(JobPurchasesWorkTasks);
+            //}
+            //else
+            //{
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
+            var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
+            var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
+            //List<WorkTask> pickList = new List<WorkTask>();
+            //foreach (WorkTask w in ActiveTasks)
+            //{
+            //    if (w.employeeId == currentUser.name && !w.Block)
+            //    {
+            //        pickList.Add(w);
+            //    }
+
+            //}
+
+            var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
+            JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
             {
-
-                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
-                var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
-                var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
-                List<WorkTask> pickList = new List<WorkTask>();
-                foreach (WorkTask w in ActiveTasks)
-                {
-                    if (w.employeeId == currentUser.name && !w.Block)
-                    {
-                        pickList.Add(w);
-                    }
-
-                }
-
-                var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
-                JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
-                {
-                    Job = job,
-                    Purchases = Purchases,
-                    ActiveTasks = pickList,
-                    CompletedTasks = CompletedTasks
-                };
-                if (job == null)
-                {
-                    return NotFound();
-                }
-
-                return View(JobPurchasesWorkTasks);
-            }
-            else
+                Job = job,
+                Purchases = Purchases,
+                //ActiveTasks = pickList,
+                ActiveTasks = ActiveTasks,
+                CompletedTasks = CompletedTasks
+            };
+            if (job == null)
             {
-                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == id);
-                var Purchases = await _context.Purchase.Where(m => m.JobID == id).ToListAsync();
-                var ActiveTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() != "Completed").ToListAsync();
-                List<WorkTask> pickList = new List<WorkTask>();
-                foreach (WorkTask w in ActiveTasks)
-                {
-                    if (w.employeeId == currentUser.name && !w.Block)
-                    {
-                        pickList.Add(w);
-                    }
-
-                }
-
-                var CompletedTasks = await _context.WorkTasks.Where(m => m.JobID == id && m.Status.ToString() == "Completed").ToListAsync();
-                JobsDetails_JobPurchasesWorkTask JobPurchasesWorkTasks = new JobsDetails_JobPurchasesWorkTask()
-                {
-                    Job = job,
-                    Purchases = Purchases,
-                    ActiveTasks = pickList,
-                    CompletedTasks = CompletedTasks
-                };
-                if (job == null)
-                {
-                    return NotFound();
-                }
-
-                return View(JobPurchasesWorkTasks);
+                return NotFound();
             }
+
+            return View(JobPurchasesWorkTasks);
+            //}
         }
 
         // GET: Jobs/Create

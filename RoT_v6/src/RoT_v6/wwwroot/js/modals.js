@@ -108,9 +108,13 @@ function objectToString(JSONData, ReportTitle) {
 
     //This loop will extract the label from 1st index of on array
     for (var index in arrData[0]) {
+        if (index == "InvHours") {
+            row += index + ' (Minutes),';
+        } else {
+            //Now convert each value to string and comma-seprated
+            row += index + ',';
+        }
 
-        //Now convert each value to string and comma-seprated
-        row += index + ',';
     }
 
     row = row.slice(0, -1);
@@ -124,7 +128,11 @@ function objectToString(JSONData, ReportTitle) {
 
         //2nd loop will extract each column and convert it in string comma-seprated
         for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
+            if (arrData[i][index] == null) {
+                row += '"",';
+            } else {
+                row += '"' + arrData[i][index] + '",';
+            }  
         }
 
         row.slice(0, row.length - 1);

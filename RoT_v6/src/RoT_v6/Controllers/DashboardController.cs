@@ -28,23 +28,14 @@ namespace RoT_v6.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            List<WorkTask> pickList = new List<WorkTask>();
             var currentUser = await GetCurrentUserAsync();
             var roleList = await _userManager.GetRolesAsync(currentUser);
+            var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed" && m.employeeId == currentUser.name).ToListAsync();
+            var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed" && m.employeeId == currentUser.name).ToListAsync();
 
             if (roleList.Contains("Employee"))
             {
                 var user = await _userManager.Users.ToListAsync();
-                var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
-                var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
-               
-                foreach (WorkTask w in ActiveTasks)
-                {
-                    if (w.employeeId == currentUser.name && !w.Block)
-                    {
-                        pickList.Add(w);
-                    }
-                }
                 var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
                 List<ToDo> pick2List = new List<ToDo>();
                 List<EmployeeTodo> bridge = await _context.EmployeeTodo.ToListAsync();
@@ -66,7 +57,7 @@ namespace RoT_v6.Controllers
                 Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
                 {
                     EmpToDo = pick2List,
-                    ActiveTasks = pickList,
+                    ActiveTasks = ActiveTasks,
                     CompletedTasks = CompletedTasks,
                     User = user
                 };
@@ -74,46 +65,31 @@ namespace RoT_v6.Controllers
             }
             else
             {
-
                 var user = await _userManager.Users.ToListAsync();
-                var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
-                var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
-
-                foreach (WorkTask w in ActiveTasks)
-                {
-                    if (w.employeeId == currentUser.name)
-                    {
-                        pickList.Add(w);
-                    }
-                }
                 var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
-                List<ToDo> pick2List = new List<ToDo>();
-                List<EmployeeTodo> bridge = await _context.EmployeeTodo.ToListAsync();
-                List<int> toIDs = new List<int>();
-                foreach (EmployeeTodo et in bridge)
-                {
-                    if (currentUser.Id == et.employee.Id)
-                    {
-                        toIDs.Add(et.ToDoId);
-                    }
-                }
-                foreach (ToDo td in EmployeeTodo)
-                {
-                    if (toIDs.Contains(td.ToDoId))
-                    {
-                        pick2List.Add(td);
-                    }
-                }
                 Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo()
                 {
-                    EmpToDo = pick2List,
-                    ActiveTasks = pickList,
+                    EmpToDo = EmployeeTodo,
+                    ActiveTasks = ActiveTasks,
                     CompletedTasks = CompletedTasks,
                     User = user
                 };
                 return View(WorkTaskToDo);
             }
         }
+
+        [Authorize]
+        public async Task<IActionResult> AllTasks()
+        {
+            var allTasksActive = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed").ToListAsync();
+            var allTasksCompleted = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed").ToListAsync();
+            Dashboard_WorkTaskToDo WorkTaskToDo = new Dashboard_WorkTaskToDo();
+            WorkTaskToDo.ActiveTasks = allTasksActive;
+            WorkTaskToDo.CompletedTasks = allTasksCompleted;
+            return View(WorkTaskToDo);
+        }
+
+
         [Authorize]
         public async Task<IActionResult> editTaskStatus(int? id, string Status)
         {
@@ -133,6 +109,10 @@ namespace RoT_v6.Controllers
             switch (Status)
             {
                 case "Complete":
+                    if (task.Status != Models.TaskStatus.InProgress)
+                    {
+                        break;
+                    }
                     task.Status = Models.TaskStatus.Completed;
                     DateTime startTime = Convert.ToDateTime(task.StartTime);
                     task.TotalTime = task.TotalTime + date.Subtract(startTime).Minutes;
