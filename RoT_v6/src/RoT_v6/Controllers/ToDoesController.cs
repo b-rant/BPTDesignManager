@@ -75,6 +75,7 @@ namespace RoT_v6.Controllers
 
                 return RedirectToAction("Index","Dashboard");
             }
+            ViewBag.Fail = "1";
             return View(test);
         }
 
@@ -126,6 +127,7 @@ namespace RoT_v6.Controllers
                 }
                 return RedirectToAction("Index","Dashboard");
             }
+            ViewBag.Fail = "1";
             return View(toDo);
         }
 

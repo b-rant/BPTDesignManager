@@ -4,7 +4,10 @@
 }
 
 @{ 
-    Layout = "";
+    if (ViewBag.Fail != "1")
+    {
+        Layout = "";
+    }
 }
 <h2>Edit Job</h2>
 <form asp-action="EditJobsList/@Model.JobID">

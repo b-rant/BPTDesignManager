@@ -5,7 +5,10 @@
 }
 
 @{ 
-    Layout = "";
+    if (ViewBag.Fail != "1")
+    {
+        Layout = "";
+    }
 }
 <h2>Create Purchase Request</h2>
 

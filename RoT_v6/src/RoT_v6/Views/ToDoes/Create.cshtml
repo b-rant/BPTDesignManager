@@ -6,7 +6,10 @@
 }
 
 @{ 
-    Layout = "";
+    if (ViewBag.Fail != "1")
+    {
+        Layout = "";
+    }
 }
 
 <h2>Create</h2>

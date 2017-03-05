@@ -100,6 +100,7 @@ namespace RoT_v6.Controllers
 
                 return RedirectToAction("Details","Jobs",new { id = JobID});
             }
+            ViewBag.Fail = "1";
             return View(workTask);
         }
 
@@ -167,6 +168,7 @@ namespace RoT_v6.Controllers
                 }
                 return RedirectToAction("Index", "Dashboard");
             }
+            ViewBag.Fail = "1";
             return View(workTask);
         }
 
@@ -231,6 +233,7 @@ namespace RoT_v6.Controllers
                 }
                 return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
             }
+            ViewBag.Fail = "1";
             return View(workTask);
         }
 

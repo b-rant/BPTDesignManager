@@ -82,6 +82,7 @@ namespace RoT_v6.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
+            ViewBag.Fail = "1";
             return View(purchase);
         }
 
@@ -133,6 +134,7 @@ namespace RoT_v6.Controllers
                }
                 return RedirectToAction("Details", "Jobs", new { id = purchase.JobID });
             }
+            ViewBag.Fail = "1";
             return View(purchase);
         }
 
@@ -193,6 +195,7 @@ namespace RoT_v6.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.Fail = "1";
             return View(purchase);
         }
 
