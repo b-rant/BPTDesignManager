@@ -30,6 +30,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
                         </th>
+                        <th>
+                           Employee
+                        </th>
 
                         <th>
                             @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
@@ -48,8 +51,12 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.partNum)
                             </td>
+                           
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.employeeId)
                             </td>
 
                             <td>

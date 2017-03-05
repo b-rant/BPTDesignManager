@@ -124,6 +124,7 @@ namespace RoT_v6.Controllers
             }
 
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            workTask.getEmployees(_context);
             if (workTask == null)
             {
                 return NotFound();
@@ -137,7 +138,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> EditDashboard(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        public async Task<IActionResult> EditDashboard(int id, WorkTask workTask)
         {
             if (id != workTask.TaskID)
             {
@@ -189,6 +190,7 @@ namespace RoT_v6.Controllers
             }
 
             var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            workTask.getEmployees(_context);
             if (workTask == null)
             {
                 return NotFound();
@@ -202,7 +204,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> EditJobDetails(int id, [Bind("TaskID,Block,CompleteDate,Description,Employee,JobID,Notes,StartDate,StartTime,Status,TotalTime,partNum")] WorkTask workTask)
+        public async Task<IActionResult> EditJobDetails(int id,  WorkTask workTask)
         {
             if (id != workTask.TaskID)
             {
