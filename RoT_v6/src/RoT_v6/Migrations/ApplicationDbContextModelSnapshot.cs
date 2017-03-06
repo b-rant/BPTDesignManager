@@ -261,6 +261,8 @@ namespace RoT_v6.Migrations
 
                     b.Property<int>("JobID");
 
+                    b.Property<string>("Notes");
+
                     b.Property<string>("PurchDate");
 
                     b.Property<int>("Quantity");
@@ -270,6 +272,8 @@ namespace RoT_v6.Migrations
                     b.Property<decimal>("TotalCost");
 
                     b.Property<string>("Vendor");
+
+                    b.Property<string>("employeeId");
 
                     b.HasKey("purchID");
 

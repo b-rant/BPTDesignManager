@@ -8,8 +8,8 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170305220122_purch_emp")]
-    partial class purch_emp
+    [Migration("20170306002157_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
