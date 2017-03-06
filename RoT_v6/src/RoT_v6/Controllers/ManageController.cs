@@ -12,7 +12,7 @@ using RoT_v6.Services;
 
 namespace RoT_v6.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -216,7 +216,6 @@ namespace RoT_v6.Controllers
         //
         // GET: /Manage/ChangePassword
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public IActionResult ChangePassword()
         {
             return View();
@@ -226,7 +225,6 @@ namespace RoT_v6.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)

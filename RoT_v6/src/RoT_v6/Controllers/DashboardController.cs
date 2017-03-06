@@ -91,19 +91,36 @@ namespace RoT_v6.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> editTaskStatus(int? id, string Status)
+        public async Task<IActionResult> Index_editTaskStatus(int? id, string Status)
         {
-            if (id == null)
+            if (id == null || Status == null)
             {
                 return NotFound();
             }
+            await changeStatus(id, Status);
+            // Return view
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> All_editTaskStatus(int? id, string Status)
+        {
+            if (id == null || Status == null)
+            {
+                return NotFound();
+            }
+            await changeStatus(id, Status);
+            // Return view
+            return RedirectToAction("AllTasks", "Dashboard");
+        }
+
+        [Authorize]
+        public async Task changeStatus(int? id, string Status)
+        {
+
             // Get task
             var task = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
             var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == task.JobID);
-            if (task == null || job == null)
-            {
-                return NotFound();
-            }
             DateTime date = DateTime.UtcNow;
             // Edit Status
             switch (Status)
@@ -152,8 +169,6 @@ namespace RoT_v6.Controllers
                     throw;
                 }
             }
-            // Return view
-            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

@@ -51,14 +51,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -106,15 +104,15 @@
                                         switch (status)
                                         {
                                             case "Created":
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="All_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
                                                 break;
                                             case "Pause":
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="All_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="All_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
                                                 break;
                                             case "InProgress":
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
-                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="All_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
+                                                <a class="btn btn-primary" asp-controller="Dashboard" asp-action="All_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
                                                 break;
                                         }
                                     }
@@ -123,12 +121,12 @@
                             <td>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditAllTasks', @item.TaskID)">Edit</button>
                                 }
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteAllTasks', @item.TaskID)">Delete</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
                             </td>
@@ -175,14 +173,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -199,12 +195,12 @@
                             <td>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditAllTasks', @item.TaskID)">Edit</button>
                                 }
                                 <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
                                 @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                                 {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
+                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteAllTasks', @item.TaskID)">Delete</button>
                                 }
                                 <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
                             </td>
@@ -229,7 +225,7 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1, 2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]
@@ -243,7 +239,7 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1,2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]

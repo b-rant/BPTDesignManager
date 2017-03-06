@@ -47,9 +47,30 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
+                @{ 
+                    if (item.Status.ToString() == "NotReady")
+                    {
+                <td class="red-back">
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
+                    }
+                    else if (item.Status.ToString() == "Completed")
+                    {
+                <td class="green-back">
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                    }
+                    else if (item.Status.ToString() == "Active")
+                    {
+                <td class="yellow-back">
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                    }
+                    else
+                    {
+                <td></td>
+                    }
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.CompleteDate)
                 </td>
