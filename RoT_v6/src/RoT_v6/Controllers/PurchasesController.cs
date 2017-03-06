@@ -126,7 +126,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]        
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes")] Purchase purchase)
+        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {
@@ -181,7 +181,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes")] Purchase purchase)
+        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {
