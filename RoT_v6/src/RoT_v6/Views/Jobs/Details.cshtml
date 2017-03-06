@@ -117,16 +117,15 @@
                     @foreach (var item in Model.ActiveTasks)
             {
                         <tr>
-                            @if (item.Block == true) {
+                            @if (item.Block == true)
+                            {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -214,14 +213,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -291,13 +288,13 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
                                 <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    
                                 </td>
                             }
                             <td>
@@ -350,7 +347,7 @@
 
     $(document).ready(function () {
         ActiveTable = $("#ActiveTasks").DataTable({
-            "scrollY": "200px",
+            "scrollY": "300px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -358,13 +355,13 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1,2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]
         });
         CompletedTable = $("#CompletedTasks").DataTable({
-            "scrollY":"200px",
+            "scrollY":"300px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -372,13 +369,13 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1,2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]
         });
         PurchasesTable = $("#Purchases").DataTable({
-            "scrollY": "200px",
+            "scrollY": "300px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,

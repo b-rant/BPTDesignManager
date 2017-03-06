@@ -5,7 +5,10 @@
 }
 
 <div class="row">
-    <a id="showAllTasks" style="margin-top: 23px; margin-left: 10px; float:right;" class="btn btn-primary" asp-controller="Dashboard" asp-action="AllTasks">View All Tasks</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+    {
+        <a id="showAllTasks" style="margin-top: 23px; margin-left: 10px; float:right;" class="btn btn-primary" asp-controller="Dashboard" asp-action="AllTasks">View All Tasks</a>
+    }
         <ul class="nav nav-tabs page-tabs" role="tablist" id="DashboardTabs">
             <li role="presentation" class="active"><a href="#ActiveTasksTab" aria-controls="ActiveTasksTab" role="tab" data-toggle="tab">Active Tasks</a></li>
             <li role="presentation"><a href="#CompletedTasksTab" aria-controls="CompletedTasksTab" role="tab" data-toggle="tab">Completed Tasks</a></li>
@@ -49,14 +52,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -102,15 +103,15 @@
                                         switch (status)
                                         {
                                             case "Created":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
                                                 break;
                                             case "Pause":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
                                                 break;
                                             case "InProgress":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
                                                     break;
                                             }
                                         }
@@ -169,14 +170,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -294,7 +293,7 @@
     var CompletedTable;
     $(document).ready(function () {
         $("#ActiveTasks").DataTable({
-            "scrollY": "200px",
+            "scrollY": "270px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -302,13 +301,13 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1,2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]
         });
         CompletedTable = $("#CompletedTasks").DataTable({
-            "scrollY": "200px",
+            "scrollY": "270px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -316,13 +315,13 @@
             "columnDefs": [
                 { "className": "dt-center", "targets": "_all" },
                 {
-                    "targets": 1,
+                    "targets": [1,2],
                     "render": $.fn.dataTable.render.ellipsis()
                 }
             ]
         });
         $("#ToDos").DataTable({
-            "scrollY": "200px",
+            "scrollY": "300px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,

@@ -47,14 +47,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td class="green-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -76,6 +74,7 @@
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsPurchases', @item.purchID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeletePurchases', @item.purchID)">Delete</button>
+                                <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
                             </td>
                         </tr>
                     }
@@ -114,14 +113,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -142,6 +139,7 @@
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsPurchases', @item.purchID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeletePurchases', @item.purchID)">Delete</button>
+                                <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
                             </td>
                         </tr>
                     }
@@ -180,14 +178,12 @@
                             @if (item.Block == true)
                             {
                                 <td class="red-back">
-                                    @Html.DisplayFor(modelItem => item.Block)
+                                    Blocked
                                 </td>
                             }
                             else
                             {
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Block)
-                                </td>
+                                <td class="green-back"></td>
                             }
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
@@ -208,6 +204,7 @@
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'EditPurchases', @item.purchID)">Edit</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DetailsPurchases', @item.purchID)">Details</button>
                                 <button class="btn btn-primary" onclick="dataUrl('Purchases', 'DeletePurchases', @item.purchID)">Delete</button>
+                                <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
                             </td>
                         </tr>
                     }

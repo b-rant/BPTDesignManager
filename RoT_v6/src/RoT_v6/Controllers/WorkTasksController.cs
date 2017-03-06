@@ -184,6 +184,74 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
+        // GET: WorkTasks/EditAllTasks/5
+        [Authorize]
+        public async Task<IActionResult> EditAllTasks(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            workTask.getEmployees(_context);
+            if (workTask == null)
+            {
+                return NotFound();
+            }
+            return View(workTask);
+        }
+
+        // POST: WorkTasks/EditAllTasks/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> EditAllTasks(int id, WorkTask workTask)
+        {
+            if (id != workTask.TaskID)
+            {
+                return NotFound();
+            }
+
+            var oldTask = await _context.WorkTasks.AsNoTracking().SingleOrDefaultAsync(m => m.TaskID == id);
+
+            if (oldTask.TotalTime != workTask.TotalTime)
+            {
+                var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+                var oldCost = (oldTask.TotalTime * HourRate) / 60;
+                var newCost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - oldCost + newCost;
+                job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
+                _context.Jobs.Update(job);
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(workTask);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!WorkTaskExists(workTask.TaskID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("AllTasks", "Dashboard");
+            }
+            ViewBag.Fail = "1";
+            workTask.getEmployees(_context);
+            return View(workTask);
+        }
+
         // GET: WorkTasks/EditJobDetails/5
         [Authorize]
         public async Task<IActionResult> EditJobDetails(int? id)
@@ -253,6 +321,7 @@ namespace RoT_v6.Controllers
             return View(workTask);
         }
 
+
         // GET: WorkTasks/DeleteDashboard/5
         [Authorize]
         public async Task<IActionResult> DeleteDashboard(int? id)
@@ -300,6 +369,55 @@ namespace RoT_v6.Controllers
             _context.WorkTasks.Remove(workTask);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Dashboard");
+        }
+
+        // GET: WorkTasks/DeleteDashboard/5
+        [Authorize]
+        public async Task<IActionResult> DeleteAllTasks(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            if (workTask == null)
+            {
+                return NotFound();
+            }
+
+            return View(workTask);
+        }
+
+        // POST: WorkTasks/DeleteDashboard/5
+        [Authorize]
+        [HttpPost, ActionName("DeleteAllTasks")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteAllTasksConfirmed(int id)
+        {
+            var workTask = await _context.WorkTasks.SingleOrDefaultAsync(m => m.TaskID == id);
+            var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
+            // Update Total Hours in job
+            if (job != null)
+            {
+                job.InvHours = job.InvHours - workTask.TotalTime;
+                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                job.InvCost = job.InvCost - cost;
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(job);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        throw;
+                    }
+                }
+            }
+            _context.WorkTasks.Remove(workTask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("AllTasks", "Dashboard");
         }
 
         // GET: WorkTasks/DeleteJobDetails/5

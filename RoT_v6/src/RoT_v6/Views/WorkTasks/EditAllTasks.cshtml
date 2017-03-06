@@ -1,0 +1,129 @@
+@model RoT_v6.Models.WorkTask
+
+@{
+    ViewData["Title"] = "EditAllTasks";
+}
+
+@{ 
+    if (ViewBag.Fail != "1")
+    {
+        Layout = "";
+    }
+}
+
+<h2>Edit Task</h2>
+@{
+    if (ViewBag.Fail == "1")
+    {
+        <h3 style="color: red;">Something went wrong, please retry your input here</h3>
+    }
+}
+<form asp-action="EditAllTasks/@Model.TaskID">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="TaskID" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="Block" />
+                    <label asp-for="Block"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label asp-for="CompleteDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CompleteDate" class="form-control" />
+                <span asp-validation-for="CompleteDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger" />
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label asp-for="Employees" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Employees" class="form-control" />
+                <span asp-validation-for="Employees" class="text-danger" />
+            </div>
+        </div>-->
+        <div class="form-group" style="display:none;">
+            <label asp-for="JobID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="JobID" class="form-control" />
+                <span asp-validation-for="JobID" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Notes" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Notes" rows="4" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label asp-for="StartDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label asp-for="StartTime" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalTime" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TotalTime" class="form-control" />
+                <span asp-validation-for="TotalTime" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="partNum" class="col-md-2 control-label">Part Number</label>
+            <div class="col-md-10">
+                <input asp-for="partNum" class="form-control" />
+                <span asp-validation-for="partNum" class="text-danger" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="employeeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="employeeId" asp-items="@Model.Employed">
+                   
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            <label asp-for="Status" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Status" class="form-control">
+                    <option>Created</option>
+                    <option>Pause</option>
+                    <option>InProgress</option>
+                    <option>Completed</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                 <input  type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
