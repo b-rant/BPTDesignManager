@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA78x4jrgGg06hD3Jk1YoQ1wAAAAACAAAAAAAQZgAAAAEAACAAAACfjgm2c8fOmkRyZlKsWpbwyMoVi0w3nvmuEPInztIKFwAAAAAOgAAAAAIAACAAAACogxbCAC5+LfosFcR92HbIAqz397SLa4EtfzSo+oUO7YAAAADZ87wySQc7dA4pI2aLKkZ4+oUMXbH79MruEm+dlXZGcrn0425ov40jeoucucOfy3f8RLfvk5a/4O8DyvPm87t9AhQ1+IYbKQVWZV5YBuSmliBoy+ksQbA8IpQsPHucXX6FD9iW2aytVgwR1174FtIqQcTvm1ICWRwariP5+zGQJkAAAABPHrrBZOqU5uWGK6HAZUKps7lPm8cxXx5zIDW8CeeQb7q4NsI9Ul9edozJ6UK7CNdcDq9XixuJKaocn7aXzkuf</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:betarotdbserver.database.windows.net,1433;Initial Catalog=BetaRoT_db;User Id=saecharles@betarotdbserver;Password=Toor1234</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EfMigrations Include="RoT_v6.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:betarotdbserver.database.windows.net,1433;Initial Catalog=BetaRoT_db;User Id=saecharles@betarotdbserver;Password=Toor1234</Value>
+    </EfMigrations>
+  </ItemGroup>
+</Project>
