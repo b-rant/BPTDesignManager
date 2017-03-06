@@ -229,6 +229,7 @@ namespace RoT_v6.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewData["StatusMessage"] = "Password must contain: 6 characters";
                 return View(model);
             }
             var user = await GetCurrentUserAsync();
@@ -239,12 +240,15 @@ namespace RoT_v6.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User changed their password successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangePasswordSuccess });
+                    ViewData["GoodMessage"] = "Password Successfully Changed!";
+                    return View(model);
                 }
                 AddErrors(result);
+                ViewData["StatusMessage"] = "Password must contain: 6 characters";
                 return View(model);
             }
-            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            ViewData["StatusMessage"] = "Failed to Change Password, Something went wrong";
+            return View(model);
         }
 
         //
