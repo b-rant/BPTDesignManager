@@ -1,9 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace RoT_v6.Services
@@ -17,10 +14,11 @@ namespace RoT_v6.Services
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            // STEP 1: Navigate to this page https://www.google.com/settings/security/lesssecureapps & set to "Turn On"
+            // Documentation for Mimekit http://www.mimekit.net/docs/html/CreatingMessages.htm
+            // for this we need to change security of the sending account https://www.google.com/settings/security/lesssecureapps 
 
             var mail = new MimeMessage();
-            mail.From.Add(new MailboxAddress("Breedt Production Tooling and Design ", "BPTDAuthenticate@donotreply.com"));
+            mail.From.Add(new MailboxAddress("Breedt Production Tooling and Design "));
             mail.To.Add(new MailboxAddress("New user", email));
             mail.Subject = "Welcome";
             mail.Body = new TextPart("plain")
@@ -30,7 +28,9 @@ namespace RoT_v6.Services
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 587);               
+                await client.ConnectAsync("smtp.gmail.com", 587);
+                //since we are connecting to a gmail account and don't have authentication token
+                //we remove the authentication mechanism               
                 client.AuthenticationMechanisms.Remove("XOAUTH2");              
                 await client.AuthenticateAsync("AllDotDat@gmail.com", "H}3~}Dg->XYt:KhF");
                 await client.SendAsync(mail);
