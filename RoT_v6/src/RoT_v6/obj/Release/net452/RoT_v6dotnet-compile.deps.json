@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETFramework,Version=v4.5.2/",
-    "signature": "593789fdc182026ed4ef4ce4f9be379b31fa5f7f"
+    "signature": "59e28415891725baef6dd670a087c2bc7f54dfb9"
   },
   "compilationOptions": {
     "defines": [
@@ -20,6 +20,8 @@
           "bootstrap": "3.3.7",
           "Bootstrap.v3.Datetimepicker": "4.17.45",
           "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
+          "Google.Apis.Auth": "1.21.0",
+          "MailKit": "1.10.2",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -66,10 +68,55 @@
           "bootstrap": "3.3.7"
         }
       },
+      "BouncyCastle/1.8.1": {
+        "compile": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.Apis/1.21.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.21.0",
+          "Zlib.Portable.Signed": "1.11.0"
+        },
+        "compile": {
+          "lib/net45/Google.Apis.PlatformServices.dll": {},
+          "lib/net45/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.21.0": {
+        "dependencies": {
+          "Google.Apis": "1.21.0",
+          "Google.Apis.Core": "1.21.0"
+        },
+        "compile": {
+          "lib/net45/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/net45/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.21.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/net45/Google.Apis.Core.dll": {}
+        }
+      },
       "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
+        }
+      },
+      "MailKit/1.10.2": {
+        "dependencies": {
+          "BouncyCastle": "1.8.1",
+          "MimeKit": "1.10.1",
+          "System": "4.0.0.0",
+          "System.Core": "4.0.0.0",
+          "System.Data": "4.0.0.0"
+        },
+        "compile": {
+          "lib/net451/MailKit.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.0.1": {
@@ -955,6 +1002,18 @@
           "lib/net451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
+      "MimeKit/1.10.1": {
+        "dependencies": {
+          "BouncyCastle": "1.8.1",
+          "System": "4.0.0.0",
+          "System.Core": "4.0.0.0",
+          "System.Data": "4.0.0.0",
+          "System.Security": "4.0.0.0"
+        },
+        "compile": {
+          "lib/net451/MimeKit.dll": {}
+        }
+      },
       "Moment.js/2.17.1": {},
       "Newtonsoft.Json/9.0.1": {
         "compile": {
@@ -1160,6 +1219,11 @@
           "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "Zlib.Portable.Signed/1.11.0": {
+        "compile": {
+          "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid/Zlib.Portable.dll": {}
+        }
+      },
       "mscorlib/4.0.0.0": {
         "compile": {
           ".NETFramework/v4.5.2/mscorlib.dll": {}
@@ -1173,6 +1237,11 @@
       "System.Core/4.0.0.0": {
         "compile": {
           ".NETFramework/v4.5.2/System.Core.dll": {}
+        }
+      },
+      "System.Data/4.0.0.0": {
+        "compile": {
+          ".NETFramework/v4.5.2/System.Data.dll": {}
         }
       },
       "System.Net.Http/4.0.0.0": {
@@ -1208,11 +1277,6 @@
       "System.Diagnostics.Tools/4.0.0.0": {
         "compile": {
           ".NETFramework/v4.5.2/Facades/System.Diagnostics.Tools.dll": {}
-        }
-      },
-      "System.Data/4.0.0.0": {
-        "compile": {
-          ".NETFramework/v4.5.2/System.Data.dll": {}
         }
       },
       "System.Transactions/4.0.0.0": {
@@ -1257,6 +1321,8 @@
           "bootstrap": "3.3.7",
           "Bootstrap.v3.Datetimepicker": "4.17.45",
           "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
+          "Google.Apis.Auth": "1.21.0",
+          "MailKit": "1.10.2",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -1303,10 +1369,55 @@
           "bootstrap": "3.3.7"
         }
       },
+      "BouncyCastle/1.8.1": {
+        "runtime": {
+          "lib/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.Apis/1.21.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.21.0",
+          "Zlib.Portable.Signed": "1.11.0"
+        },
+        "runtime": {
+          "lib/net45/Google.Apis.PlatformServices.dll": {},
+          "lib/net45/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.21.0": {
+        "dependencies": {
+          "Google.Apis": "1.21.0",
+          "Google.Apis.Core": "1.21.0"
+        },
+        "runtime": {
+          "lib/net45/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/net45/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.21.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "runtime": {
+          "lib/net45/Google.Apis.Core.dll": {}
+        }
+      },
       "jQuery/1.9.1": {},
       "Libuv/1.9.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1"
+        }
+      },
+      "MailKit/1.10.2": {
+        "dependencies": {
+          "BouncyCastle": "1.8.1",
+          "MimeKit": "1.10.1",
+          "System": "4.0.0.0",
+          "System.Core": "4.0.0.0",
+          "System.Data": "4.0.0.0"
+        },
+        "runtime": {
+          "lib/net451/MailKit.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/1.0.1": {
@@ -2188,6 +2299,18 @@
           "lib/net451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
+      "MimeKit/1.10.1": {
+        "dependencies": {
+          "BouncyCastle": "1.8.1",
+          "System": "4.0.0.0",
+          "System.Core": "4.0.0.0",
+          "System.Data": "4.0.0.0",
+          "System.Security": "4.0.0.0"
+        },
+        "runtime": {
+          "lib/net451/MimeKit.dll": {}
+        }
+      },
       "Moment.js/2.17.1": {},
       "Newtonsoft.Json/9.0.1": {
         "runtime": {
@@ -2305,9 +2428,15 @@
           "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "Zlib.Portable.Signed/1.11.0": {
+        "runtime": {
+          "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid/Zlib.Portable.dll": {}
+        }
+      },
       "mscorlib/4.0.0.0": {},
       "System/4.0.0.0": {},
       "System.Core/4.0.0.0": {},
+      "System.Data/4.0.0.0": {},
       "System.Net.Http/4.0.0.0": {},
       "System.Security/4.0.0.0": {},
       "System.Xml/4.0.0.0": {},
@@ -2315,7 +2444,6 @@
       "System.Configuration/4.0.0.0": {},
       "System.ComponentModel.DataAnnotations/4.0.0.0": {},
       "System.Diagnostics.Tools/4.0.0.0": {},
-      "System.Data/4.0.0.0": {},
       "System.Transactions/4.0.0.0": {},
       "System.IO.Compression/4.0.0.0": {},
       "System.IdentityModel/4.0.0.0": {},
@@ -2351,6 +2479,26 @@
       "serviceable": true,
       "sha512": "sha512-O6uUKSMe4KvfSJ1pON8yI8JzTxpf/InaDChbC3kwfUFG7hjysyIpx8fmgEtb8sojMJcfRRO5NFyLsz+rRX3Fdw=="
     },
+    "BouncyCastle/1.8.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r0w4ciJJ916V3dYRdtq8uF4Nz6oAv8Mia1JEAPKgDDRzMTcht8uK/Qam9WtvIg9SaFa+4OTox+GG6huB07nC1g=="
+    },
+    "Google.Apis/1.21.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZcWP3H65G7kW2URxDlGXcpeQNMQEFEp1/LPKlKlvgQKPAJeqWE7KCgqVW+0P06c791rbiXUAjFS/6q6Gzg+2Mg=="
+    },
+    "Google.Apis.Auth/1.21.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JnSqfIBggkUKh4nrLzqy72v/eJb82alVXwneT6iDtSlf2UAk5JvtMJH/WgoeZIicn0fWXul2BNbpv7Y9y8ya7Q=="
+    },
+    "Google.Apis.Core/1.21.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9kQDOyLcwLv0sHIWdjilyW/9jufRmxRhNReMBO7WQ9XfLy9PfONjVNizadoqELV/7rRPtbhSVGjr/KWV8I1QMw=="
+    },
     "jQuery/1.9.1": {
       "type": "package",
       "serviceable": true,
@@ -2360,6 +2508,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-9Q7AaqtQhS8JDSIvRBt6ODSLWDBI4c8YxNxyCQemWebBFUtBbc6M5Vi5Gz1ZyIUlTW3rZK9bIr5gnVyv0z7a2Q=="
+    },
+    "MailKit/1.10.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VOtuXtFkytfda65OMzonx3sUtLmBaavPH4Gx77AopczcstEXUxPd4eDJAg7dWUupEvI5MWrMFz+n6GBeS0Ewqg=="
     },
     "Microsoft.AspNetCore.Antiforgery/1.0.1": {
       "type": "package",
@@ -2786,6 +2939,11 @@
       "serviceable": true,
       "sha512": "sha512-f01OAOfsctcN7gSa05qYK8AgU1E/BFeZizvszNJMXY3BMJbYSj+3+YqyLunkMSf7LN92kcl7gQsAY9FayEH3ag=="
     },
+    "MimeKit/1.10.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n5c0DKPQG8xx84Qafipd0+0Mw6iGKFUH4dUMDI37ahehVjqKy55YKmvBBwEcCkyjPrazcF/yaBIVRNN0iyr9NA=="
+    },
     "Moment.js/2.17.1": {
       "type": "package",
       "serviceable": true,
@@ -2966,6 +3124,11 @@
       "serviceable": true,
       "sha512": "sha512-pH4FZDsZQ/WmgJtN4LWYmRdJAEeVkyriSwrv2Teoe5FOU0Yxlb6II6GL8dBPOfRmutHGATduj3ooMt7dJ2+i+w=="
     },
+    "Zlib.Portable.Signed/1.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1f4itCxlSBxU8kf85qUmx1+d0iHKLeZK8S7ilb4w0t+uV+/xtOUUVOEAnFMG5uHVBc7L+ycZjWQoA+a1GZKYjg=="
+    },
     "mscorlib/4.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
@@ -2977,6 +3140,11 @@
       "sha512": ""
     },
     "System.Core/4.0.0.0": {
+      "type": "referenceassembly",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Data/4.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -3012,11 +3180,6 @@
       "sha512": ""
     },
     "System.Diagnostics.Tools/4.0.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "System.Data/4.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
