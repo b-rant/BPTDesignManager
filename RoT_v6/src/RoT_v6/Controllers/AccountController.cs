@@ -130,7 +130,7 @@ namespace RoT_v6.Controllers
                 }
                 AddErrors(result);
             }
-
+            model.getRoles(_context);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
