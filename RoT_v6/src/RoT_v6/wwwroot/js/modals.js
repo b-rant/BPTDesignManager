@@ -75,22 +75,42 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     var fileName = "ExportedJob_";
     //this will remove the blank-spaces from the title and replace it with an underscore
     fileName += ReportTitle.replace(/ /g, "_");
+    fileName += ".csv";
 
-    //Initialize file format you want csv or xls
-    var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);   
+    var blob = new Blob([CSV], { type: "text/csv;charset=utf-8;" });
 
-    //this trick will generate a temp <a /> tag
-    var link = document.createElement("a");
-    link.href = uri;
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, fileName)
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", fileName);
+            link.style = "visibility:hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
 
-    //set the visibility hidden so it will not effect on your web-layout
-    link.style = "visibility:hidden";
-    link.download = fileName + ".csv";
 
-    //this part will append the anchor tag and remove it after automatic click
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    ////Initialize file format you want csv or xls
+    //var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);   
+
+    ////this trick will generate a temp <a /> tag
+    //var link = document.createElement("a");
+    //link.href = uri;
+
+    ////set the visibility hidden so it will not effect on your web-layout
+    //link.style = "visibility:hidden";
+    //link.download = fileName + ".csv";
+
+    ////this part will append the anchor tag and remove it after automatic click
+    //document.body.appendChild(link);
+    //link.click();
+    //document.body.removeChild(link);
 }
 
 function objectToString(JSONData, ReportTitle) {
