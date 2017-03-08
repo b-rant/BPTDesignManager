@@ -5,6 +5,8 @@
     "bootstrap": "3.3.7",
     "Bootstrap.v3.Datetimepicker": "4.17.45",
     "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
+    "Google.Apis.Auth": "1.21.0",
+    "MailKit": "1.10.2",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
