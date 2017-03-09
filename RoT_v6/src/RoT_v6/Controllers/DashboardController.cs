@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="DashboardController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +25,45 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class DashboardController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class DashboardController : Controller
     {
+        /// <summary>
+        /// Gets the current user asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ApplicationUser&gt;.</returns>
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
+        /// <summary>
+        /// The hour rate
+        /// </summary>
         private decimal HourRate = 75;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userManager">The user manager.</param>
         public DashboardController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _context = context;
         }
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -78,6 +117,10 @@ namespace RoT_v6.Controllers
             }
         }
 
+        /// <summary>
+        /// Alls the tasks.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> AllTasks()
         {
@@ -90,6 +133,12 @@ namespace RoT_v6.Controllers
         }
 
 
+        /// <summary>
+        /// Indexes the edit task status.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="Status">The status.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Index_editTaskStatus(int? id, string Status)
         {
@@ -102,6 +151,12 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Index", "Dashboard");
         }
 
+        /// <summary>
+        /// Alls the edit task status.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="Status">The status.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> All_editTaskStatus(int? id, string Status)
         {
@@ -114,6 +169,12 @@ namespace RoT_v6.Controllers
             return RedirectToAction("AllTasks", "Dashboard");
         }
 
+        /// <summary>
+        /// Changes the status.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="Status">The status.</param>
+        /// <returns>Task.</returns>
         [Authorize]
         public async Task changeStatus(int? id, string Status)
         {

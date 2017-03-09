@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="ApplicationDbContextModelSnapshot.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -7,9 +20,17 @@ using RoT_v6.Data;
 
 namespace RoT_v6.Migrations
 {
+    /// <summary>
+    /// Class ApplicationDbContextModelSnapshot.
+    /// </summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.Infrastructure.ModelSnapshot" />
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
+        /// <summary>
+        /// Builds the model.
+        /// </summary>
+        /// <param name="modelBuilder">The model builder.</param>
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder

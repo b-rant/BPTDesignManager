@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="WorkTasksController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +24,36 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class WorkTasksController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class WorkTasksController : Controller
     {
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
+        /// <summary>
+        /// The hour rate
+        /// </summary>
         private decimal HourRate = 75;
-      
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WorkTasksController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
         public WorkTasksController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
         // GET: WorkTasks
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -30,6 +61,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DetailsDashboard/5
+        /// <summary>
+        /// Detailses the dashboard.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> DetailsDashboard(int? id)
         {
@@ -48,6 +84,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DetailsJobDetails/5
+        /// <summary>
+        /// Detailses the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> DetailsJobDetails(int? id)
         {
@@ -66,6 +107,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/Create
+        /// <summary>
+        /// Creates the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>IActionResult.</returns>
         [Authorize]
         public IActionResult Create(int id)
         {
@@ -83,6 +129,12 @@ namespace RoT_v6.Controllers
         // POST: WorkTasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified job identifier.
+        /// </summary>
+        /// <param name="JobID">The job identifier.</param>
+        /// <param name="workTask">The work task.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -117,6 +169,11 @@ namespace RoT_v6.Controllers
 
 
         // GET: WorkTasks/EditDashboard/5
+        /// <summary>
+        /// Edits the dashboard.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> EditDashboard(int? id)
         {
@@ -137,6 +194,12 @@ namespace RoT_v6.Controllers
         // POST: WorkTasks/EditDashboard/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the dashboard.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="workTask">The work task.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -185,6 +248,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/EditAllTasks/5
+        /// <summary>
+        /// Edits all tasks.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> EditAllTasks(int? id)
         {
@@ -205,6 +273,12 @@ namespace RoT_v6.Controllers
         // POST: WorkTasks/EditAllTasks/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits all tasks.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="workTask">The work task.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -253,6 +327,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/EditJobDetails/5
+        /// <summary>
+        /// Edits the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> EditJobDetails(int? id)
         {
@@ -273,6 +352,12 @@ namespace RoT_v6.Controllers
         // POST: WorkTasks/EditJobDetails/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="workTask">The work task.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -323,6 +408,11 @@ namespace RoT_v6.Controllers
 
 
         // GET: WorkTasks/DeleteDashboard/5
+        /// <summary>
+        /// Deletes the dashboard.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> DeleteDashboard(int? id)
         {
@@ -341,6 +431,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: WorkTasks/DeleteDashboard/5
+        /// <summary>
+        /// Deletes the dashboard confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         [HttpPost, ActionName("DeleteDashboard")]
         [ValidateAntiForgeryToken]
@@ -372,6 +467,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DeleteDashboard/5
+        /// <summary>
+        /// Deletes all tasks.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> DeleteAllTasks(int? id)
         {
@@ -390,6 +490,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: WorkTasks/DeleteDashboard/5
+        /// <summary>
+        /// Deletes all tasks confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         [HttpPost, ActionName("DeleteAllTasks")]
         [ValidateAntiForgeryToken]
@@ -421,6 +526,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: WorkTasks/DeleteJobDetails/5
+        /// <summary>
+        /// Deletes the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> DeleteJobDetails(int? id)
         {
@@ -439,6 +549,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: WorkTasks/DeleteJobDetails/5
+        /// <summary>
+        /// Deletes the job details confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost, ActionName("DeleteJobDetails")]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -469,6 +584,11 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Details", "Jobs", new { id = workTask.JobID });
         }
 
+        /// <summary>
+        /// Works the task exists.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         private bool WorkTaskExists(int id)
         {
             return _context.WorkTasks.Any(e => e.TaskID == id);

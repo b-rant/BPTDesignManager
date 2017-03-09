@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="ToDoesController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +24,34 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class ToDoesController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class ToDoesController : Controller
     {
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
 
-       
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToDoesController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
         public ToDoesController(ApplicationDbContext context)
         {
             _context = context;    
         }
 
         // GET: ToDoes
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -31,6 +59,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Details/5
+        /// <summary>
+        /// Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,6 +82,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Create
+        /// <summary>
+        /// Creates the specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>IActionResult.</returns>
         [Authorize]
         public  IActionResult Create(string returnUrl = null)
         {
@@ -62,6 +100,11 @@ namespace RoT_v6.Controllers
         // POST: ToDoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified test.
+        /// </summary>
+        /// <param name="test">The test.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -89,6 +132,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Edit/5
+        /// <summary>
+        /// Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -109,6 +157,12 @@ namespace RoT_v6.Controllers
         // POST: ToDoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="toDo">To do.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -170,6 +224,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: ToDoes/Delete/5
+        /// <summary>
+        /// Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -188,6 +247,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: ToDoes/Delete/5
+        /// <summary>
+        /// Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -199,6 +263,11 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Index","Dashboard");
         }
 
+        /// <summary>
+        /// To the do exists.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         [Authorize]
         private bool ToDoExists(int id)
         {

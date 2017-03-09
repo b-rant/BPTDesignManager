@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="JobsController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +26,32 @@ using Microsoft.AspNetCore.Identity;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class JobsController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class JobsController : Controller
     {
+        /// <summary>
+        /// Gets the current user asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ApplicationUser&gt;.</returns>
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JobsController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userManager">The user manager.</param>
         public JobsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -27,12 +59,21 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Jobs
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         public async Task<IActionResult> Index()
         {
             return View(await _context.Jobs.ToListAsync());
         }
 
         // GET: Jobs/Details/5
+        /// <summary>
+        /// Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -108,6 +149,10 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Jobs/Create
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns>IActionResult.</returns>
         [Authorize(Roles = "Admin, ShopManager")]
         public IActionResult Create()
         {
@@ -117,6 +162,11 @@ namespace RoT_v6.Controllers
         // POST: Jobs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified job.
+        /// </summary>
+        /// <param name="job">The job.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, ShopManager")]
@@ -136,6 +186,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Jobs/EditDetails/5
+        /// <summary>
+        /// Edits the details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, ShopManager")]
         public async Task<IActionResult> EditDetails(int? id)
         {
@@ -153,6 +208,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Jobs/EditJobsList/5
+        /// <summary>
+        /// Edits the jobs list.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, ShopManager")]
         public async Task<IActionResult> EditJobsList(int? id)
         {
@@ -172,6 +232,12 @@ namespace RoT_v6.Controllers
         // POST: Jobs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="job">The job.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -210,6 +276,12 @@ namespace RoT_v6.Controllers
         // POST: Jobs/EditJobsList/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the jobs list.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="job">The job.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -245,6 +317,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Jobs/Delete/5
+        /// <summary>
+        /// Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, ShopManager")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -263,6 +340,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: Jobs/Delete/5
+        /// <summary>
+        /// Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, ShopManager")]
@@ -284,6 +366,11 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Jobs the exists.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         private bool JobExists(int id)
         {
             return _context.Jobs.Any(e => e.JobID == id);

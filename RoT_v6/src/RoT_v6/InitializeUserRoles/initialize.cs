@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="initialize.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,8 +25,16 @@ using RoT_v6.Models;
 
 namespace RoT_v6.InitializeUserRoles
 {
+    /// <summary>
+    /// Class initialize.
+    /// </summary>
     public class initialize
     {
+        /// <summary>
+        /// Creates the roles.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>Task.</returns>
         public async Task CreateRoles(IServiceProvider serviceProvider)
           {
               var roleMan = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();

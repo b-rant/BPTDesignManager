@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="UpdateRemoveUsersController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +27,37 @@ using System.Data;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class UpdateRemoveUsersController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize(Roles = "Admin")]
     public class UpdateRemoveUsersController : Controller
     {
+        /// <summary>
+        /// Gets the current user asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ApplicationUser&gt;.</returns>
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// The role manager
+        /// </summary>
         private readonly RoleManager<IdentityRole> _roleManager;
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateRemoveUsersController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="roleManager">The role manager.</param>
+        /// <param name="context">The context.</param>
         public UpdateRemoveUsersController(UserManager<ApplicationUser> userManager,
         RoleManager<IdentityRole> roleManager, ApplicationDbContext context) {
             _context = context;
@@ -29,6 +65,10 @@ namespace RoT_v6.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         public async  Task<IActionResult> Index()
         {
             UpdateUserRoleModel model = new UpdateUserRoleModel();
@@ -41,6 +81,12 @@ namespace RoT_v6.Controllers
 
         //[ValidateAntiForgeryToken]
         //[HttpPost]
+        /// <summary>
+        /// Updates the role.
+        /// </summary>
+        /// <param name="userID">The user identifier.</param>
+        /// <param name="role">The role.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         [HttpGet("updateRole/{userID}/{role}")]
         public async Task<ActionResult> updateRole(string userID, string role)
         {
@@ -66,6 +112,11 @@ namespace RoT_v6.Controllers
         }
 
         //[HttpPost]
+        /// <summary>
+        /// Deletes the user.
+        /// </summary>
+        /// <param name="userID">The user identifier.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         [HttpGet("deleteUser/{userID}")]
         public async Task<ActionResult> deleteUser(string userID)
         {

@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="ManageController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,14 +26,41 @@ using RoT_v6.Services;
 namespace RoT_v6.Controllers
 {
     //[Authorize(Roles ="Admin")]
+    /// <summary>
+    /// Class ManageController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class ManageController : Controller
     {
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// The sign in manager
+        /// </summary>
         private readonly SignInManager<ApplicationUser> _signInManager;
+        /// <summary>
+        /// The email sender
+        /// </summary>
         private readonly IEmailSender _emailSender;
+        /// <summary>
+        /// The SMS sender
+        /// </summary>
         private readonly ISmsSender _smsSender;
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManageController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="signInManager">The sign in manager.</param>
+        /// <param name="emailSender">The email sender.</param>
+        /// <param name="smsSender">The SMS sender.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
         public ManageController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
@@ -37,6 +77,11 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/Index
+        /// <summary>
+        /// Indexes the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(ManageMessageId? message = null)
@@ -68,6 +113,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/RemoveLogin
+        /// <summary>
+        /// Removes the login.
+        /// </summary>
+        /// <param name="account">The account.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -89,6 +139,10 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        /// <summary>
+        /// Adds the phone number.
+        /// </summary>
+        /// <returns>IActionResult.</returns>
         [Authorize(Roles = "Admin")]
         public IActionResult AddPhoneNumber()
         {
@@ -97,6 +151,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/AddPhoneNumber
+        /// <summary>
+        /// Adds the phone number.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -119,6 +178,10 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/EnableTwoFactorAuthentication
+        /// <summary>
+        /// Enables the two factor authentication.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -136,6 +199,10 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/DisableTwoFactorAuthentication
+        /// <summary>
+        /// Disables the two factor authentication.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -153,6 +220,11 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// Verifies the phone number.
+        /// </summary>
+        /// <param name="phoneNumber">The phone number.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
@@ -169,6 +241,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// Verifies the phone number.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -195,6 +272,10 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/RemovePhoneNumber
+        /// <summary>
+        /// Removes the phone number.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -215,6 +296,10 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <returns>IActionResult.</returns>
         [HttpGet]
         public IActionResult ChangePassword()
         {
@@ -223,6 +308,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/ChangePassword
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -253,6 +343,10 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/SetPassword
+        /// <summary>
+        /// Sets the password.
+        /// </summary>
+        /// <returns>IActionResult.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult SetPassword()
@@ -262,6 +356,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/SetPassword
+        /// <summary>
+        /// Sets the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -288,6 +387,11 @@ namespace RoT_v6.Controllers
         }
 
         //GET: /Manage/ManageLogins
+        /// <summary>
+        /// Manages the logins.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
@@ -314,6 +418,11 @@ namespace RoT_v6.Controllers
 
         //
         // POST: /Manage/LinkLogin
+        /// <summary>
+        /// Links the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <returns>IActionResult.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -327,6 +436,10 @@ namespace RoT_v6.Controllers
 
         //
         // GET: /Manage/LinkLoginCallback
+        /// <summary>
+        /// Links the login callback.
+        /// </summary>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> LinkLoginCallback()
@@ -348,6 +461,10 @@ namespace RoT_v6.Controllers
 
         #region Helpers
 
+        /// <summary>
+        /// Adds the errors.
+        /// </summary>
+        /// <param name="result">The result.</param>
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -356,18 +473,49 @@ namespace RoT_v6.Controllers
             }
         }
 
+        /// <summary>
+        /// Enum ManageMessageId
+        /// </summary>
         public enum ManageMessageId
         {
+            /// <summary>
+            /// The add phone success
+            /// </summary>
             AddPhoneSuccess,
+            /// <summary>
+            /// The add login success
+            /// </summary>
             AddLoginSuccess,
+            /// <summary>
+            /// The change password success
+            /// </summary>
             ChangePasswordSuccess,
+            /// <summary>
+            /// The set two factor success
+            /// </summary>
             SetTwoFactorSuccess,
+            /// <summary>
+            /// The set password success
+            /// </summary>
             SetPasswordSuccess,
+            /// <summary>
+            /// The remove login success
+            /// </summary>
             RemoveLoginSuccess,
+            /// <summary>
+            /// The remove phone success
+            /// </summary>
             RemovePhoneSuccess,
+            /// <summary>
+            /// The error
+            /// </summary>
             Error
         }
 
+        /// <summary>
+        /// Gets the current user asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ApplicationUser&gt;.</returns>
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);

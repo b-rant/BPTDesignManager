@@ -1,4 +1,12 @@
-﻿
+﻿/*
+dataUrl function is associated with the buttons of the application, being called on click of the buttons
+that need the function in order to start the process of making our modals. This function gets the correct
+view and then upon success calls the modal function.
+
+@param mainPage = This is the controller that is used for navigation to the correct page (like Jobs, WorkTasks etc.)
+@param action = This is the main page the button is navigating to (like Create, CreateJobDetails, etc)
+@param jobId = This is the id that is needed to be passed to get the correct view for certain views (like @Model.JobID, etc.)
+*/
 dataUrl = function (mainPage, action, jobId) {
     $.ajax({
         url: '/' + mainPage + '/' + action,
@@ -10,6 +18,12 @@ dataUrl = function (mainPage, action, jobId) {
     });
 };
 
+/*
+doModal is called in the dataUrl function upon successfully grabbing the view. The view is then passed into the doModal function
+and is injected into the view that this function creates.
+
+@param result = This is the resulting page that was grabbed by the previous function
+*/
 function doModal(result) {
     html = '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
     html += '<div class="modal-dialog">';
@@ -32,6 +46,11 @@ function doModal(result) {
 
 }
 
+/*
+This function allows us to export job details to CSV via json information about the job details
+
+@param json = This is the json object to be converted into CSV
+*/
 function exportCSV_JobDetails(json) {
 
 

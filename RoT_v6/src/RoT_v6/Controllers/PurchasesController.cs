@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : RoT_v6
+// Author           : Mikel
+// Created          : 03-09-2017
+//
+// Last Modified By : Mikel
+// Last Modified On : 03-09-2017
+// ***********************************************************************
+// <copyright file="PurchasesController.cs" company="">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +26,43 @@ using Microsoft.AspNetCore.Identity;
 
 namespace RoT_v6.Controllers
 {
+    /// <summary>
+    /// Class PurchasesController.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class PurchasesController : Controller
     {
+        /// <summary>
+        /// Gets the current user asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;ApplicationUser&gt;.</returns>
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        /// <summary>
+        /// The user manager
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly ApplicationDbContext _context;
-       
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PurchasesController"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userManager">The user manager.</param>
         public PurchasesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;  
         }
-    
+
         // GET: Purchases
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> Index()
         {
@@ -37,6 +73,11 @@ namespace RoT_v6.Controllers
 
             return View(model);
         }
+        /// <summary>
+        /// Detailses the purchases.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         // GET: Purchases/DetailsPurchases/5
         public async Task<IActionResult> DetailsPurchases(int? id)
@@ -54,6 +95,11 @@ namespace RoT_v6.Controllers
 
             return View(purchase);
         }
+        /// <summary>
+        /// Detailses the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         // GET: Purchases/DetailsDetails/5
         public async Task<IActionResult> DetailsJobDetails(int? id)
@@ -71,6 +117,11 @@ namespace RoT_v6.Controllers
 
             return View(purchase);
         }
+        /// <summary>
+        /// Creates the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize]
         // GET: Purchases/Create
         public async Task<IActionResult> Create(int id)
@@ -84,6 +135,11 @@ namespace RoT_v6.Controllers
         // POST: Purchases/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified purchase.
+        /// </summary>
+        /// <param name="purchase">The purchase.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -104,6 +160,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/EditJobDetails/5
+        /// <summary>
+        /// Edits the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditJobDetails(int? id)
         {
@@ -123,6 +184,12 @@ namespace RoT_v6.Controllers
         // POST: Purchases/EditJobDetails/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="purchase">The purchase.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]        
         [Authorize(Roles = "Admin, Purchaser")]
@@ -158,7 +225,12 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/EditPurchases/5
-        
+
+        /// <summary>
+        /// Edits the purchases.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditPurchases(int? id)
         {
@@ -178,6 +250,12 @@ namespace RoT_v6.Controllers
         // POST: Purchases/EditPurchases/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the purchases.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="purchase">The purchase.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
@@ -222,6 +300,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/DeleteJobDetails/5
+        /// <summary>
+        /// Deletes the job details.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeleteJobDetails(int? id)
         {
@@ -240,6 +323,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: Purchases/DeleteJobDetails/5
+        /// <summary>
+        /// Deletes the job details confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost, ActionName("DeleteJobDetails")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
@@ -252,6 +340,11 @@ namespace RoT_v6.Controllers
         }
 
         // GET: Purchases/DeletePurchases/5
+        /// <summary>
+        /// Deletes the purchases.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> DeletePurchases(int? id)
         {
@@ -270,6 +363,11 @@ namespace RoT_v6.Controllers
         }
 
         // POST: Purchases/DeletePurchases/5
+        /// <summary>
+        /// Deletes the purchases confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;IActionResult&gt;.</returns>
         [HttpPost, ActionName("DeletePurchases")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
@@ -281,6 +379,11 @@ namespace RoT_v6.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Purchases the exists.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         private bool PurchaseExists(int id)
         {
             return _context.Purchase.Any(e => e.purchID == id);
