@@ -28,8 +28,7 @@ namespace RoT_v6.InitializeUserRoles
                       result = await roleMan.CreateAsync(new IdentityRole(rolesName));
                   }
               }
-              //var user = await userMan.FindByIdAsync("f577865d-4c37-4aaa-bd19-e828e18a54a8");
-              //await userMan.AddToRoleAsync(user, "Admin");
+             
           } 
 
     }
