@@ -73,6 +73,26 @@ textarea {
     color:white;
 }
 
+.navbar-nav > li > a {
+    margin-left: 10px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.open > .dropdown-menu {
+    background-color: white; 
+}
+
+.navbar-nav .open .dropdown-menu {
+    background-color: white; 
+}
+
+.navbar-btn {
+    margin-left: 10px;
+}
+
 /*navbar link*/
 .navbar-new .navbar-nav > li > a
 {

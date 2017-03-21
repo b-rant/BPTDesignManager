@@ -30,7 +30,7 @@ namespace RoT_v6.Controllers
         {
             var currentUser = await GetCurrentUserAsync();
             var roleList = await _userManager.GetRolesAsync(currentUser);
-            var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed" && m.employeeId == currentUser.name).ToListAsync();
+            //var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed" && m.employeeId == currentUser.name).ToListAsync();
             var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed" && m.employeeId == currentUser.name).ToListAsync();
 
             if (roleList.Contains("Employee"))
@@ -58,7 +58,7 @@ namespace RoT_v6.Controllers
                 {
                     EmpToDo = pick2List,
                     ActiveTasks = ActiveTasks,
-                    CompletedTasks = CompletedTasks,
+                    //CompletedTasks = CompletedTasks,
                     User = user
                 };
                 return View(WorkTaskToDo);
@@ -71,7 +71,7 @@ namespace RoT_v6.Controllers
                 {
                     EmpToDo = EmployeeTodo,
                     ActiveTasks = ActiveTasks,
-                    CompletedTasks = CompletedTasks,
+                    //CompletedTasks = CompletedTasks,
                     User = user
                 };
                 return View(WorkTaskToDo);

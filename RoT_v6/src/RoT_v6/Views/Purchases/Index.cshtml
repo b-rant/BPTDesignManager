@@ -8,8 +8,8 @@
 <div class="row">
     <ul class="nav nav-tabs page-tabs" role="tablist" id="PurchaseTabs">
         <li role="presentation" class="active"><a href="#NewRequestsTab" aria-controls="NewRequestsTab" role="tab" data-toggle="tab">New Requests</a></li>
-        <li role="presentation"><a href="#PurchasedRequestsTab" aria-controls="PurchasedRequestsTab" role="tab" data-toggle="tab">Purchased Requests</a></li>
-        <li role="presentation"><a href="#ArrivedRequestsTab" aria-controls="ArrivedRequestsTab" role="tab" data-toggle="tab">Arrived Requests</a></li>
+        <li role="presentation"><a href="#PurchasedRequestsTab" aria-controls="PurchasedRequestsTab" role="tab" data-toggle="tab">Purchased</a></li>
+        <li role="presentation"><a href="#ArrivedRequestsTab" aria-controls="ArrivedRequestsTab" role="tab" data-toggle="tab">Arrived</a></li>
 
     </ul>
 
@@ -219,7 +219,7 @@
     var arrivedTable;
     $(document).ready(function () {
         newTable = $("#NewRequests").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -233,7 +233,7 @@
             ]
         });
         purchasedTable = $("#PurchasedRequests").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -247,7 +247,7 @@
             ]
         });
         arrivedTable = $("#ArrivedRequests").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -260,11 +260,27 @@
                 }
             ]
         });
+        //activate latest tab, if it exists:
+        var last_tab_Purchases = $.cookie('last_tab_Purchases');
+        if (last_tab_Purchases) {
+            $('ul.nav-tabs').children().removeClass('active');
+            $("a[href*='"+ last_tab_Purchases +"']").parents('li:first').addClass('active');
+            $('div.tab-content').children().removeClass('active');
+            $(last_tab_Purchases).addClass('active');
+            //$(lastTab).tab('show');
+            purchasedTable.columns.adjust().draw();
+            arrivedTable.columns.adjust().draw();
+        }
+        // Show the correct menu Item active
+        $("a[href*='Purchases']").css("background-color", "#E5C527");
+        $("a[href*='Purchases']").css("color", "black");
     });
     $('#PurchaseTabs a').click(function (e) {
         e.preventDefault()
-        $(this).tab('show')
+        $(this).tab('show');
+        $.cookie('last_tab_Purchases', $(e.target).attr('href'));
         purchasedTable.columns.adjust().draw();
         arrivedTable.columns.adjust().draw();
     })
+    
 </script>

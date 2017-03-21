@@ -9,207 +9,128 @@
     {
         <a id="showAllTasks" style="margin-top: 23px; margin-left: 10px; float:right;" class="btn btn-primary" asp-controller="Dashboard" asp-action="AllTasks">View All Tasks</a>
     }
-        <ul class="nav nav-tabs page-tabs" role="tablist" id="DashboardTabs">
-            <li role="presentation" class="active"><a href="#ActiveTasksTab" aria-controls="ActiveTasksTab" role="tab" data-toggle="tab">Active Tasks</a></li>
-            <li role="presentation"><a href="#CompletedTasksTab" aria-controls="CompletedTasksTab" role="tab" data-toggle="tab">Completed Tasks</a></li>
-        </ul>
-        
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="ActiveTasksTab">
-            <p>
-                <!--<h2 style="display: inline-block; padding-right:1em;">Active Tasks</h2>-->
-            </p>
-            <table class="table table-striped table-bordered" id="ActiveTasks">
-                <thead class="data_table_head">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Block)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
-                        </th>
-                        <th>
-                            Edit Status
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
+    <h1>
+        Your Active Tasks
+    </h1>
+    <table class="table table-striped table-bordered" id="ActiveTasks">
+        <thead class="data_table_head">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveTasks[0].Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveTasks[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveTasks[0].partNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiveTasks[0].Status)
+                </th>
+                <th>
+                    Edit Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
 
 
-                <tbody>
-                    @foreach (var item in Model.ActiveTasks)
-                    {
-
-                        <tr>
-                            @if (item.Block == true)
-                            {
-                                <td class="red-back">
-                                    Blocked
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="green-back"></td>
-                            }
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.partNum)
-                            </td>
-
-                            @{
-                                if (item.Status.ToString() == "Pause")
-                                {
-                                    <td class="red-back">
-                                        @Html.DisplayFor(modelItem => item.Status)
-                                    </td>
-                                }
-                                else if (item.Status.ToString() == "Created")
-                                {
-                                    <td class="green-back">
-                                        @Html.DisplayFor(modelItem => item.Status)
-                                    </td>
-                                }
-                                else if (item.Status.ToString() == "InProgress")
-                                {
-                                    <td class="yellow-back">
-                                        @Html.DisplayFor(modelItem => item.Status)
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                            }
-                            <td>
-                                @{
-                                    var status = item.Status.ToString();
-                                    if (User.IsInRole("Employee") && item.Block == true)
-                                    {
-                                        <span>Task is Blocked</span>
-
-                                    }
-                                    else
-                                    {
-                                        switch (status)
-                                        {
-                                            case "Created":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
-                                                break;
-                                            case "Pause":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
-                                                break;
-                                            case "InProgress":
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
-                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
-                                                    break;
-                                            }
-                                        }
-                                    }
-                            </td>
-                            <td>
-                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
-                                {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
-                                }
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
-                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
-                                {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
-                                }
-                                <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
-                            </td>
-                        </tr>
-                                    }
-                </tbody>
-
-
-
-
-
-            </table>
-
-        </div>
-        <div role="tabpanel" class="tab-pane" id="CompletedTasksTab">
-            <p>
-                <!--<h2 style="display: inline-block; padding-right:1em;">Completed Tasks</h2>-->
-            </p>
-            <table class="table table-striped table-bordered" id="CompletedTasks">
-                <thead class="data_table_head">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Block)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].Description)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].partNum)
-                        </th>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.CompletedTasks[0].CompleteDate)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.CompletedTasks)
+        <tbody>
+            @foreach (var item in Model.ActiveTasks)
             {
-                        <tr>
-                            @if (item.Block == true)
+
+                <tr>
+                    @if (item.Block == true)
+                    {
+                        <td class="red-back">
+                            Blocked
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="green-back"></td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.partNum)
+                    </td>
+
+                    @{
+                        if (item.Status.ToString() == "Pause")
+                        {
+                            <td class="red-back">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        }
+                        else if (item.Status.ToString() == "Created")
+                        {
+                            <td class="green-back">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        }
+                        else if (item.Status.ToString() == "InProgress")
+                        {
+                            <td class="yellow-back">
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
+                    <td>
+                        @{
+                            var status = item.Status.ToString();
+                            if (User.IsInRole("Employee") && item.Block == true)
                             {
-                                <td class="red-back">
-                                    Blocked
-                                </td>
+                                <span>Task is Blocked</span>
+
                             }
                             else
                             {
-                                <td class="green-back"></td>
+                                switch (status)
+                                {
+                                    case "Created":
+                                        <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Start Task</a>
+                                        break;
+                                    case "Pause":
+                                        <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="InProgress">Resume Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="CompleteFromPause">Complete Task</a>
+                                        break;
+                                    case "InProgress":
+                                        <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Pause">Pause Task</a>
+                                            <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index_editTaskStatus" asp-route-id="@item.TaskID" asp-route-status="Complete">Complete Task</a>
+                                        break;
+                                }
                             }
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.partNum)
-                            </td>
+                        }
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                        {
+                            <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
+                        }
+                        <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
+                        @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
+                        {
+                            <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
+                        }
+                        <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
+                    </td>
+                </tr>
+                            }
+        </tbody>
+    </table>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CompleteDate)
-                            </td>
-                            <td>
-                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
-                                {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'EditDashboard', @item.TaskID)">Edit</button>
-                                }
-                                <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DetailsDashboard', @item.TaskID)">Details</button>
-                                @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
-                                {
-                                    <button class="btn btn-primary" onclick="dataUrl('WorkTasks', 'DeleteDashboard', @item.TaskID)">Delete</button>
-                                }
-                                <a class="btn btn-primary" asp-controller="Jobs" asp-action="Details" asp-route-id="@item.JobID">Job</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
 
     <div>
 
         <p>
-            <h2 style="display: inline-block; padding-right:1em;">ToDo</h2>
+            <h2 style="display: inline-block; padding-right:1em;">To Do</h2>
 
             @if (User.IsInRole("Admin"))
             {
@@ -293,21 +214,7 @@
     var CompletedTable;
     $(document).ready(function () {
         $("#ActiveTasks").DataTable({
-            "scrollY": "270px",
-            "scrollCollapse": true,
-            "paging": false,
-            "ordering": true,
-            "info": false,
-            "columnDefs": [
-                { "className": "dt-center", "targets": "_all" },
-                {
-                    "targets": [1,2],
-                    "render": $.fn.dataTable.render.ellipsis()
-                }
-            ]
-        });
-        CompletedTable = $("#CompletedTasks").DataTable({
-            "scrollY": "270px",
+            "scrollY": "250px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -321,7 +228,7 @@
             ]
         });
         $("#ToDos").DataTable({
-            "scrollY": "300px",
+            "scrollY": "250px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -334,10 +241,7 @@
                 }
             ]
         });
-    })
-    $('#DashboardTabs a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-        CompletedTable.columns.adjust().draw()
+        $("a[href*='Dashboard']").css("background-color", "#E5C527");
+        $("a[href*='Dashboard']").css("color", "black");
     })
 </script>

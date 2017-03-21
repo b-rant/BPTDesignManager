@@ -173,3 +173,8 @@ $.fn.dataTable.render.ellipsis = function () {
             data;
     }
 };
+
+// Returns a number as a string with ',' in thousands and millions place and so on
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

@@ -27,10 +27,13 @@ namespace RoT_v6.Models
 
         public bool Block { get; set; }
 
-      
+        [DataType(DataType.Currency)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N}")]
         [Display(Name = "Cost Per Unit")]
         public string CostPer { get; set; }
 
+        [DataType(DataType.Currency)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:N}")]
         [Display(Name = "Total Cost")]
         public decimal TotalCost { get; set; }
 
