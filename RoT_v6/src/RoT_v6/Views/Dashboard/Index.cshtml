@@ -145,9 +145,6 @@
             <thead class="data_table_head">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.EmpToDo[0].CreatedDate)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.EmpToDo[0].Description)
                     </th>
                     <th>
@@ -159,7 +156,8 @@
                     <th>
                         Employees
                     </th>
-
+                    <th>Status</th>
+                    <th>Edit Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -167,9 +165,6 @@
                 @foreach (var item in Model.EmpToDo)
             {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
@@ -192,7 +187,41 @@
                             }
                             }
                         </td>
+                        @{
+                            if (item.Status.ToString() == "Active")
+                            {
+                                <td class="yellow-back">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            else if (item.Status.ToString() == "Completed")
+                            {
+                                <td class="green-back">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
 
+                            if (item.Status.ToString() == "Active")
+                            {
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="Dashboard" asp-action="ToDoStatusChange" asp-route-id="@item.ToDoId">Complete</a>
+                                </td>
+                            }
+                            else if (item.Status.ToString() == "Completed")
+                            {
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="Dashboard" asp-action="ToDoStatusChange" asp-route-id="@item.ToDoId">Restart</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
                         <td>
                             @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
                             {

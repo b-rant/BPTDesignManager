@@ -29,6 +29,8 @@
                 <span asp-validation-for="ArrivedDate" class="text-danger" />
             </div>
         </div>
+        <input type="hidden" asp-for="Miscellaneous" />
+        <input type="hidden" asp-for="ShippingSurcharge" />
         @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
         {
             <div class="form-group" style="">

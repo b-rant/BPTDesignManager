@@ -36,6 +36,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="StartDate" class="col-md-2 control-label">Start Date</label>
+            <div class="col-md-10">
+                <input asp-for="StartDate" class="form-control datetime" />
+                <span asp-validation-for="StartDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <textarea asp-for="Description" rows="4" class="form-control"></textarea>
@@ -52,7 +59,7 @@
         <div class="form-group">
             <label asp-for="EstCost" class="col-md-2 control-label">Estimated Cost</label>
             <div class="col-md-10">
-                <input asp-for="EstCost" class="form-control" />
+                <input asp-for="EstCost" id="EC" class="form-control" />
                 <span asp-validation-for="EstCost" class="text-danger" />
             </div>
         </div>
@@ -66,7 +73,7 @@
         <div class="form-group" style="display:none;">
             <label asp-for="InvCost" class="col-md-2 control-label">Invested Cost</label>
             <div class="col-md-10">
-                <input asp-for="InvCost" class="form-control" />
+                <input asp-for="InvCost" id="IC" class="form-control" />
                 <span asp-validation-for="InvCost" class="text-danger" />
             </div>
         </div>
@@ -77,13 +84,6 @@
                 <span asp-validation-for="InvHours" class="text-danger" />
             </div>
         </div>
-        <div class="form-group" style="display:none;">
-        <label asp-for="StartDate" class="col-md-2 control-label">Start Date</label>
-        <div class="col-md-10">
-            <input asp-for="StartDate" class="form-control datetime" />
-            <span asp-validation-for="StartDate" class="text-danger" />
-        </div>
-    </div>
         <div class="form-group">
             <label asp-for="Status" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -104,7 +104,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" onclick="FormatDecimalInputs()" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -119,4 +119,11 @@
             format: 'MM/DD/YYYY'
         });
     });
+    // Removes , on decimal values before submit
+    function FormatDecimalInputs() {
+        $('#EC').val(parseFloat($('#EC').val().replace(/,/g, '')));
+        $('#IC').val(parseFloat($('#IC').val().replace(/,/g, '')));
+        $('#EH').val(parseInt($('#EH').val().replace(/,/g, '')));
+        $('#IH').val(parseInt($('#IH').val().replace(/,/g, '')));
+    }
 </script>

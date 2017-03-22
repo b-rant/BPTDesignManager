@@ -8,9 +8,10 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170322184555_editPurchases")]
+    partial class editPurchases
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -249,7 +250,7 @@ namespace RoT_v6.Migrations
 
                     b.Property<bool>("Block");
 
-                    b.Property<decimal>("CostPer");
+                    b.Property<string>("CostPer");
 
                     b.Property<string>("Description")
                         .IsRequired();
@@ -261,7 +262,7 @@ namespace RoT_v6.Migrations
 
                     b.Property<int>("JobID");
 
-                    b.Property<decimal>("Miscellaneous");
+                    b.Property<string>("Miscellaneous");
 
                     b.Property<string>("Notes");
 
@@ -271,7 +272,7 @@ namespace RoT_v6.Migrations
 
                     b.Property<string>("RequestDate");
 
-                    b.Property<decimal>("ShippingSurcharge");
+                    b.Property<string>("ShippingSurcharge");
 
                     b.Property<decimal>("TotalCost");
 
@@ -298,8 +299,6 @@ namespace RoT_v6.Migrations
                         .IsRequired();
 
                     b.Property<int>("Priority");
-
-                    b.Property<int>("Status");
 
                     b.HasKey("ToDoId");
 

@@ -1,4 +1,5 @@
 @model IEnumerable<RoT_v6.Models.Job>
+@using Newtonsoft.Json
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,6 +9,7 @@
 {
     <p>
         <button class="btn btn-primary" onclick="dataUrl('Jobs', 'Create')">Create New</button>
+        <a class="btn btn-primary" id="downloadAnchorElem" onclick="getCSV()">Download CSV</a>
     </p>
 }
 
@@ -94,6 +96,10 @@
     </tbody>
 </table>
 <script>
+    var MODEL = @Html.Raw(JsonConvert.SerializeObject(Model));
+    function getCSV(){
+        JSONToCSVConvertor_JOBS(MODEL);
+    }
     var elementExists = document.getElementById("Error");
     $(document).ready(function () {
         $("#allJobs").DataTable({

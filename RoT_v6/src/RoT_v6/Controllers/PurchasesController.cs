@@ -87,7 +87,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,employeeId,Notes")] Purchase purchase)
+        public async Task<IActionResult> Create([Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,employeeId,Notes,Miscellaneous,ShippingSurcharge")] Purchase purchase)
         {
             DateTime dateOnly = DateTime.Today;
             purchase.RequestDate = dateOnly.ToString("d");
@@ -126,7 +126,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]        
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
+        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId,Miscellaneous,ShippingSurcharge")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {
@@ -181,7 +181,7 @@ namespace RoT_v6.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Purchaser")]
-        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
+        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId,Miscellaneous,ShippingSurcharge")] Purchase purchase)
         {
             if (id != purchase.purchID)
             {

@@ -33,7 +33,7 @@ namespace RoT_v6.Controllers
             //var CompletedTasks = await _context.WorkTasks.Where(m => m.Status.ToString() == "Completed" && m.employeeId == currentUser.name).ToListAsync();
             var ActiveTasks = await _context.WorkTasks.Where(m => m.Status.ToString() != "Completed" && m.employeeId == currentUser.name).ToListAsync();
 
-            if (roleList.Contains("Employee"))
+            if (roleList.Contains("Employee") || roleList.Contains("Purchaser"))
             {
                 var user = await _userManager.Users.ToListAsync();
                 var EmployeeTodo = await _context.ToDos.Include(m => m.EmployeeTodo).ToListAsync();
@@ -49,7 +49,7 @@ namespace RoT_v6.Controllers
                 }
                 foreach (ToDo td in EmployeeTodo)
                 {
-                    if (toIDs.Contains(td.ToDoId))
+                    if (toIDs.Contains(td.ToDoId) && td.Status.ToString() == "Active")
                     {
                         pick2List.Add(td);
                     }
@@ -169,6 +169,37 @@ namespace RoT_v6.Controllers
                     throw;
                 }
             }
+        }
+
+        // Swaps the status of a To Do Item
+        [Authorize]
+        public async Task<IActionResult> ToDoStatusChange(int? id)
+        {
+            // Get To Do Item
+            var ToDo = await _context.ToDos.SingleOrDefaultAsync(m => m.ToDoId == id);
+            var status = ToDo.Status;
+            // Swap the status
+            if (status.ToString() == "Active")
+            {
+                ToDo.Status = ToDoStatus.Completed;
+            } else
+            {
+                ToDo.Status = ToDoStatus.Active;
+            }
+            // Post to database
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(ToDo);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }
