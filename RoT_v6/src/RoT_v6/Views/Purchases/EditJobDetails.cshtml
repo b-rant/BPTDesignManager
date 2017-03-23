@@ -25,6 +25,8 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="purchID" />
         <input type="hidden" asp-for="employeeId" />
+        <input type="hidden" asp-for="Miscellaneous" id="M" />
+        <input type="hidden" asp-for="ShippingSurcharge" id="S" />
         <div class="form-group" style="display:none;">
             <label asp-for="ArrivedDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -46,7 +48,7 @@
         <div class="form-group" style="display:none;">
             <label asp-for="CostPer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CostPer" class="form-control" />
+                <input asp-for="CostPer" id="C" class="form-control" />
                 <span asp-validation-for="CostPer" class="text-danger" />
             </div>
         </div>
@@ -109,7 +111,7 @@
         <div class="form-group" style="display:none;">
             <label asp-for="TotalCost" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="TotalCost" class="form-control" />
+                <input asp-for="TotalCost" id="T" class="form-control" />
                 <span asp-validation-for="TotalCost" class="text-danger" />
             </div>
         </div>
@@ -122,7 +124,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" onclick="Total()" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -134,8 +136,13 @@
 <script type="text/javascript">
         $(function () {
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY',
-                minDate: new Date()
+                format: 'MM/DD/YYYY'
             });
         });
+        function Total() {
+            $('#T').val(parseFloat($('#T').val().replace(/,/g, '')));
+            $('#C').val(parseFloat($('#C').val().replace(/,/g, '')));
+            $('#S').val(parseFloat($('#S').val().replace(/,/g, '')));
+            $('#M').val(parseFloat($('#M').val().replace(/,/g, '')));
+        }
 </script>

@@ -8,9 +8,10 @@ using RoT_v6.Data;
 namespace RoT_v6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170322191837_editPurchasesAgain")]
+    partial class editPurchasesAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -261,11 +262,8 @@ namespace RoT_v6.Migrations
 
                     b.Property<int>("JobID");
 
-<<<<<<< HEAD
-=======
                     b.Property<decimal>("Miscellaneous");
 
->>>>>>> refs/remotes/origin/master
                     b.Property<string>("Notes");
 
                     b.Property<string>("PurchDate");
@@ -301,8 +299,6 @@ namespace RoT_v6.Migrations
                         .IsRequired();
 
                     b.Property<int>("Priority");
-
-                    b.Property<int>("Status");
 
                     b.HasKey("ToDoId");
 

@@ -32,23 +32,6 @@ function doModal(result) {
 
 }
 
-function exportCSV_JobDetails(json) {
-
-
-
-
-
-
-
-    //var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
-    var dlAnchorElem = document.getElementById('downloadAnchorElem');
-    dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", "scene.json");
-    dlAnchorElem.click();
-
-}
-
-
 
 function JSONToCSVConvertor(JSONData, ReportTitle) {
     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
@@ -95,22 +78,40 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
         }
     }
 
+}
 
-    ////Initialize file format you want csv or xls
-    //var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);   
+function JSONToCSVConvertor_JOBS(JSONData) {
+    //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
+    //var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';
+    CSV += objectToString(JSONData, "All Jobs");
 
-    ////this trick will generate a temp <a /> tag
-    //var link = document.createElement("a");
-    //link.href = uri;
+    if (CSV == '') {
+        alert("Invalid data");
+        return;
+    }
 
-    ////set the visibility hidden so it will not effect on your web-layout
-    //link.style = "visibility:hidden";
-    //link.download = fileName + ".csv";
+    //Generate a file name
+    var fileName = "AllJobs.csv";
 
-    ////this part will append the anchor tag and remove it after automatic click
-    //document.body.appendChild(link);
-    //link.click();
-    //document.body.removeChild(link);
+    var blob = new Blob([CSV], { type: "text/csv;charset=utf-8;" });
+
+    if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, fileName)
+    } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            var url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", fileName);
+            link.style = "visibility:hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
 }
 
 function objectToString(JSONData, ReportTitle) {
@@ -173,3 +174,8 @@ $.fn.dataTable.render.ellipsis = function () {
             data;
     }
 };
+
+// Returns a number as a string with ',' in thousands and millions place and so on
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

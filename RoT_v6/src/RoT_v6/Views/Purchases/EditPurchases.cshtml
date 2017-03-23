@@ -84,17 +84,31 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="Quantity" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Quantity" id="Q" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="CostPer" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CostPer" class="form-control" />
+                <input asp-for="CostPer" id="C" class="form-control" />
                 <span asp-validation-for="CostPer" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Quantity" class="col-md-2 control-label"></label>
+            <label asp-for="ShippingSurcharge" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger" />
+                <input asp-for="ShippingSurcharge" id="S" class="form-control" />
+                <span asp-validation-for="ShippingSurcharge" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Miscellaneous" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Miscellaneous" id="M" class="form-control" />
+                <span asp-validation-for="Miscellaneous" class="text-danger" />
             </div>
         </div>
         <div class="form-group" style="display:none;">
@@ -107,7 +121,7 @@
         <div class="form-group">
             <label asp-for="TotalCost" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="TotalCost" class="form-control" />
+                <input readonly asp-for="TotalCost" id="T" class="form-control" />
                 <span asp-validation-for="TotalCost" class="text-danger" />
             </div>
         </div>
@@ -120,7 +134,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" onclick="Total()" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -130,10 +144,27 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 <script type="text/javascript">
-        $(function () {
-            $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY',
-                minDate: new Date()
-            });
+    $(function () {
+        $('.datetime').datetimepicker({
+            format: 'MM/DD/YYYY'
         });
+    });
+    function calcTotal() {
+        var Quantity = parseFloat($("#Q").val().replace(/,/g, ''));
+        var CostPer = parseFloat($("#C").val().replace(/,/g, ''));
+        var Surcharge = parseFloat($("#S").val().replace(/,/g, ''));
+        var Misc = parseFloat($("#M").val().replace(/,/g, ''));
+        var total = ((Quantity * CostPer) + Surcharge + Misc);
+        $('#T').val(total.toFixed(2));
+    }
+    $('.form-control').change(function () {
+        calcTotal();
+    })
+    function Total() {
+        calcTotal();
+        $('#T').val(parseFloat($('#T').val().replace(/,/g, '')));
+        $('#C').val(parseFloat($('#C').val().replace(/,/g, '')));
+        $('#S').val(parseFloat($('#S').val().replace(/,/g, '')));
+        $('#M').val(parseFloat($('#M').val().replace(/,/g, '')));
+    }
 </script>

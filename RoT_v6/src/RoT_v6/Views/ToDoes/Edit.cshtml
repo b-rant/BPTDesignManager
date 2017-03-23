@@ -23,7 +23,7 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ToDoId" />
-        <div class="form-group" style="display:none;">
+        <div class="form-group">
             <label asp-for="CreatedDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="CreatedDate" class="form-control datetime" />
@@ -44,6 +44,18 @@
                 <span asp-validation-for="DueDate" class="text-danger" />
             </div>
         </div>
+
+        <div class="form-group">
+            <label asp-for="Status" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Status" class="form-control">
+                    <option>Active</option>
+                    <option>Completed</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger" />
+            </div>
+        </div>
+
         <div class="form-group">
             <label asp-for="Priority" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -82,10 +94,9 @@
 }
 <script type="text/javascript">
 
-        $(function () {
-            $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY',
-                minDate: new Date()
-            });
+    $(function () {
+        $('.datetime').datetimepicker({
+            format: 'MM/DD/YYYY'
         });
+    });
 </script>

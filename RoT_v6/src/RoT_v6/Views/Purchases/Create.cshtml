@@ -29,6 +29,8 @@
                 <span asp-validation-for="ArrivedDate" class="text-danger" />
             </div>
         </div>
+        <input type="hidden" asp-for="Miscellaneous" />
+        <input type="hidden" asp-for="ShippingSurcharge" />
         @if (User.IsInRole("Admin") || User.IsInRole("ShopManager"))
         {
             <div class="form-group" style="">
@@ -143,8 +145,7 @@
 <script type="text/javascript">
     $(function () {
         $('.datetime').datetimepicker({
-            format: 'MM/DD/YYYY',
-            minDate: new Date()
+            format: 'MM/DD/YYYY'
         });
     });
 </script>

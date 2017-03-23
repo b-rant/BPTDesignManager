@@ -19,6 +19,12 @@ namespace RoT_v6.Models
         Low
     }
 
+    public enum ToDoStatus
+    {
+        Active,
+        Completed,
+    }
+
     public class ToDo
     {
         [Key]
@@ -34,6 +40,9 @@ namespace RoT_v6.Models
         [Required]
         [Display(Name = "Due Date")]
         public string DueDate { get; set; }
+
+        [Display(Name = "Status")]
+        public ToDoStatus Status { get; set; }
 
         [Display(Name = "Priority")]
         public priorityStatus Priority { get; set; }
