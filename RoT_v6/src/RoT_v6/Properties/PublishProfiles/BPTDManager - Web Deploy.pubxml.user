@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Data Source=tcp:bptdmanagerdbserver.database.windows.net,1433;Initial Catalog=BPTDManager_db;User Id=BPTD@bptdmanagerdbserver;Password=Toor1234</Value>
+      <Value>Data Source=tcp:bptdmanagerdbserver.database.windows.net,1433;Initial Catalog=BPTD_DB;User Id=BPTD@bptdmanagerdbserver;Password=Toor1234</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
