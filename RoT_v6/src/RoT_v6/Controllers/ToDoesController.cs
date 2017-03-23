@@ -128,19 +128,21 @@ namespace RoT_v6.Controllers
               
                 await _context.SaveChangesAsync();
             }
-            if (toDo.employee.Count() == 0)
+            if (toDo.employee == null)
             {
-                ViewBag.Fail = "1";
-                toDo.getEmployees(_context);
-                return View(toDo);
+                //ViewBag.Fail = "1";
+                //toDo.getEmployees(_context);
+                //return View(toDo);
             }
-            foreach (string e in toDo.employee)
+            else
             {
-                var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = toDo.ToDoId };
-                _context.Add(todent);
-                await _context.SaveChangesAsync();
+                foreach (string e in toDo.employee)
+                {
+                    var todent = new EmployeeTodo { employeeId = e.ToString(), ToDoId = toDo.ToDoId };
+                    _context.Add(todent);
+                    await _context.SaveChangesAsync();
+                }
             }
-
 
 
             if (ModelState.IsValid)

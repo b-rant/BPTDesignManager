@@ -72,7 +72,7 @@
     var MODEL = @Html.Raw(JsonConvert.SerializeObject(Model));
     $(document).ready(function () {
         $("#rolesTable").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": false,
@@ -81,5 +81,9 @@
                 { "className": "dt-center", "targets": "_all" }
             ]
         });
+        $("a[href*='UpdateRemove']").css("background-color", "#E5C527");
+        $("a[href*='UpdateRemove']").css("color", "black");
+        $("a[href='#']").css("background-color", "#E5C527");
+        $("a[href='#']").css("color", "black");
     })
 </script>

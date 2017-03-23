@@ -11,7 +11,7 @@
 
     </ul>
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" style="margin-top: 20px;">
         <div role="tabpanel" class="tab-pane active" id="ActiveTasksTab">
             <p>
                 <!--<h2 style="display: inline-block; padding-right:1em;">Active Tasks</h2>-->
@@ -217,7 +217,7 @@
     var CompletedTable;
     $(document).ready(function () {
         $("#ActiveTasks").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -231,7 +231,7 @@
             ]
         });
         CompletedTable = $("#CompletedTasks").DataTable({
-            "scrollY": "800px",
+            "scrollY": "650px",
             "scrollCollapse": true,
             "paging": false,
             "ordering": true,
@@ -244,10 +244,22 @@
                 }
             ]
         });
+        //activate latest tab, if it exists:
+        var lastTab_AllTasks = $.cookie('lastTab_AllTasks');
+        if (lastTab_AllTasks) {
+            $('ul.nav-tabs').children().removeClass('active');
+            $("a[href*='"+ lastTab_AllTasks +"']").parents('li:first').addClass('active');
+            $('div.tab-content').children().removeClass('active');
+            $(lastTab_AllTasks).addClass('active');
+            CompletedTable.columns.adjust().draw();
+        }
+        $("a[href*='Dashboard']").css("background-color", "#E5C527");
+        $("a[href*='Dashboard']").css("color", "black");
     })
     $('#DashboardTabs a').click(function (e) {
         e.preventDefault()
-        $(this).tab('show')
-        CompletedTable.columns.adjust().draw()
+        $(this).tab('show');
+        $.cookie('lastTab_AllTasks', $(e.target).attr('href'));
+        CompletedTable.columns.adjust().draw();
     })
 </script>

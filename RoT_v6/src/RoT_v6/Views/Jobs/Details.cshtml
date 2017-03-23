@@ -88,7 +88,7 @@
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" style="margin-top: 20px;">
         <div role="tabpanel" class="tab-pane active" id="ActiveTasksTab">
             <p>
             </p>
@@ -397,8 +397,8 @@
         var hourProg = parseInt((invHours / estHours) * 100);
         var costProg = parseInt((invCost / estCost) * 100);
         
-        $("#Hours_Label").text('Hours Current vs. Budgeted : ' + invHours + ' / ' + estHours);
-        $("#Cost_Label").text('Cost Current vs. Budgeted : ' + invCost + ' / ' + estCost);
+        $("#Hours_Label").text('Hours Current vs. Budgeted : ' + numberWithCommas(invHours) + ' / ' + numberWithCommas(estHours));
+        $("#Cost_Label").text('Cost Current vs. Budgeted : ' + numberWithCommas(invCost) + ' / ' + numberWithCommas(estCost));
         if (parseInt(invCost) > parseInt(estCost)){
             $("#cost_Progress").html('<div class="progress-bar red-back" role="progressbar" aria-valuenow="' + costProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + costProg + '%;"></div>');
         } else {
@@ -409,10 +409,22 @@
         } else {
             $("#hours_Progress").html('<div class="progress-bar" role="progressbar" aria-valuenow="' + hourProg + '" aria-valuemin="0" aria-valuemax="120" style="width: ' + hourProg + '%;"></div>');
         }
+        //activate latest tab, if it exists:
+        var lastTab_JobDetails = $.cookie('lastTab_JobDetails');
+        if (lastTab_JobDetails) {
+            $('ul.nav-tabs').children().removeClass('active');
+            $("a[href*='"+ lastTab_JobDetails +"']").parents('li:first').addClass('active');
+            $('div.tab-content').children().removeClass('active');
+            $(lastTab_JobDetails).addClass('active');
+            //$(lastTab).tab('show');
+            CompletedTable.columns.adjust().draw()
+            PurchasesTable.columns.adjust().draw()
+        }
     })
     $('#JobDetailsTabs a').click(function (e) {
         e.preventDefault()
         $(this).tab('show')
+        $.cookie('lastTab_JobDetails', $(e.target).attr('href'));
         ActiveTable.columns.adjust().draw()
         CompletedTable.columns.adjust().draw()
         PurchasesTable.columns.adjust().draw()
