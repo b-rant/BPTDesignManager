@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAObmGOExXP0+STXB0f4N/2gAAAAACAAAAAAAQZgAAAAEAACAAAAAHZ1e4o0fdMD2fooEskQDhSEC2FSQ4ldYsgr6hSjIqeQAAAAAOgAAAAAIAACAAAAAs7Bsg/54DMYDf9nP5rrWRLzKv5osTmX2EoIvdtw/JsoAAAADpVfrZtxX//5Txnetljzaw0KeFLwhxXsR3KU1DtOC/r2XuTTBpzFoQgPSznw4m+C2nWKEN4wo89YQVke2947k4/EaO2z03uVqBs43+hxJvcpLlOWdhMQyTaXRpbg8YF36ykn4RJC/57FO+86FSx54w4emBIstzu8/VIC/gsBVLd0AAAAAuNHy9zAoO8Z3aFl0zum1J0RsSoGaQCcbjHKSddSYfvJtD/kb6UAr1n4tbFhKDpUd4qgHAV61hige4CuEhFcC2</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:bptdmanagerdbserver.database.windows.net,1433;Initial Catalog=BPTDManager_db;User Id=BPTD@bptdmanagerdbserver;Password=Toor1234</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EfMigrations Include="RoT_v6.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:bptdmanagerdbserver.database.windows.net,1433;Initial Catalog=BPTDManager_db;User Id=BPTD@bptdmanagerdbserver;Password=Toor1234</Value>
+    </EfMigrations>
+  </ItemGroup>
+</Project>

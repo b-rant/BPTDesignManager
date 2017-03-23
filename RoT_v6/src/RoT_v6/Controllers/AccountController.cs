@@ -93,7 +93,7 @@ namespace RoT_v6.Controllers
         //
         // GET: /Account/Register
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin, ShopManager")]
         public IActionResult Register(string returnUrl = null)
         {
             RegisterViewModel R = new RegisterViewModel();
@@ -105,7 +105,7 @@ namespace RoT_v6.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin, ShopManager")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {

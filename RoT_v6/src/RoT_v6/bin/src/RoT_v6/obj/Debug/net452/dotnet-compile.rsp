@@ -14,6 +14,13 @@
 --version:1.0.0.0
 --informational-version:1.0.0
 --target-framework:.NETFramework,Version=v4.5.2
+--reference:C:\Users\saech\.nuget\packages\BouncyCastle\1.8.1\lib\BouncyCastle.Crypto.dll
+--reference:C:\Users\saech\.nuget\packages\Google.Apis\1.21.0\lib\net45\Google.Apis.PlatformServices.dll
+--reference:C:\Users\saech\.nuget\packages\Google.Apis\1.21.0\lib\net45\Google.Apis.dll
+--reference:C:\Users\saech\.nuget\packages\Google.Apis.Auth\1.21.0\lib\net45\Google.Apis.Auth.PlatformServices.dll
+--reference:C:\Users\saech\.nuget\packages\Google.Apis.Auth\1.21.0\lib\net45\Google.Apis.Auth.dll
+--reference:C:\Users\saech\.nuget\packages\Google.Apis.Core\1.21.0\lib\net45\Google.Apis.Core.dll
+--reference:C:\Users\saech\.nuget\packages\MailKit\1.10.2\lib\net451\MailKit.dll
 --reference:C:\Users\saech\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.1\lib\net451\Microsoft.AspNetCore.Antiforgery.dll
 --reference:C:\Users\saech\.nuget\packages\Microsoft.AspNetCore.Authentication\1.0.0\lib\net451\Microsoft.AspNetCore.Authentication.dll
 --reference:C:\Users\saech\.nuget\packages\Microsoft.AspNetCore.Authentication.Cookies\1.0.0\lib\net451\Microsoft.AspNetCore.Authentication.Cookies.dll
@@ -120,6 +127,7 @@
 --reference:C:\Users\saech\.nuget\packages\Microsoft.VisualStudio.Web.CodeGeneration.Tools\1.0.0-preview2-final\lib\net451\dotnet-aspnet-codegenerator.exe
 --reference:C:\Users\saech\.nuget\packages\Microsoft.VisualStudio.Web.CodeGeneration.Utils\1.0.0-preview2-final\lib\net451\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 --reference:C:\Users\saech\.nuget\packages\Microsoft.VisualStudio.Web.CodeGenerators.Mvc\1.0.0-preview2-final\lib\net451\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+--reference:C:\Users\saech\.nuget\packages\MimeKit\1.10.1\lib\net451\MimeKit.dll
 --reference:C:\Users\saech\.nuget\packages\Newtonsoft.Json\9.0.1\lib\net45\Newtonsoft.Json.dll
 --reference:C:\Users\saech\.nuget\packages\NuGet.Common\3.5.0-beta2-1484\lib\net45\NuGet.Common.dll
 --reference:C:\Users\saech\.nuget\packages\NuGet.Configuration\3.5.0-beta2-1484\lib\net45\NuGet.Configuration.dll
@@ -169,9 +177,11 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Threading.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Threading.Tasks.dll
 --reference:C:\Users\saech\.nuget\packages\System.Threading.Tasks.Extensions\4.0.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll
+--reference:C:\Users\saech\.nuget\packages\Zlib.Portable.Signed\1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Core.dll
+--reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Security.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.dll
@@ -179,7 +189,6 @@
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Configuration.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.ComponentModel.DataAnnotations.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\System.Diagnostics.Tools.dll
---reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Transactions.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.IO.Compression.dll
 --reference:C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.IdentityModel.dll
@@ -201,9 +210,6 @@ C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Controllers\UpdateRemo
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Controllers\WorkTasksController.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Data\ApplicationDbContext.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\InitializeUserRoles\initialize.cs
-C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Migrations\20170305034353_first.cs
-C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Migrations\20170305034353_first.Designer.cs
-C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Models\ApplicationUser.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Models\EmployeeTodo.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Models\EmployeeWorkTask.cs
@@ -232,4 +238,5 @@ C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Services\ISmsSender.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\Services\MessageServices.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\ViewModels\Dashboard_WorkTaskToDo.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\ViewModels\JobsDetails_JobPurchasesWorkTask.cs
+C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\ViewModels\Purchase_IndexThreeTables.cs
 C:\Users\saech\Desktop\BPTDesignManager\RoT_v6\src\RoT_v6\ViewModels\UpdateUserRoleModel.cs
