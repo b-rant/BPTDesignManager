@@ -125,13 +125,10 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]        
-<<<<<<< HEAD
-        [Authorize(Roles = "Admin, Purchaser,ShopManager")]
-        public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
-=======
+
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditJobDetails(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId,Miscellaneous,ShippingSurcharge")] Purchase purchase)
->>>>>>> refs/remotes/origin/master
+
         {
             if (id != purchase.purchID)
             {
@@ -185,13 +182,10 @@ namespace RoT_v6.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-<<<<<<< HEAD
-        [Authorize(Roles = "Admin, Purchaser,ShopManager")]
-        public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId")] Purchase purchase)
-=======
+
         [Authorize(Roles = "Admin, Purchaser")]
         public async Task<IActionResult> EditPurchases(int id, [Bind("purchID,ArrivedDate,Block,CostPer,Description,EstArrDate,IdealDelDate,JobID,PurchDate,Quantity,RequestDate,TotalCost,Vendor,Notes,employeeId,Miscellaneous,ShippingSurcharge")] Purchase purchase)
->>>>>>> refs/remotes/origin/master
+
         {
             if (id != purchase.purchID)
             {
