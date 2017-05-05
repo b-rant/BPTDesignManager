@@ -59,7 +59,7 @@
             @Html.DisplayNameFor(model => model.TotalTime)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TotalTime)
+            @(Math.Round((Double)Model.TotalTime / 3600, 2)) Hours
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CompleteDate)

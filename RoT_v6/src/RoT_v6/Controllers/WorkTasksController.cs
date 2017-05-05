@@ -16,6 +16,8 @@ namespace RoT_v6.Controllers
     {
         private readonly ApplicationDbContext _context;
         private decimal HourRate = 75;
+        // Divisor to convert time in seconds to hours.
+        private decimal timeFactor = 3600;
       
         public WorkTasksController(ApplicationDbContext context)
         {
@@ -89,6 +91,9 @@ namespace RoT_v6.Controllers
         public async Task<IActionResult> Create(int JobID, WorkTask workTask)
         {
             workTask.Status = Models.TaskStatus.Created;
+            DateTime dateOnly = DateTime.Today;
+            workTask.StartDate = dateOnly.ToString("d");
+
             if (ModelState.IsValid)
             {
                 _context.Add(workTask);
@@ -152,8 +157,8 @@ namespace RoT_v6.Controllers
             if (oldTask.TotalTime != workTask.TotalTime)
             {
                 var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
-                var oldCost = (oldTask.TotalTime * HourRate) / 60;
-                var newCost = (workTask.TotalTime * HourRate) / 60;
+                var oldCost = (oldTask.TotalTime * HourRate) / timeFactor;
+                var newCost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - oldCost + newCost;
                 job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
                 _context.Jobs.Update(job);
@@ -220,8 +225,8 @@ namespace RoT_v6.Controllers
             if (oldTask.TotalTime != workTask.TotalTime)
             {
                 var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
-                var oldCost = (oldTask.TotalTime * HourRate) / 60;
-                var newCost = (workTask.TotalTime * HourRate) / 60;
+                var oldCost = (oldTask.TotalTime * HourRate) / timeFactor;
+                var newCost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - oldCost + newCost;
                 job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
                 _context.Jobs.Update(job);
@@ -288,8 +293,8 @@ namespace RoT_v6.Controllers
             if (oldTask.TotalTime != workTask.TotalTime)
             {
                 var job = await _context.Jobs.SingleOrDefaultAsync(m => m.JobID == workTask.JobID);
-                var oldCost = (oldTask.TotalTime * HourRate) / 60;
-                var newCost = (workTask.TotalTime * HourRate) / 60;
+                var oldCost = (oldTask.TotalTime * HourRate) / timeFactor;
+                var newCost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - oldCost + newCost;
                 job.InvHours = job.InvHours - oldTask.TotalTime + workTask.TotalTime;
                 _context.Jobs.Update(job);
@@ -352,7 +357,7 @@ namespace RoT_v6.Controllers
             if (job != null)
             {
                 job.InvHours = job.InvHours - workTask.TotalTime;
-                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                Decimal cost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - cost;
                 if (ModelState.IsValid)
                 {
@@ -401,7 +406,7 @@ namespace RoT_v6.Controllers
             if (job != null)
             {
                 job.InvHours = job.InvHours - workTask.TotalTime;
-                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                Decimal cost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - cost;
                 if (ModelState.IsValid)
                 {
@@ -450,7 +455,7 @@ namespace RoT_v6.Controllers
             if (job != null)
             {
                 job.InvHours = job.InvHours - workTask.TotalTime;
-                Decimal cost = (workTask.TotalTime * HourRate) / 60;
+                Decimal cost = (workTask.TotalTime * HourRate) / timeFactor;
                 job.InvCost = job.InvCost - cost;
                 if (ModelState.IsValid)
                 {

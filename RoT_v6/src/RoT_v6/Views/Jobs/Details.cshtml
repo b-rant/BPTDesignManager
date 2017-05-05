@@ -391,7 +391,7 @@
         // Handles Progress bars for the hours and cost
         var estHours = @Model.Job.EstHours;
         var invHours = @Model.Job.InvHours;
-        invHours = (invHours / 60).toFixed(2);
+        invHours = (invHours / 3600).toFixed(2);
         var estCost = @Model.Job.EstCost;
         var invCost = @Model.Job.InvCost;
         var hourProg = parseInt((invHours / estHours) * 100);
