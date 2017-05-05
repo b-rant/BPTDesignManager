@@ -19,6 +19,7 @@ namespace RoT_v6.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
         private decimal HourRate = 75;
+        private decimal timeFactor = 3600;
 
         public DashboardController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -132,23 +133,23 @@ namespace RoT_v6.Controllers
                     }
                     task.Status = Models.TaskStatus.Completed;
                     DateTime startTime = Convert.ToDateTime(task.StartTime);
-                    task.TotalTime = task.TotalTime + date.Subtract(startTime).Minutes;
+                    task.TotalTime = task.TotalTime + (int)(date - startTime).TotalSeconds;//date.Subtract(startTime).Minutes;
                     task.CompleteDate = date.ToString("d");
                     job.InvHours = job.InvHours + (int)task.TotalTime;
-                    Decimal cost = (task.TotalTime * HourRate) / 60;
+                    Decimal cost = (task.TotalTime * HourRate) / timeFactor;
                     job.InvCost = job.InvCost + cost; //((task.TotalTime / 60) * HourRate);
                     break;
                 case "CompleteFromPause":
                     task.Status = Models.TaskStatus.Completed;
                     task.CompleteDate = date.ToString("d");
                     job.InvHours = job.InvHours + (int)task.TotalTime;
-                    Decimal cost2 = (task.TotalTime * HourRate) / 60;
+                    Decimal cost2 = (task.TotalTime * HourRate) / timeFactor;
                     job.InvCost = job.InvCost + cost2; //((task.TotalTime / 60) * HourRate);
                     break;
                 case "Pause":
                     task.Status = Models.TaskStatus.Pause;
                     DateTime sTime = Convert.ToDateTime(task.StartTime);
-                    task.TotalTime = task.TotalTime + date.Subtract(sTime).Minutes;
+                    task.TotalTime = task.TotalTime + (int)(date - sTime).TotalSeconds;
                     break;
                 case "InProgress":
                     task.Status = Models.TaskStatus.InProgress;
